@@ -1,4 +1,3 @@
-import { isHomeHostname } from "@/lib/constants";
 import {
   ApiMiddleware,
   AppMiddleware,
@@ -31,19 +30,8 @@ export const config = {
 };
 
 export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
-  const { domain, path, fullPath, key } = parse(req);
-  console.log("middleware", { domain, path, fullPath, key });
+  const { domain, path, key } = parse(req);
 
-  if (isHomeHostname(domain)) {
-    // for docs via Mintlify
-    console.log("home domain detected");
-    if (fullPath.startsWith("/docs")) {
-      return NextResponse.rewrite(`https://dub.mintlify.dev/docs${fullPath}`);
-    }
-    return NextResponse.rewrite(
-      new URL(`/marketing/${path === "/" ? "" : path}`, req.url),
-    );
-  }
   // for App
   if (APP_HOSTNAMES.has(domain)) {
     return AppMiddleware(req);
