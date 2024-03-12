@@ -11,11 +11,7 @@ export const GET = withAuth(async ({ project }) => {
       projectId: project.id,
     },
     select: {
-      dubsh: true,
-      chatgpt: true,
-      sptifi: true,
-      gitnew: true,
-      amznid: true,
+      offrsus: true,
     },
   });
 
@@ -47,11 +43,7 @@ export const PUT = withAuth(async ({ req, project }) => {
       projectId: project.id,
     },
     data: {
-      dubsh: defaultDomains.includes("dub.sh"),
-      chatgpt: defaultDomains.includes("chatg.pt"),
-      sptifi: defaultDomains.includes("spti.fi"),
-      gitnew: defaultDomains.includes("git.new"),
-      amznid: defaultDomains.includes("amzn.id"),
+      offrsus: defaultDomains.includes("offrs.us"),
     },
   });
 
