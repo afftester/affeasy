@@ -28,18 +28,6 @@ export interface UserProps {
   projects?: { projectId: string }[];
 }
 
-export async function tester(req: NextRequest) {
-  const { path, fullPath } = parse(req);
-  const session = (await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-  })) as {
-    email?: string;
-    user?: UserProps;
-  };
-  console.log("session", session);
-}
-
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 console.log("VERCEL_URL", process.env.VERCEL_URL);
 
@@ -65,6 +53,14 @@ export const config = {
 export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
   const { domain, path, key } = parse(req);
   console.log("middleware", { domain, path, key });
+  const session = (await getToken({
+    req,
+    secret: process.env.NEXTAUTH_SECRET,
+  })) as {
+    email?: string;
+    user?: UserProps;
+  };
+  console.log("session", session);
 
   // for App
   if (APP_HOSTNAMES.has(domain)) {
