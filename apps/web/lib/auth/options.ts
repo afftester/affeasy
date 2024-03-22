@@ -14,6 +14,9 @@ import { subscribe } from "../flodesk";
 
 const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
 
+console.log("VERCEL_DEPLOYMENT", VERCEL_DEPLOYMENT);
+
+console.log("NEXT_PUBLIC_APP_DOMAIN", process.env.NEXT_PUBLIC_APP_DOMAIN);
 export const authOptions: NextAuthOptions = {
   providers: [
     EmailProvider({
@@ -177,6 +180,7 @@ export const authOptions: NextAuthOptions = {
       },
     },
   },
+
   pages: {
     error: "/login",
   },

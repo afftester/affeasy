@@ -14,6 +14,13 @@ import {
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 import AdminMiddleware from "./lib/middleware/admin";
 
+const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
+console.log("VERCEL_URL", process.env.VERCEL_URL);
+
+console.log("VERCEL_DEPLOYMENT", VERCEL_DEPLOYMENT);
+
+console.log("NEXT_PUBLIC_APP_DOMAIN", process.env.NEXT_PUBLIC_APP_DOMAIN);
+
 export const config = {
   matcher: [
     /*
@@ -31,6 +38,7 @@ export const config = {
 
 export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
   const { domain, path, key } = parse(req);
+  console.log("middleware", { domain, path, key });
 
   // for App
   if (APP_HOSTNAMES.has(domain)) {
