@@ -5,6 +5,7 @@ import {
   isReservedUsername,
 } from "@/lib/edge-config";
 import prisma from "@/lib/prisma";
+import { isStored, storage } from "@/lib/storage";
 import { formatRedisLink, redis } from "@/lib/upstash";
 import {
   getLinksCountQuerySchema,
@@ -22,35 +23,36 @@ import {
   truncate,
   validKeyRegex,
 } from "@dub/utils";
-import cloudinary from "cloudinary";
+import { Prisma } from "@prisma/client";
 import { checkIfKeyExists, getRandomKey } from "../planetscale";
 import { recordLink } from "../tinybird";
 import {
   LinkProps,
   LinkWithTagIdsProps,
-  ProjectProps,
   RedisLinkProps,
+  WorkspaceProps,
 } from "../types";
 import z from "../zod";
 
-export async function getLinksForProject({
-  projectId,
+export async function getLinksForWorkspace({
+  workspaceId,
   domain,
   tagId,
+  tagIds,
   search,
   sort = "createdAt",
   page,
   userId,
   showArchived,
   withTags,
-}: Omit<z.infer<typeof getLinksQuerySchema>, "projectSlug"> & {
-  projectId: string;
-}): Promise<LinkProps[]> {
-  const tagIds = tagId ? tagId.split(",") : [];
+}: z.infer<typeof getLinksQuerySchema> & {
+  workspaceId: string;
+}) {
+  const combinedTagIds = combineTagIds({ tagId, tagIds });
 
   const links = await prisma.link.findMany({
     where: {
-      projectId,
+      projectId: workspaceId,
       archived: showArchived ? undefined : false,
       ...(domain && { domain }),
       ...(search && {
@@ -68,8 +70,8 @@ export async function getLinksForProject({
           some: {},
         },
       }),
-      ...(tagIds.length > 0 && {
-        tags: { some: { tagId: { in: tagIds } } },
+      ...(combinedTagIds.length > 0 && {
+        tags: { some: { tagId: { in: combinedTagIds } } },
       }),
       ...(userId && { userId }),
     },
@@ -101,31 +103,36 @@ export async function getLinksForProject({
       domain: link.domain,
       key: link.key,
     });
+
+    const tags = link.tags.map(({ tag }) => tag);
+
     return {
       ...link,
-      tags: link.tags.map(({ tag }) => tag),
+      tagId: tags?.[0]?.id ?? null, // backwards compatibility
+      tags,
       shortLink,
       qrCode: `https://api.dub.co/qr?url=${shortLink}`,
+      workspaceId: `ws_${link.projectId}`,
     };
   });
 }
 
 export async function getLinksCount({
   searchParams,
-  projectId,
+  workspaceId,
   userId,
 }: {
   searchParams: z.infer<typeof getLinksCountQuerySchema>;
-  projectId: string;
+  workspaceId: string;
   userId?: string | null;
 }) {
-  const { groupBy, search, domain, tagId, showArchived, withTags } =
+  const { groupBy, search, domain, tagId, tagIds, showArchived, withTags } =
     searchParams;
 
-  const tagIds = tagId ? tagId.split(",") : [];
+  const combinedTagIds = combineTagIds({ tagId, tagIds });
 
   const linksWhere = {
-    projectId,
+    projectId: workspaceId,
     archived: showArchived ? undefined : false,
     ...(userId && { userId }),
     ...(search && {
@@ -166,7 +173,7 @@ export async function getLinksCount({
           some: {},
         },
       }),
-      ...(tagIds.length > 0 && {
+      ...(combinedTagIds.length > 0 && {
         tags: {
           some: {
             tagId: {
@@ -199,11 +206,11 @@ export async function getLinksCount({
 export async function keyChecks({
   domain,
   key,
-  project,
+  workspace,
 }: {
   domain: string;
   key: string;
-  project?: ProjectProps;
+  workspace?: WorkspaceProps;
 }) {
   const link = await checkIfKeyExists(domain, key);
   if (link) {
@@ -224,7 +231,7 @@ export async function keyChecks({
       };
     }
 
-    if (key.length <= 3 && (!project || project.plan === "free")) {
+    if (key.length <= 3 && (!workspace || workspace.plan === "free")) {
       return {
         error: `You can only use keys that are 3 characters or less on a Pro plan and above. Upgrade to Pro to register a ${key.length}-character key.`,
         code: "forbidden",
@@ -232,7 +239,7 @@ export async function keyChecks({
     }
     if (
       (await isReservedUsername(key)) &&
-      (!project || project.plan === "free")
+      (!workspace || workspace.plan === "free")
     ) {
       return {
         error:
@@ -255,18 +262,21 @@ export function processKey(key: string) {
   if (key.length === 0) {
     return null;
   }
+  // replace all special characters
+  key = key.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
   return key;
 }
 
 export async function processLink({
   payload,
-  project,
+  workspace,
   userId,
   bulk = false,
   skipKeyChecks = false, // only skip when key doesn't change (e.g. when editing a link)
 }: {
   payload: LinkWithTagIdsProps;
-  project?: ProjectProps;
+  workspace?: WorkspaceProps;
   userId?: string;
   bulk?: boolean;
   skipKeyChecks?: boolean;
@@ -305,7 +315,7 @@ export async function processLink({
   }
 
   // free plan restrictions
-  if (!project || project.plan === "free") {
+  if (!workspace || workspace.plan === "free") {
     if (proxy || password || rewrite || expiresAt || ios || android || geo) {
       return {
         link: payload,
@@ -316,9 +326,9 @@ export async function processLink({
     }
   }
 
-  // if domain is not defined, set it to the project's primary domain
+  // if domain is not defined, set it to the workspace's primary domain
   if (!domain) {
-    domain = project?.domains?.find((d) => d.primary)?.slug || SHORT_DOMAIN;
+    domain = workspace?.domains?.find((d) => d.primary)?.slug || SHORT_DOMAIN;
   }
 
   // checks for default short domain
@@ -355,11 +365,11 @@ export async function processLink({
       };
     }
 
-    // else, check if the domain belongs to the project
-  } else if (!project?.domains?.find((d) => d.slug === domain)) {
+    // else, check if the domain belongs to the workspace
+  } else if (!workspace?.domains?.find((d) => d.slug === domain)) {
     return {
       link: payload,
-      error: "Domain does not belong to project.",
+      error: "Domain does not belong to workspace.",
       code: "forbidden",
     };
   }
@@ -377,7 +387,7 @@ export async function processLink({
     }
     key = processedKey;
 
-    const response = await keyChecks({ domain, key, project });
+    const response = await keyChecks({ domain, key, workspace });
     if (response.error) {
       return {
         link: payload,
@@ -403,14 +413,14 @@ export async function processLink({
     }
 
     // only perform tag validity checks if:
-    // - not bulk creation (we do that check in bulkCreateLinks)
+    // - not bulk creation (we do that check separately in the route itself)
     // - tagIds are present
   } else if (tagIds.length > 0) {
     const tags = await prisma.tag.findMany({
       select: {
         id: true,
       },
-      where: { projectId: project?.id, id: { in: tagIds } },
+      where: { projectId: workspace?.id, id: { in: tagIds } },
     });
 
     if (tags.length !== tagIds.length) {
@@ -423,17 +433,16 @@ export async function processLink({
               (tagId) => tags.find(({ id }) => tagId === id) === undefined,
             )
             .join(", "),
-        status: 422,
+        code: "unprocessable_entity",
       };
     }
   }
 
-  // custom social media image checks
-  const uploadedImage = image && image.startsWith("data:image") ? true : false;
-  if (uploadedImage && !process.env.CLOUDINARY_URL) {
+  // custom social media image checks (see if R2 is configured)
+  if (proxy && !process.env.STORAGE_SECRET_ACCESS_KEY) {
     return {
       link: payload,
-      error: "Missing Cloudinary environment variable.",
+      error: "Missing storage access key.",
       code: "bad_request",
     };
   }
@@ -469,8 +478,8 @@ export async function processLink({
       domain,
       key,
       url: processedUrl,
-      // make sure projectId is set to the current project
-      projectId: project?.id || null,
+      // make sure projectId is set to the current workspace
+      projectId: workspace?.id || null,
       // if userId is passed, set it (we don't change the userId if it's already set, e.g. when editing a link)
       ...(userId && {
         userId,
@@ -480,7 +489,7 @@ export async function processLink({
   };
 }
 
-function combineTagIds({
+export function combineTagIds({
   tagId,
   tagIds,
 }: {
@@ -495,24 +504,12 @@ function combineTagIds({
 }
 
 export async function addLink(link: LinkWithTagIdsProps) {
-  let { domain, key, url, expiresAt, title, description, image, proxy, geo } =
-    link;
-  const uploadedImage = image && image.startsWith("data:image") ? true : false;
+  let { key, url, expiresAt, title, description, image, proxy, geo } = link;
 
   const combinedTagIds = combineTagIds(link);
 
   const { utm_source, utm_medium, utm_campaign, utm_term, utm_content } =
     getParamsFromURL(url);
-
-  if (proxy && image && uploadedImage) {
-    const { secure_url } = await cloudinary.v2.uploader.upload(image, {
-      public_id: key,
-      folder: domain,
-      overwrite: true,
-      invalidate: true,
-    });
-    image = secure_url;
-  }
 
   const { tagId, tagIds, ...rest } = link;
 
@@ -522,14 +519,15 @@ export async function addLink(link: LinkWithTagIdsProps) {
       key,
       title: truncate(title, 120),
       description: truncate(description, 240),
-      image,
+      // if it's an uploaded image, make this null first because we'll update it later
+      image: proxy && image && !isStored(image) ? null : image,
       utm_source,
       utm_medium,
       utm_campaign,
       utm_term,
       utm_content,
       expiresAt: expiresAt ? new Date(expiresAt) : null,
-      geo: geo || undefined,
+      geo: geo || Prisma.JsonNull,
       ...(combinedTagIds.length > 0 && {
         tags: {
           createMany: {
@@ -553,39 +551,63 @@ export async function addLink(link: LinkWithTagIdsProps) {
     },
   });
 
+  const uploadedImageUrl = `${process.env.STORAGE_BASE_URL}/images/${response.id}`;
+
+  if (proxy && image && !isStored(image)) {
+    await Promise.all([
+      // upload image to R2
+      storage.upload(`images/${response.id}`, image, {
+        width: 1200,
+        height: 630,
+      }),
+      // update the null image we set earlier to the uploaded image URL
+      prisma.link.update({
+        where: {
+          id: response.id,
+        },
+        data: {
+          image: uploadedImageUrl,
+        },
+      }),
+    ]);
+  }
+
   const shortLink = linkConstructor({
     domain: response.domain,
     key: response.key,
   });
+  const tags = response.tags.map(({ tag }) => tag);
   return {
     ...response,
-    tags: response.tags.map(({ tag }) => tag),
+    // optimistically set the image URL to the uploaded image URL
+    image:
+      proxy && image && !isStored(image) ? uploadedImageUrl : response.image,
+    tagId: tags?.[0]?.id ?? null, // backwards compatibility
+    tags,
     shortLink,
     qrCode: `https://api.dub.co/qr?url=${shortLink}`,
+    workspaceId: `ws_${response.projectId}`,
   };
 }
 
 export async function bulkCreateLinks({
   links,
-  skipPrismaCreate,
 }: {
   links: LinkWithTagIdsProps[];
-  skipPrismaCreate?: boolean;
 }) {
   if (links.length === 0) return [];
 
-  let createdLinks: LinkProps[] = [];
-  let linkTags: { tagId: string; linkId: string }[] = [];
+  // create links via $transaction (because Prisma doesn't support nested createMany)
+  // ref: https://github.com/prisma/prisma/issues/8131#issuecomment-997667070
+  const createdLinks = await prisma.$transaction(
+    links.map(({ tagId, tagIds, ...link }) => {
+      const { utm_source, utm_medium, utm_campaign, utm_term, utm_content } =
+        getParamsFromURL(link.url);
 
-  if (skipPrismaCreate) {
-    createdLinks = links;
-  } else {
-    await prisma.link.createMany({
-      data: links.map(({ tagId, tagIds, ...link }) => {
-        const { utm_source, utm_medium, utm_campaign, utm_term, utm_content } =
-          getParamsFromURL(link.url);
+      const combinedTagIds = combineTagIds({ tagId, tagIds });
 
-        return {
+      return prisma.link.create({
+        data: {
           ...link,
           title: truncate(link.title, 120),
           description: truncate(link.description, 240),
@@ -596,54 +618,61 @@ export async function bulkCreateLinks({
           utm_content,
           expiresAt: link.expiresAt ? new Date(link.expiresAt) : null,
           geo: link.geo || undefined,
-          // note: we're creating linkTags separately cause you can't do
-          // nested createMany in Prisma: https://github.com/prisma/prisma/issues/5455
-        };
-      }),
-      skipDuplicates: true,
-    });
-
-    createdLinks = (await Promise.all(
-      links.map(async (link) => {
-        const { key, domain, tagId, tagIds } = link;
-        const data = await prisma.link.findUnique({
-          where: {
-            domain_key: {
-              domain,
-              key,
+          ...(combinedTagIds.length > 0 && {
+            tags: {
+              createMany: {
+                data: combinedTagIds.map((tagId) => ({ tagId })),
+              },
+            },
+          }),
+        },
+        include: {
+          tags: {
+            select: {
+              tagId: true,
+              tag: {
+                select: {
+                  id: true,
+                  name: true,
+                  color: true,
+                },
+              },
             },
           },
-        });
-        if (!data) return null;
-        // combine tagIds for creation later
-        const combinedTagIds = combineTagIds({ tagId, tagIds });
-        linkTags.push(
-          ...combinedTagIds.map((tagId) => ({ tagId, linkId: data.id })),
-        );
-        return data;
-      }),
-    )) as LinkWithTagIdsProps[];
-  }
+        },
+      });
+    }),
+  );
 
+  await propagateBulkLinkChanges(createdLinks);
+
+  return createdLinks.map((link) => {
+    const shortLink = linkConstructor({
+      domain: link.domain,
+      key: link.key,
+    });
+    const tags = link.tags.map(({ tag }) => tag);
+    return {
+      ...link,
+      shortLink,
+      tagId: tags?.[0]?.id ?? null, // backwards compatibility
+      tags,
+      qrCode: `https://api.dub.co/qr?url=${shortLink}`,
+      workspaceId: `ws_${link.projectId}`,
+    };
+  });
+}
+
+export async function propagateBulkLinkChanges(
+  links: (LinkProps & { tags: { tagId: string }[] })[],
+) {
   const pipeline = redis.pipeline();
 
-  // split links into domains
+  // split links into domains for better write effeciency in Redis
   const linksByDomain: Record<string, Record<string, RedisLinkProps>> = {};
 
-  const [validTagIds, ..._rest] = await Promise.all([
-    prisma.tag
-      .findMany({
-        where: {
-          id: {
-            in: linkTags.map(({ tagId }) => tagId),
-          },
-        },
-        select: {
-          id: true,
-        },
-      })
-      .then((tags) => tags.map(({ id }) => id)),
-    ...createdLinks.map(async (link) => {
+  await Promise.all(
+    links.map(async (link) => {
       const { domain, key } = link;
 
       if (!linksByDomain[domain]) {
@@ -656,53 +685,38 @@ export async function bulkCreateLinks({
       // record link in Tinybird
       await recordLink({ link });
     }),
-  ]);
+  );
 
   Object.entries(linksByDomain).forEach(([domain, links]) => {
     pipeline.hset(domain, links);
   });
 
   await Promise.all([
+    // update Redis
     pipeline.exec(),
-    // create link tags for valid tagIds
-    linkTags.length > 0 &&
-      prisma.linkTag.createMany({
-        data: linkTags.filter(({ tagId }) => validTagIds.includes(tagId)),
-        skipDuplicates: true,
-      }),
-    // update links usage
+    // update links usage for workspace
     prisma.project.update({
       where: {
-        id: createdLinks[0].projectId!, // this will always be present
+        id: links[0].projectId!, // this will always be present
       },
       data: {
         linksUsage: {
-          increment: createdLinks.length,
+          increment: links.length,
         },
       },
     }),
   ]);
-
-  return createdLinks.map((link) => {
-    const shortLink = linkConstructor({
-      domain: link.domain,
-      key: link.key,
-    });
-    return {
-      ...link,
-      shortLink,
-      qrCode: `https://api.dub.co/qr?url=${shortLink}`,
-    };
-  });
 }
 
 export async function editLink({
-  domain: oldDomain = SHORT_DOMAIN,
-  key: oldKey,
+  oldDomain = SHORT_DOMAIN,
+  oldKey,
+  oldImage,
   updatedLink,
 }: {
-  domain?: string;
-  key: string;
+  oldDomain?: string;
+  oldKey: string;
+  oldImage?: string;
   updatedLink: LinkWithTagIdsProps;
 }) {
   let {
@@ -719,7 +733,6 @@ export async function editLink({
   } = updatedLink;
   const changedKey = key.toLowerCase() !== oldKey.toLowerCase();
   const changedDomain = domain !== oldDomain;
-  const uploadedImage = image && image.startsWith("data:image") ? true : false;
 
   const { utm_source, utm_medium, utm_campaign, utm_term, utm_content } =
     getParamsFromURL(url);
@@ -737,21 +750,11 @@ export async function editLink({
 
   const combinedTagIds = combineTagIds({ tagId, tagIds });
 
-  if (proxy && image) {
-    // only upload image to cloudinary if proxy is true and there's an image
-    if (uploadedImage) {
-      const { secure_url } = await cloudinary.v2.uploader.upload(image, {
-        public_id: key,
-        folder: domain,
-        overwrite: true,
-        invalidate: true,
-      });
-      image = secure_url;
-    }
-    // if there's no proxy enabled or no image, delete the image in Cloudinary
-  } else {
-    await cloudinary.v2.uploader.destroy(`${domain}/${key}`, {
-      invalidate: true,
+  if (proxy && image && !isStored(image)) {
+    // only upload image if proxy is true and image is not stored in R2
+    await storage.upload(`images/${id}`, image, {
+      width: 1200,
+      height: 630,
     });
   }
 
@@ -765,14 +768,17 @@ export async function editLink({
         key,
         title: truncate(title, 120),
         description: truncate(description, 240),
-        image,
+        image:
+          proxy && image && !isStored(image)
+            ? `${process.env.STORAGE_BASE_URL}/images/${id}`
+            : image,
         utm_source,
         utm_medium,
         utm_campaign,
         utm_term,
         utm_content,
         expiresAt: expiresAt ? new Date(expiresAt) : null,
-        geo: geo || undefined,
+        geo: geo || Prisma.JsonNull,
         tags: {
           deleteMany: {
             tagId: {
@@ -799,21 +805,9 @@ export async function editLink({
         },
       },
     }),
-    // if key is changed: rename resource in Cloudinary, delete the old key in Redis and change the clicks key name
-    ...(changedDomain || changedKey
-      ? [
-          ...(process.env.CLOUDINARY_URL
-            ? [
-                cloudinary.v2.uploader
-                  .destroy(`${oldDomain}/${oldKey}`, {
-                    invalidate: true,
-                  })
-                  .catch(() => {}),
-              ]
-            : []),
-          redis.hdel(oldDomain, oldKey.toLowerCase()),
-        ]
-      : []),
+    // if key is changed: delete the old key in Redis
+    (changedDomain || changedKey) &&
+      redis.hdel(oldDomain, oldKey.toLowerCase()),
   ]);
 
   const shortLink = linkConstructor({
@@ -821,24 +815,32 @@ export async function editLink({
     key: response.key,
   });
 
+  const tags = response.tags.map(({ tag }) => tag);
+
   return {
     ...response,
-    tags: response.tags.map(({ tag }) => tag),
+    tagId: tags?.[0]?.id ?? null, // backwards compatibility
+    tags,
     shortLink,
     qrCode: `https://api.dub.co/qr?url=${shortLink}`,
+    workspaceId: `ws_${response.projectId}`,
   };
 }
 
-export async function deleteLink(link: LinkProps) {
-  return await Promise.all([
-    prisma.link.delete({
-      where: {
-        id: link.id,
-      },
-    }),
-    cloudinary.v2.uploader.destroy(`${link.domain}/${link.key}`, {
-      invalidate: true,
-    }),
+export async function deleteLink(linkId: string) {
+  const link = await prisma.link.delete({
+    where: {
+      id: linkId,
+    },
+    include: {
+      tags: true,
+    },
+  });
+  return await Promise.allSettled([
+    // if the image is stored in Cloudflare R2, delete it
+    link.proxy &&
+      link.image?.startsWith(process.env.STORAGE_BASE_URL as string) &&
+      storage.delete(`images/${link.id}`),
     redis.hdel(link.domain, link.key.toLowerCase()),
     recordLink({ link, deleted: true }),
     link.projectId &&
@@ -874,17 +876,17 @@ export async function archiveLink({
 
 export async function transferLink({
   linkId,
-  newProjectId,
+  newWorkspaceId,
 }: {
   linkId: string;
-  newProjectId: string;
+  newWorkspaceId: string;
 }) {
   return await prisma.link.update({
     where: {
       id: linkId,
     },
     data: {
-      projectId: newProjectId,
+      projectId: newWorkspaceId,
       // remove tags when transferring link
       tags: {
         deleteMany: {},

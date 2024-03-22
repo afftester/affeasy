@@ -12,28 +12,7 @@ import {
   DEFAULT_REDIRECTS,
 } from "@dub/utils";
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
-import { getToken } from "next-auth/jwt";
-
-export const roles = ["owner", "member"] as const;
-
-export type RoleProps = (typeof roles)[number];
-
-export interface UserProps {
-  id: string;
-  name: string;
-  email: string;
-  image?: string;
-  createdAt: Date;
-  role: RoleProps;
-  projects?: { projectId: string }[];
-}
-
-const VERCEL_DEPLOYMENT = !!process.env.VERCEL_URL;
-console.log("VERCEL_URL", process.env.VERCEL_URL);
-
-console.log("VERCEL_DEPLOYMENT", VERCEL_DEPLOYMENT);
-
-console.log("NEXT_PUBLIC_APP_DOMAIN", process.env.NEXT_PUBLIC_APP_DOMAIN);
+import AdminMiddleware from "./lib/middleware/admin";
 
 export const config = {
   matcher: [
@@ -52,22 +31,9 @@ export const config = {
 
 export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
   const { domain, path, key } = parse(req);
-  console.log("middleware", { domain, path, key });
-  const session = (await getToken({
-    req,
-    secret: process.env.NEXTAUTH_SECRET,
-  })) as {
-    email?: string;
-    user?: UserProps;
-  };
-  console.log("session", session);
-
-  console.log("req", req);
-  console.log("secret", process.env.NEXTAUTH_SECRET);
 
   // for App
   if (APP_HOSTNAMES.has(domain)) {
-    console.log("app domain is getting compiled");
     return AppMiddleware(req);
   }
 
@@ -76,9 +42,23 @@ export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
     return ApiMiddleware(req);
   }
 
+  // for public stats pages (e.g. d.to/stats/try)
+  if (path.startsWith("/stats/")) {
+    return NextResponse.rewrite(new URL(`/${domain}${path}`, req.url));
+  }
+
+  // default redirects for dub.sh
+  if (domain === "dub.sh" && DEFAULT_REDIRECTS[key]) {
+    return NextResponse.redirect(DEFAULT_REDIRECTS[key]);
+  }
+
+  // for Admin
+  if (ADMIN_HOSTNAMES.has(domain)) {
+    return AdminMiddleware(req);
+  }
+
   // for root pages (e.g. dub.sh, chatg.pt, etc.)
   if (key.length === 0) {
-    console.log("root domain is getting compiled");
     return RootMiddleware(req, ev);
   }
 

@@ -127,7 +127,7 @@ model ProjectInvite {
 
 model DefaultDomains {
   id          String   @id @default(cuid())
-  offrsus     Boolean  @default(true)
+  offrsus      Boolean  @default(true)
   projectId   String   @unique
   project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
 }

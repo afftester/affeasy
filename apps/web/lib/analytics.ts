@@ -1,4 +1,4 @@
-import { conn } from "./planetscale";
+import { DATABASE_URL, conn } from "./planetscale";
 import z from "./zod";
 import { getAnalyticsQuerySchema } from "./zod/schemas/analytics";
 
@@ -52,7 +52,7 @@ export const intervalData = {
   },
   "90d": {
     startDate: new Date(Date.now() - 7776000000),
-    granularity: "month",
+    granularity: "day",
   },
   all: {
     // Dub.co founding date
@@ -89,24 +89,25 @@ export const VALID_ANALYTICS_FILTERS = [
   "os",
   "referer",
   "excludeRoot",
+  "tagId",
 ];
 
 export const getAnalytics = async ({
-  projectId,
+  workspaceId,
   linkId,
   domain,
   endpoint,
   interval,
   ...rest
-}: Omit<z.infer<typeof getAnalyticsQuerySchema>, "projectSlug"> & {
-  projectId?: string;
+}: z.infer<typeof getAnalyticsQuerySchema> & {
+  workspaceId?: string;
   linkId?: string;
   endpoint: (typeof VALID_TINYBIRD_ENDPOINTS)[number];
 }) => {
   // Note: we're using decodeURIComponent in this function because that's how we store it in MySQL and Tinybird
 
   if (
-    !process.env.DATABASE_URL ||
+    !DATABASE_URL ||
     !process.env.TINYBIRD_API_KEY ||
     !VALID_TINYBIRD_ENDPOINTS.includes(endpoint)
   ) {
@@ -137,8 +138,8 @@ export const getAnalytics = async ({
   let url = new URL(
     `${process.env.TINYBIRD_API_URL}/v0/pipes/${endpoint}.json`,
   );
-  if (projectId) {
-    url.searchParams.append("projectId", projectId);
+  if (workspaceId) {
+    url.searchParams.append("projectId", workspaceId);
   }
   if (linkId) {
     url.searchParams.append("linkId", linkId);

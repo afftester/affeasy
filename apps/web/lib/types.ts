@@ -67,7 +67,7 @@ export type PlanProps = (typeof plans)[number];
 
 export type RoleProps = (typeof roles)[number];
 
-export interface ProjectProps {
+export interface WorkspaceProps {
   id: string;
   name: string;
   slug: string;
@@ -94,11 +94,6 @@ export interface ProjectProps {
     defaultDomains?: string[];
   };
   inviteCode: string;
-}
-
-export interface ProjectWithDomainProps extends ProjectProps {
-  domains: DomainProps[];
-  primaryDomain?: DomainProps;
 }
 
 export interface UserProps {
