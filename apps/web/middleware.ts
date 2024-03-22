@@ -61,6 +61,10 @@ export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
     user?: UserProps;
   };
   console.log("session", session);
+  console.log("session.email", session.email);
+  console.log("session.user", session.user);
+  console.log("req", req);
+  console.log("secret", process.env.NEXTAUTH_SECRET);
 
   // for App
   if (APP_HOSTNAMES.has(domain)) {
