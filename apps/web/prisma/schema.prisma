@@ -13,19 +13,87 @@ generator client {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
+  id                          String                      @id @default(cuid())
+  name                        String?
+  email                       String?                     @unique
+  emailVerified               DateTime?
+  image                       String?
+  createdAt                   DateTime                    @default(now())
+  subscribed                  Boolean                     @default(true)
+  userAdvertiserRelationships UserAdvertiserRelationship[]
+  userBrandRelationships      UserBrandRelationship[]
+  accounts                    Account[]
+  sessions                    Session[]
+  projects                    ProjectUsers[]
+  links                       Link[]
+  tokens                      Token[]
+}
 
-  accounts   Account[]
-  sessions   Session[]
-  projects   ProjectUsers[]
-  links      Link[]
-  tokens     Token[]
-  createdAt  DateTime       @default(now())
-  subscribed Boolean        @default(true)
+model UserAdvertiserRelationship {
+  id                       String                @id @default(cuid())
+  userId                   String
+  advertiserId             String
+  user                     User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  advertiser               Advertiser            @relation(fields: [advertiserId], references: [id], onDelete: Cascade)
+  apiKey                   String?
+  username                 String?
+  password                 String?
+  userBrandRelationships   UserBrandRelationship[]
+
+  @@unique([userId, advertiserId])
+  @@index([userId])
+  @@index([advertiserId])
+}
+
+model Advertiser {
+  id                         String                      @id @default(cuid())
+  name                       String
+  userBrandRelationships     UserBrandRelationship[]
+  brands                     BrandAdvertiserRelationship[]
+  userAdvertiserRelationships UserAdvertiserRelationship[]
+}
+
+model Brand {
+  id                     String                      @id @default(cuid())
+  name                   String
+  url                    String?
+  advertisers            BrandAdvertiserRelationship[]
+  userBrandRelationships UserBrandRelationship[]
+}
+
+model BrandAdvertiserRelationship {
+  id           String     @id @default(cuid())
+  brandId      String
+  advertiserId String
+  brandIdAtAdvertiser       String                       @unique
+  brand        Brand      @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  advertiser   Advertiser @relation(fields: [advertiserId], references: [id], onDelete: Cascade)
+  userBrandRelationships    UserBrandRelationship[]
+
+  @@unique([brandId, advertiserId])
+  @@index([brandId])
+  @@index([advertiserId])
+}
+
+model UserBrandRelationship {
+  id           String                      @id @default(cuid())
+  userId       String
+  brandId      String
+  advertiserId String
+  user         User                        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  brand        Brand                       @relation(fields: [brandId], references: [id], onDelete: Cascade)
+  advertiser   Advertiser                  @relation(fields: [advertiserId], references: [id], onDelete: Cascade)
+  userAdvertiserRelation UserAdvertiserRelationship @relation(fields: [userAdvertiserRelationId], references: [id], onDelete: Cascade)
+  userAdvertiserRelationId  String
+  brandAdvertiserRelation   BrandAdvertiserRelationship @relation(fields: [brandAdvertiserRelationId], references: [id], onDelete: Cascade)
+  brandAdvertiserRelationId String
+  
+  @@unique([userId, brandId, advertiserId])
+  @@index([userId])
+  @@index([brandId])
+  @@index([advertiserId])
+  @@index([userAdvertiserRelationId])
+  @@index([brandAdvertiserRelationId])
 }
 
 model Account {
