@@ -12,6 +12,10 @@ export default function PersonalSettingsLayout({
       segment: null,
     },
     {
+      name: "Affiliate Networks",
+      segment: "networks",
+    },
+    {
       name: "API Keys",
       segment: "tokens",
     },

@@ -45,6 +45,7 @@ model UserAdvertiserRelationship {
   @@index([advertiserId])
 }
 
+// Affiliate Network
 model Advertiser {
   id                         String                      @id @default(cuid())
   name                       String
