@@ -58,11 +58,15 @@ export const POST = withSession(async ({ req, session }) => {
 // DELETE /api/user/tokens – delete a token for a specific user
 export const DELETE = withSession(async ({ searchParams, session }) => {
   const { id } = searchParams;
-  const response = await prisma.token.delete({
+
+  const response = await prisma.userAdvertiserRelationship.delete({
     where: {
-      id,
-      userId: session.user.id,
+      userId_advertiserId: {
+        userId: session.user.id,
+        advertiserId: id,
+      },
     },
   });
+
   return NextResponse.json(response);
 });
