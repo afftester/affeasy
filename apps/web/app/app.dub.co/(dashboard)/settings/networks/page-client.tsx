@@ -1,36 +1,32 @@
 "use client";
 
-import { useInviteTeammateModal } from "@/ui/modals/invite-teammate-modal";
-import {
-  Button,
-  IconMenu,
-  LoadingSpinner,
-  Popover,
-  TokenAvatar,
-} from "@dub/ui";
+import { UserAdvertiserWithNameProps } from "@/lib/types";
+import { useAddEditNetworkModal } from "@/ui/modals/add-edit-network-modal";
+import { useDeleteNetworkModal } from "@/ui/modals/delete-network-modal";
+import { Delete } from "@/ui/shared/icons";
+import { Button, LoadingSpinner, Popover, TokenAvatar } from "@dub/ui";
 import { APP_NAME, fetcher } from "@dub/utils";
-import { Advertiser } from "@prisma/client";
-import { FolderOpen, MoreVertical, Trash } from "lucide-react";
+import { Edit3, FolderOpen, MoreVertical } from "lucide-react";
 import { useState } from "react";
 import useSWR from "swr";
 
 const tabs: Array<"Networks"> = ["Networks"];
 
-export default function NetworksPageClient() {
-  const { setShowInviteTeammateModal, InviteTeammateModal } =
-    useInviteTeammateModal();
+export default async function NetworksPageClient() {
+  const { setShowAddEditNetworkModal, AddEditNetworkModal } =
+    useAddEditNetworkModal({});
 
   const [currentTab, setCurrentTab] = useState<"Networks">("Networks");
 
   const {
-    data: networks,
+    data: userAdvertiserRelationships,
     mutate,
     isLoading,
-  } = useSWR<Advertiser[]>("/api/user/networks", fetcher);
+  } = useSWR<UserAdvertiserWithNameProps[]>("/api/user/networks", fetcher);
 
   return (
     <>
-      <InviteTeammateModal />
+      <AddEditNetworkModal />
 
       <div className="rounded-lg border border-gray-200 bg-white">
         <div className="flex flex-col items-center justify-between space-y-3 p-5 sm:flex-row sm:space-y-0 sm:p-10">
@@ -43,7 +39,7 @@ export default function NetworksPageClient() {
           <div className="flex space-x-2">
             <Button
               text="Add"
-              onClick={() => setShowInviteTeammateModal(true)}
+              onClick={() => setShowAddEditNetworkModal(true)}
               className="h-9"
             />
           </div>
@@ -65,16 +61,19 @@ export default function NetworksPageClient() {
             </div>
           ))}
         </div>
-        {isLoading || !networks ? (
+        {isLoading || !userAdvertiserRelationships ? (
           <div className="flex flex-col items-center justify-center space-y-4 pb-20 pt-10">
             <LoadingSpinner className="h-6 w-6 text-gray-500" />
             <p className="text-sm text-gray-500">Fetching Networks...</p>
           </div>
-        ) : networks.length > 0 ? (
+        ) : userAdvertiserRelationships.length > 0 ? (
           <div>
             <div className="divide-y divide-gray-200">
-              {networks.map((network) => (
-                <NetworkRow key={network.id} {...network} />
+              {userAdvertiserRelationships.map((userAdvertiserRelationship) => (
+                <NetworkRow
+                  key={userAdvertiserRelationship.id}
+                  {...userAdvertiserRelationship}
+                />
               ))}
             </div>
           </div>
@@ -91,19 +90,29 @@ export default function NetworksPageClient() {
   );
 }
 
-const NetworkRow = (network: Advertiser) => {
+const NetworkRow = (relationship: UserAdvertiserWithNameProps) => {
   const [openPopover, setOpenPopover] = useState(false);
-  // const { DeleteTokenModal, setShowDeleteTokenModal } = useDeleteTokenModal({
-  //   token,
-  // });
+
+  const { DeleteNetworkModal, setShowDeleteNetworkModal } =
+    useDeleteNetworkModal({
+      relationship,
+    });
+
+  const props = relationship;
+  const { setShowAddEditNetworkModal, AddEditNetworkModal } =
+    useAddEditNetworkModal({ props });
   return (
     <>
-      {/* <DeleteTokenModal /> */}
+      <DeleteNetworkModal />
+      <AddEditNetworkModal />
+
       <div className="relative grid grid-cols-5 items-center px-5 py-3 sm:px-10">
         <div className="col-span-3 flex items-center space-x-3">
-          <TokenAvatar id={network.id} />
+          <TokenAvatar id={relationship.advertiserId} />
           <div className="flex flex-col space-y-px">
-            <p className="font-semibold text-gray-700">{network.name}</p>
+            <p className="font-semibold text-gray-700">
+              {relationship.advertiser.name}
+            </p>
           </div>
         </div>
         <div className="font-mono text-sm">{/* {token.partialKey} */}</div>
@@ -113,21 +122,32 @@ const NetworkRow = (network: Advertiser) => {
         >
           {/* {timeAgo(token.lastUsed)} */}
         </div>
+
         <Popover
           content={
             <div className="grid w-full gap-1 p-2 sm:w-48">
-              <button
-                // onClick={() => {
-                //   setOpenPopover(false);
-                //   setShowDeleteTokenModal(true);
-                // }}
-                className="rounded-md p-2 text-left text-sm font-medium text-red-600 transition-all duration-75 hover:bg-red-600 hover:text-white"
-              >
-                <IconMenu
-                  text="Delete API Key"
-                  icon={<Trash className="h-4 w-4" />}
-                />
-              </button>
+              <Button
+                text="Edit"
+                variant="outline"
+                onClick={() => {
+                  setOpenPopover(false);
+                  setShowAddEditNetworkModal(true);
+                }}
+                icon={<Edit3 className="h-4 w-4" />}
+                shortcut="E"
+                className="h-9 px-2 font-medium"
+              />
+              <Button
+                text="Delete"
+                variant="danger-outline"
+                onClick={() => {
+                  setOpenPopover(false);
+                  setShowDeleteNetworkModal(true);
+                }}
+                icon={<Delete className="h-4 w-4" />}
+                shortcut="X"
+                className="h-9 px-2 font-medium"
+              />
             </div>
           }
           align="end"

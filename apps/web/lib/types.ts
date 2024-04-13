@@ -1,9 +1,10 @@
 import z from "@/lib/zod";
 import { DirectorySyncProviders } from "@boxyhq/saml-jackson";
-import { Link } from "@prisma/client";
+import { Link, UserAdvertiserRelationship } from "@prisma/client";
 import { createLinkBodySchema } from "./zod/schemas/links";
 
 export type LinkProps = Link;
+export type UserAdvertiserProps = UserAdvertiserRelationship;
 
 export interface LinkWithTagsProps extends LinkProps {
   tags: TagProps[];
@@ -11,6 +12,20 @@ export interface LinkWithTagsProps extends LinkProps {
 
 export interface LinkWithTagIdsProps extends LinkProps {
   tagIds: string[];
+}
+
+export interface UserAdvertiserWithNameProps {
+  id: string;
+  advertiserId: string;
+  apiKey?: string;
+  username?: string;
+  password?: string;
+  accountId?: string;
+  websiteId?: string;
+  advertiser: {
+    id: string;
+    name: string;
+  };
 }
 
 export interface SimpleLinkProps {

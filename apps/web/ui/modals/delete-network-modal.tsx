@@ -1,5 +1,5 @@
+import { UserAdvertiserWithNameProps } from "@/lib/types";
 import { Button, Logo, Modal, TokenAvatar, useMediaQuery } from "@dub/ui";
-import { Advertiser } from "@prisma/client";
 import {
   Dispatch,
   SetStateAction,
@@ -13,11 +13,11 @@ import { mutate } from "swr";
 function DeleteNetworkModal({
   showDeleteNetworkModal,
   setShowDeleteNetworkModal,
-  network,
+  relationship,
 }: {
   showDeleteNetworkModal: boolean;
   setShowDeleteNetworkModal: Dispatch<SetStateAction<boolean>>;
-  network: Advertiser;
+  relationship: UserAdvertiserWithNameProps;
 }) {
   const [removing, setRemoving] = useState(false);
 
@@ -46,10 +46,10 @@ function DeleteNetworkModal({
           {/* <Badge variant="neutral" className="absolute right-2 top-2">
             {token.partialKey}
           </Badge> */}
-          <TokenAvatar id={network.id} />
+          <TokenAvatar id={relationship.advertiserId} />
           <div className="flex flex-col">
             <h3 className="line-clamp-1 w-48 font-semibold text-gray-700">
-              {network.name}
+              {relationship.advertiser.name}
             </h3>
             {/* <p className="text-xs text-gray-500" suppressHydrationWarning>
               Last used {timeAgo(token.lastUsed, { withAgo: true })}
@@ -63,7 +63,7 @@ function DeleteNetworkModal({
           loading={removing}
           onClick={() => {
             setRemoving(true);
-            fetch(`/api/user/networks?id=${network.id}`, {
+            fetch(`/api/user/networks?id=${relationship.id}`, {
               method: "DELETE",
               headers: { "Content-Type": "application/json" },
             }).then(async (res) => {
@@ -84,7 +84,11 @@ function DeleteNetworkModal({
   );
 }
 
-export function useDeleteNetworkModal({ network }: { network: Advertiser }) {
+export function useDeleteNetworkModal({
+  relationship,
+}: {
+  relationship: UserAdvertiserWithNameProps;
+}) {
   const [showDeleteNetworkModal, setShowDeleteNetworkModal] = useState(false);
 
   const DeleteNetworkModalCallback = useCallback(() => {
@@ -92,7 +96,7 @@ export function useDeleteNetworkModal({ network }: { network: Advertiser }) {
       <DeleteNetworkModal
         showDeleteNetworkModal={showDeleteNetworkModal}
         setShowDeleteNetworkModal={setShowDeleteNetworkModal}
-        network={network}
+        relationship={relationship}
       />
     );
   }, [showDeleteNetworkModal, setShowDeleteNetworkModal]);
