@@ -44,7 +44,7 @@ export const GET = withSession(async ({ session }) => {
         },
       },
     });
-  console.log(userAdvertiserRelationships);
+  // console.log(userAdvertiserRelationships);
   return NextResponse.json(userAdvertiserRelationships);
 });
 

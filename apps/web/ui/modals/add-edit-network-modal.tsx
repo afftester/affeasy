@@ -1,9 +1,12 @@
 "use client";
 
 import useWorkspace from "@/lib/swr/use-workspace";
-import { UserAdvertiserProps, UserAdvertiserWithNameProps } from "@/lib/types";
+import { UserAdvertiserWithNameProps } from "@/lib/types";
 import LinkLogo from "@/ui/links/link-logo";
 import { X } from "@/ui/shared/icons";
+import { toast } from "sonner";
+import { mutate } from "swr";
+
 import {
   Button,
   Modal,
@@ -31,7 +34,6 @@ import {
   useCallback,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import useSWR from "swr";
@@ -53,13 +55,12 @@ function AddEditNetworkModal({
   const [keyError, setKeyError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
 
-  const {
-    data: networks,
-    mutate,
-    isLoading,
-  } = useSWR<Advertiser[]>("/api/networks", fetcher);
+  const { data: networks, isLoading } = useSWR<Advertiser[]>(
+    "/api/networks",
+    fetcher,
+  );
 
-  const [data, setData] = useState<UserAdvertiserProps>(
+  const [data, setData] = useState<UserAdvertiserWithNameProps>(
     props || DEFAULT_USER_ADVERTISER_PROPS,
   );
 
@@ -70,15 +71,8 @@ function AddEditNetworkModal({
     }
   }, [networks, props]);
 
-  const {
-    userId,
-    advertiserId,
-    apiKey,
-    username,
-    password,
-    accountId,
-    websiteId,
-  } = data;
+  const { id, advertiserId, apiKey, username, password, accountId, websiteId } =
+    data;
 
   const networkName =
     networks &&
@@ -125,7 +119,12 @@ function AddEditNetworkModal({
       (props &&
         Object.entries(props).every(([key, value]) => {
           // If the key is "title" or "description" and proxy is not enabled, return true (skip the check)
-          if (key === "id" || key === "userId" || key === "advertiserId") {
+          if (
+            key === "id" ||
+            key === "userId" ||
+            key === "advertiserId" ||
+            key == "advertiser"
+          ) {
             return true;
           }
           // Otherwise, check for discrepancy in the current key-value pair
@@ -140,7 +139,6 @@ function AddEditNetworkModal({
 
   const randomIdx = Math.floor(Math.random() * 100);
   const welcomeFlow = pathname === "/welcome";
-  const keyRef = useRef<HTMLInputElement>(null);
 
   const { isMobile } = useMediaQuery();
 
@@ -195,42 +193,43 @@ function AddEditNetworkModal({
               e.preventDefault();
               setSaving(true);
               // @ts-ignore – exclude extra attributes from `data` object before sending to API
-              const { user, tags, tagId, ...rest } = data;
+              const { ...rest } = data;
               const bodyData = {
                 ...rest,
               };
-              // fetch(endpoint.url, {
-              //   method: endpoint.method,
-              //   headers: {
-              //     "Content-Type": "application/json",
-              //   },
-              //   body: JSON.stringify(bodyData),
-              // }).then(async (res) => {
-              //   if (res.status === 200) {
-              //     await mutate(
-              //       (key) =>
-              //         typeof key === "string" && key.startsWith("/api/links"),
-              //       undefined,
-              //       { revalidate: true },
-              //     );
-              //     // for welcome page, redirect to links page after adding a link
-              //     if (pathname === "/welcome") {
-              //       router.push("/links");
-              //       setShowAddEditNetworkModal(false);
-              //     }
+              fetch(endpoint.url, {
+                method: endpoint.method,
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(bodyData),
+              }).then(async (res) => {
+                if (res.status === 200) {
+                  mutate("/api/user/networks");
+                  if (props) {
+                    toast.success("Network Record Modified!");
+                  } else {
+                    toast.success("Network Added!");
+                  }
 
-              //     setShowAddEditNetworkModal(false);
-              //   } else {
-              //     const { error } = await res.json();
-              //     if (error) {
-              //       toast.error(error.message);
-              //       if (error.message.toLowerCase().includes("key")) {
-              //         setKeyError(error.message);
-              //       }
-              //     }
-              //   }
-              //   setSaving(false);
-              // });
+                  // for welcome page, redirect to links page after adding a link
+                  if (pathname === "/welcome") {
+                    router.push("/links");
+                    setShowAddEditNetworkModal(false);
+                  }
+
+                  setShowAddEditNetworkModal(false);
+                } else {
+                  const { error } = await res.json();
+                  if (error) {
+                    toast.error(error.message);
+                    if (error.message.toLowerCase().includes("key")) {
+                      setKeyError(error.message);
+                    }
+                  }
+                }
+                setSaving(false);
+              });
             }}
             className="grid gap-6 bg-gray-50 pt-8"
           >
@@ -278,6 +277,7 @@ function AddEditNetworkModal({
                     placeholder={
                       "https://dub.co/help/article/what-is-websiteID"
                     }
+                    value={websiteId ?? ""}
                     autoComplete="off"
                     onChange={(e) => {
                       setData({ ...data, websiteId: e.target.value });
@@ -303,6 +303,7 @@ function AddEditNetworkModal({
                     placeholder={
                       "https://dub.co/help/article/what-is-accountId"
                     }
+                    value={accountId ?? ""}
                     autoComplete="off"
                     onChange={(e) => {
                       setData({ ...data, accountId: e.target.value });
@@ -326,6 +327,8 @@ function AddEditNetworkModal({
                     name="apiKey"
                     id={`apiKey-${randomIdx}`}
                     placeholder={"https://dub.co/help/article/what-is-apiKey"}
+                    value={apiKey ?? ""} // Use an empty string if apiKey is null
+                    required
                     autoComplete="off"
                     onChange={(e) => {
                       setData({ ...data, apiKey: e.target.value });
