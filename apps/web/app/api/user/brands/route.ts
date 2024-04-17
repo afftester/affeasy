@@ -21,77 +21,92 @@ export const POST = withSession(async ({ req, session }) => {
   const data = await req.json();
   const relationship = data.userAdvertiserRelationship;
 
-  if (relationship) {
-    const accountId = relationship.accountId;
-    const apiKey = relationship.apiKey;
+  if (!relationship) {
+    return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+  }
 
-    const url = "https://advertiser-lookup.api.cj.com/v2/advertiser-lookup";
-    const params = {
-      "requestor-cid": accountId,
-      "advertiser-ids": "joined",
-    };
-    const headers = {
-      Authorization: `Bearer ${apiKey}`,
-    };
+  const accountId = relationship.accountId;
+  const apiKey = relationship.apiKey;
+  const advertiserId = relationship.advertiserId;
+  // console.log(advertiserId);
 
+  // Call the CJ advertiser lookup API to get a list of advertisers for the account
+  const url = "https://advertiser-lookup.api.cj.com/v2/advertiser-lookup";
+  const params = {
+    "requestor-cid": accountId,
+    "advertiser-ids": "joined",
+  };
+  const headers = {
+    Authorization: `Bearer ${apiKey}`,
+  };
+
+  try {
     const response = await fetch(`${url}?${new URLSearchParams(params)}`, {
       headers,
     });
-
     const xmlData = await response.text();
     const parser = new XMLParser();
     const jsonData = parser.parse(xmlData);
-
     const advertiserElements =
       jsonData["cj-api"]?.advertisers?.advertiser || [];
-    const advertiserDict = {};
 
-    for (const advertiser of advertiserElements) {
-      const advertiserId = advertiser["advertiser-id"];
-      const advertiserName = advertiser["advertiser-name"];
-      const advertiserUrl = advertiser["program-url"];
-      const modifiedUrl = extractBaseUrlUpdated(advertiserUrl);
+    const brands = await Promise.all(
+      advertiserElements.map(async (advertiser) => {
+        const advertiserUrl = advertiser["program-url"];
+        const modifiedUrl = extractBaseUrlUpdated(advertiserUrl);
 
-      if (advertiserId && advertiserName && modifiedUrl) {
-        try {
-          let brand;
-
-          brand = await prisma.brand.findFirst({
+        if (modifiedUrl) {
+          const brand = await prisma.brand.findFirst({
             where: { url: modifiedUrl },
             include: {
-              advertisers: true,
-              userBrandRelationships: true,
+              advertisers: {
+                where: {
+                  advertiserId: advertiserId,
+                },
+              },
+              userBrandRelationships: {
+                where: {
+                  userId: session.user.id,
+                  advertiserId,
+                },
+              },
             },
           });
 
           if (brand) {
-            console.log("brandId", brand.id);
-            console.log("advertiserId", relationship.advertiserId);
-            console.log("userAdvertiserRelationshipId", relationship.id);
-            console.log(
-              "brandAdvertiserRelationshipId",
-              brand.advertisers[0].id,
-            );
-            return NextResponse.json(brand);
-          } else {
-            console.log("No brand");
-            return NextResponse.json(
-              { error: "Brand not found" },
-              { status: 404 },
-            );
+            // console.log(brand);
+            let userBrandRelationship = brand.userBrandRelationships[0];
+            if (!userBrandRelationship) {
+              console.log("creating relationship");
+              userBrandRelationship = await prisma.userBrandRelationship.create(
+                {
+                  data: {
+                    userId: session.user.id,
+                    brandId: brand.id,
+                    advertiserId,
+                    userAdvertiserRelationId: relationship.id,
+                    brandAdvertiserRelationId: brand.advertisers[0].id,
+                  },
+                },
+              );
+            } else {
+              console.log("relationship already exists");
+            }
+            return { brand, userBrandRelationship };
           }
-        } catch (error) {
-          console.error("Error fetching brand:", error);
-          return NextResponse.json(
-            { error: "Error fetching brand" },
-            { status: 500 },
-          );
         }
-      }
-    }
-    return NextResponse.json(data);
-  } else {
-    console.log("No relationship found");
-    return NextResponse.json(data);
+
+        return null;
+      }),
+    );
+
+    const validBrands = brands.filter(Boolean);
+    return NextResponse.json(validBrands);
+  } catch (error) {
+    console.error("Error fetching advertiser data:", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
 });
