@@ -206,6 +206,17 @@ function AddEditNetworkModal({
               }).then(async (res) => {
                 if (res.status === 200) {
                   mutate("/api/user/networks");
+                  const data = await res.json();
+
+                  // Use the stringified relationship in the second fetch request
+                  fetch(`/api/user/brands`, {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                  });
+
                   if (props) {
                     toast.success("Network Record Modified!");
                   } else {

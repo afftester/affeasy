@@ -87,7 +87,7 @@ export const PUT = withSession(async ({ req }) => {
   const { id, apiKey, username, password, accountId, websiteId } =
     await req.json();
 
-  const updatedUserAdvertiserRelationship =
+  const userAdvertiserRelationship =
     await prisma.userAdvertiserRelationship.update({
       where: {
         id,
@@ -101,5 +101,5 @@ export const PUT = withSession(async ({ req }) => {
       },
     });
 
-  return NextResponse.json({ updatedUserAdvertiserRelationship });
+  return NextResponse.json({ userAdvertiserRelationship });
 });
