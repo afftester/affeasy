@@ -50,9 +50,11 @@ export default async function LinkMiddleware(
   }
 
   let link = await redis.hget<RedisLinkProps>(domain, key);
+  console.log(link);
 
   if (!link) {
     const linkData = await getLinkViaEdge(domain, key);
+    console.log(linkData);
 
     if (!linkData) {
       // short link not found, redirect to root

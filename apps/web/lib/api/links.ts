@@ -24,6 +24,8 @@ import {
   validKeyRegex,
 } from "@dub/utils";
 import { Prisma } from "@prisma/client";
+import { XMLParser } from "fast-xml-parser";
+import fetch from "node-fetch";
 import { checkIfKeyExists, getRandomKey } from "../planetscale";
 import { recordLink } from "../tinybird";
 import {
@@ -268,6 +270,18 @@ export function processKey(key: string) {
   return key;
 }
 
+function extractBaseUrlUpdated(url) {
+  // Remove the protocol part (http:// or https://) if present
+  if (url.includes("://")) {
+    url = url.split("://")[1];
+  }
+
+  // Split by '/' to remove paths, then take the first part and split by '?' to remove query parameters
+  const baseUrl = url.split("/")[0].split("?")[0];
+
+  return baseUrl;
+}
+
 export async function processLink({
   payload,
   workspace,
@@ -306,6 +320,7 @@ export async function processLink({
     };
   }
   const processedUrl = getUrlFromString(url);
+
   if (!processedUrl) {
     return {
       link: payload,
@@ -472,12 +487,78 @@ export async function processLink({
   delete payload["qrCode"];
   delete payload["prefix"];
 
+  const modifiedUrl = extractBaseUrlUpdated(processedUrl);
+  let desiredClickUrl = null;
+  let clickUrl = "";
+  if (modifiedUrl) {
+    const userBrandRelationship = await prisma.userBrandRelationship.findFirst({
+      where: {
+        user: {
+          id: userId,
+        },
+        brand: {
+          url: modifiedUrl,
+        },
+      },
+      include: {
+        brand: true,
+        userAdvertiserRelation: true,
+        brandAdvertiserRelation: true,
+      },
+    });
+    if (userBrandRelationship) {
+      const advertiserId = userBrandRelationship.advertiserId;
+
+      if (advertiserId === "1") {
+        const apiKey = userBrandRelationship.userAdvertiserRelation.apiKey;
+        const brandId =
+          userBrandRelationship.brandAdvertiserRelation.brandIdAtAdvertiser;
+        const websiteId =
+          userBrandRelationship.userAdvertiserRelation.websiteId;
+
+        const url = `https://link-search.api.cj.com/v2/link-search?website-id=${websiteId}&link-type=text%20link&advertiser-ids=${brandId}&allow-deep-linking=true`;
+
+        const headers = {
+          Authorization: `Bearer ${apiKey}`,
+        };
+
+        try {
+          const response = await fetch(url, { headers });
+          const encodedUrl = `?url=${encodeURIComponent(processedUrl)}`;
+          const xmlData = await response.text();
+          const parser = new XMLParser();
+          const jsonData = parser.parse(xmlData);
+
+          const linkElements = jsonData["cj-api"].links.link;
+
+          if (Array.isArray(linkElements)) {
+            for (const linkElement of linkElements) {
+              const allowDeepLinkingElement = linkElement["allow-deep-linking"];
+
+              if (allowDeepLinkingElement) {
+                desiredClickUrl = linkElement.clickUrl;
+                break;
+              }
+            }
+          }
+
+          if (desiredClickUrl) {
+            clickUrl = `${desiredClickUrl}${encodedUrl}`;
+          }
+        } catch (error) {
+          console.error("Error generating affiliate link:", error);
+        }
+      }
+    }
+  }
+
   return {
     link: {
       ...payload,
       domain,
       key,
       url: processedUrl,
+      aff_url: clickUrl || null,
       // make sure projectId is set to the current workspace
       projectId: workspace?.id || null,
       // if userId is passed, set it (we don't change the userId if it's already set, e.g. when editing a link)

@@ -77,7 +77,7 @@ export const POST = withSession(async ({ req, session }) => {
             // console.log(brand);
             let userBrandRelationship = brand.userBrandRelationships[0];
             if (!userBrandRelationship) {
-              console.log("creating relationship");
+              // console.log("creating relationship");
               userBrandRelationship = await prisma.userBrandRelationship.create(
                 {
                   data: {
@@ -89,9 +89,10 @@ export const POST = withSession(async ({ req, session }) => {
                   },
                 },
               );
-            } else {
-              console.log("relationship already exists");
             }
+            // else {
+            //   console.log("relationship already exists");
+            // }
             return { brand, userBrandRelationship };
           }
         }

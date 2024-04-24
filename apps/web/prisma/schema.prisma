@@ -249,6 +249,7 @@ model Link {
   domain        String
   key           String
   url           String    @db.LongText
+  aff_url       String?   @db.LongText
   archived      Boolean   @default(false)
   expiresAt     DateTime?
   password      String?
