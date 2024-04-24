@@ -1,3 +1,4 @@
+import prisma from "@/lib/prisma";
 import {
   LOCALHOST_GEO_DATA,
   capitalize,
@@ -7,7 +8,6 @@ import {
 import { NextRequest, userAgent } from "next/server";
 import { getIdentityHash } from "./edge";
 import { detectBot } from "./middleware/utils";
-import { conn } from "./planetscale";
 import { LinkProps } from "./types";
 import { ratelimit } from "./upstash";
 
@@ -87,19 +87,49 @@ export async function recordClick({
     // also increment the usage count for the project (if it's a link click)
     // and then we have a cron that will reset it at the start of new billing cycle
     root
-      ? conn.execute(
-          "UPDATE Domain SET clicks = clicks + 1, lastClicked = NOW() WHERE id = ?",
-          [id],
-        )
+      ? await prisma.domain.update({
+          where: {
+            id: id,
+          },
+          data: {
+            clicks: {
+              increment: 1,
+            },
+            lastClicked: new Date(),
+          },
+        })
       : [
-          conn.execute(
-            "UPDATE Link SET clicks = clicks + 1, lastClicked = NOW() WHERE id = ?",
-            [id],
-          ),
-          conn.execute(
-            "UPDATE Project p JOIN Link l ON p.id = l.projectId SET p.usage = p.usage + 1 WHERE l.id = ?",
-            [id],
-          ),
+          await prisma.link.update({
+            where: {
+              id: id,
+            },
+            data: {
+              clicks: {
+                increment: 1,
+              },
+              lastClicked: new Date(),
+            },
+          }),
+          (async () => {
+            const link = await prisma.link.findUnique({
+              where: {
+                id: id,
+              },
+            });
+
+            if (link?.projectId) {
+              await prisma.project.update({
+                where: {
+                  id: link.projectId,
+                },
+                data: {
+                  usage: {
+                    increment: 1,
+                  },
+                },
+              });
+            }
+          })(),
         ],
   ]);
 }
