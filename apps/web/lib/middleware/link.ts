@@ -88,9 +88,14 @@ export default async function LinkMiddleware(
     geo,
   } = link;
   let { url } = link;
+  console.log("Url before change:", url);
+  console.log("aff url:", aff_url);
 
   if (aff_url) {
     url = aff_url;
+    console.log("new Url is", url);
+  } else {
+    console.log("there was no aff url");
   }
 
   // only show inspect modal if the link is not password protected

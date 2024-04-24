@@ -76,12 +76,14 @@ export async function formatRedisLink(
     android,
     geo,
     projectId,
+    aff_url,
   } = link;
   const hasPassword = password && password.length > 0 ? true : false;
 
   return {
     id,
     url,
+    ...(aff_url && { aff_url }),
     ...(hasPassword && { password: true }),
     ...(proxy && { proxy: true }),
     ...(rewrite && {
