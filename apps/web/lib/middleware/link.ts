@@ -50,11 +50,9 @@ export default async function LinkMiddleware(
   }
 
   let link = await redis.hget<RedisLinkProps>(domain, key);
-  console.log(link);
 
   if (!link) {
     const linkData = await getLinkViaEdge(domain, key);
-    console.log(linkData);
 
     if (!linkData) {
       // short link not found, redirect to root
@@ -88,14 +86,9 @@ export default async function LinkMiddleware(
     geo,
   } = link;
   let { url } = link;
-  console.log("Url before change:", url);
-  console.log("aff url:", aff_url);
 
   if (aff_url) {
     url = aff_url;
-    console.log("new Url is", url);
-  } else {
-    console.log("there was no aff url");
   }
 
   // only show inspect modal if the link is not password protected

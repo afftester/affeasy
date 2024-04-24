@@ -67,6 +67,7 @@ export default function LinkCard({
     key,
     domain,
     url,
+    aff_url,
     rewrite,
     password,
     expiresAt,
@@ -377,6 +378,24 @@ export default function LinkCard({
                 </BadgeTooltip>
               )}
             </div>
+            {aff_url && (
+              <div className="flex max-w-fit items-center space-x-1">
+                <p
+                  className="whitespace-nowrap text-sm text-gray-500"
+                  suppressHydrationWarning
+                >
+                  Affiliate URL:
+                </p>
+                <a
+                  href={aff_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="xs:block hidden max-w-[140px] truncate text-sm font-medium text-gray-700 underline-offset-2 hover:underline sm:max-w-[300px] md:max-w-[360px] xl:max-w-[420px]"
+                >
+                  {aff_url}
+                </a>
+              </div>
+            )}
             <div className="flex max-w-fit items-center space-x-1">
               <Tooltip
                 content={
