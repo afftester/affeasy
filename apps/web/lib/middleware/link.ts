@@ -77,7 +77,7 @@ export default async function LinkMiddleware(
 
   const {
     id,
-    url,
+    aff_url,
     password,
     proxy,
     rewrite,
@@ -87,6 +87,11 @@ export default async function LinkMiddleware(
     android,
     geo,
   } = link;
+  let { url } = link;
+
+  if (aff_url) {
+    url = aff_url;
+  }
 
   // only show inspect modal if the link is not password protected
   if (inspectMode && !password) {
