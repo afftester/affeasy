@@ -61,6 +61,7 @@ export const getLinkViaEdge = async (domain: string, key: string) => {
         domain: string;
         key: string;
         url: string;
+        aff_url: string | null;
         proxy: number;
         title: string;
         description: string;
