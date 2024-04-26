@@ -71,8 +71,17 @@ function AddEditNetworkModal({
     }
   }, [networks, props]);
 
-  const { id, advertiserId, apiKey, username, password, accountId, websiteId } =
-    data;
+  const {
+    id,
+    advertiserId,
+    apiKey,
+    username,
+    password,
+    accountId,
+    clientId,
+    clientSecret,
+    websiteId,
+  } = data;
 
   const networkName =
     networks &&
@@ -272,83 +281,176 @@ function AddEditNetworkModal({
                   ))}
                 </select>
               </div>
-              <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor={`url-${randomIdx}`}
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Website ID
-                  </label>
-                </div>
-                <div className="relative mt-1 flex rounded-md shadow-sm">
-                  <input
-                    name="websiteID"
-                    id={`websiteID-${randomIdx}`}
-                    placeholder={
-                      "https://dub.co/help/article/what-is-websiteID"
-                    }
-                    value={websiteId ?? ""}
-                    autoComplete="off"
-                    onChange={(e) => {
-                      setData({ ...data, websiteId: e.target.value });
-                    }}
-                    className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
-                    aria-invalid="true"
-                  />
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor={`url-${randomIdx}`}
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    Account ID
-                  </label>
-                </div>
-                <div className="relative mt-1 flex rounded-md shadow-sm">
-                  <input
-                    name="accountId"
-                    id={`accountId-${randomIdx}`}
-                    placeholder={
-                      "https://dub.co/help/article/what-is-accountId"
-                    }
-                    value={accountId ?? ""}
-                    autoComplete="off"
-                    onChange={(e) => {
-                      setData({ ...data, accountId: e.target.value });
-                    }}
-                    className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
-                    aria-invalid="true"
-                  />
-                </div>
-              </div>
-              <div>
-                <div className="flex items-center justify-between">
-                  <label
-                    htmlFor={`url-${randomIdx}`}
-                    className="block text-sm font-medium text-gray-700"
-                  >
-                    API Key
-                  </label>
-                </div>
-                <div className="relative mt-1 flex rounded-md shadow-sm">
-                  <input
-                    name="apiKey"
-                    id={`apiKey-${randomIdx}`}
-                    placeholder={"https://dub.co/help/article/what-is-apiKey"}
-                    value={apiKey ?? ""} // Use an empty string if apiKey is null
-                    required
-                    autoComplete="off"
-                    onChange={(e) => {
-                      setData({ ...data, apiKey: e.target.value });
-                    }}
-                    className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
-                    aria-invalid="true"
-                  />
-                </div>
-              </div>
+
+              {advertiserId === "1" ? (
+                <>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`url-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Website ID
+                      </label>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="websiteID"
+                        id={`websiteID-${randomIdx}`}
+                        placeholder={
+                          "https://dub.co/help/article/what-is-websiteID"
+                        }
+                        value={websiteId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) => {
+                          setData({ ...data, websiteId: e.target.value });
+                        }}
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`url-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        API Key
+                      </label>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="apiKey"
+                        id={`apiKey-${randomIdx}`}
+                        placeholder={
+                          "https://dub.co/help/article/what-is-apiKey"
+                        }
+                        value={apiKey ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) => {
+                          setData({ ...data, apiKey: e.target.value });
+                        }}
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`url-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Account ID
+                      </label>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="accountId"
+                        id={`accountId-${randomIdx}`}
+                        placeholder={
+                          "https://dub.co/help/article/what-is-accountId"
+                        }
+                        value={accountId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) => {
+                          setData({ ...data, accountId: e.target.value });
+                        }}
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : advertiserId === "2" ? (
+                <>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`url-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Client ID
+                      </label>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="clientId"
+                        id={`clientId-${randomIdx}`}
+                        placeholder={
+                          "https://dub.co/help/article/what-is-clientId"
+                        }
+                        value={clientId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) => {
+                          setData({ ...data, clientId: e.target.value });
+                        }}
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`url-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Client Secret
+                      </label>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="clientSecret"
+                        id={`clientSecret-${randomIdx}`}
+                        placeholder={
+                          "https://dub.co/help/article/what-is-clientSecret"
+                        }
+                        value={clientSecret ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) => {
+                          setData({ ...data, clientSecret: e.target.value });
+                        }}
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`url-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Account ID
+                      </label>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="accountId"
+                        id={`accountId-${randomIdx}`}
+                        placeholder={
+                          "https://dub.co/help/article/what-is-accountId"
+                        }
+                        value={accountId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) => {
+                          setData({ ...data, accountId: e.target.value });
+                        }}
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : null}
             </div>
 
             {/* Divider

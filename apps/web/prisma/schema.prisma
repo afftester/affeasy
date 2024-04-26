@@ -33,6 +33,8 @@ model UserAdvertiserRelationship {
   apiKey                 String?
   username               String?
   password               String?
+  clientId               String?
+  clientSecret           String?
   accountId              String?
   websiteId              String?
   user                   User                    @relation(fields: [userId], references: [id], onDelete: Cascade)

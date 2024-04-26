@@ -34,6 +34,8 @@ export const GET = withSession(async ({ session }) => {
         apiKey: true,
         username: true,
         password: true,
+        clientId: true,
+        clientSecret: true,
         accountId: true,
         websiteId: true,
         advertiser: {
@@ -50,8 +52,16 @@ export const GET = withSession(async ({ session }) => {
 
 // POST /api/user/networks – create a new UserAdvertiserRelationship
 export const POST = withSession(async ({ req, session }) => {
-  const { advertiserId, username, password, apiKey, accountId, websiteId } =
-    await req.json();
+  const {
+    advertiserId,
+    username,
+    password,
+    apiKey,
+    accountId,
+    websiteId,
+    clientId,
+    clientSecret,
+  } = await req.json();
 
   const userAdvertiserRelationship =
     await prisma.userAdvertiserRelationship.create({
@@ -63,6 +73,8 @@ export const POST = withSession(async ({ req, session }) => {
         password,
         accountId,
         websiteId,
+        clientId,
+        clientSecret,
       },
     });
 
@@ -84,8 +96,16 @@ export const DELETE = withSession(async ({ searchParams, session }) => {
 
 // PUT /api/user/networks – update an existing UserAdvertiserRelationship record
 export const PUT = withSession(async ({ req }) => {
-  const { id, apiKey, username, password, accountId, websiteId } =
-    await req.json();
+  const {
+    id,
+    apiKey,
+    username,
+    password,
+    accountId,
+    websiteId,
+    clientId,
+    clientSecret,
+  } = await req.json();
 
   const userAdvertiserRelationship =
     await prisma.userAdvertiserRelationship.update({
@@ -98,6 +118,8 @@ export const PUT = withSession(async ({ req }) => {
         password,
         accountId,
         websiteId,
+        clientId,
+        clientSecret,
       },
     });
 

@@ -20,6 +20,8 @@ export interface UserAdvertiserWithNameProps {
   apiKey?: string;
   username?: string;
   password?: string;
+  clientId?: string;
+  clientSecret?: string;
   accountId?: string;
   websiteId?: string;
   advertiser: {
