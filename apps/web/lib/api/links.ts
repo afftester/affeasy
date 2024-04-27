@@ -26,6 +26,7 @@ import {
 import { Prisma } from "@prisma/client";
 import { XMLParser } from "fast-xml-parser";
 import fetch from "node-fetch";
+import { generateRakutenToken } from "../advertisers";
 import { checkIfKeyExists, getRandomKey } from "../planetscale";
 import { recordLink } from "../tinybird";
 import {
@@ -548,6 +549,66 @@ export async function processLink({
         } catch (error) {
           console.error("Error generating affiliate link:", error);
         }
+      } else if (advertiserId === "2") {
+        const brandId =
+          userBrandRelationship.brandAdvertiserRelation.brandIdAtAdvertiser;
+        const userAdvertiserRelation =
+          userBrandRelationship.userAdvertiserRelation;
+
+        const clientId = userAdvertiserRelation.clientId || "";
+        const clientSecret = userAdvertiserRelation.clientSecret || "";
+        const accountId = userAdvertiserRelation.accountId || "";
+
+        if (!clientId || !clientSecret || !accountId) {
+          // Handle the case where any of the required values are missing
+          return {
+            link: payload,
+            error: "Missing credentials for Rakuten affiliate program.",
+            code: "unprocessable_entity",
+          };
+        }
+
+        const token = await generateRakutenToken(
+          clientId,
+          clientSecret,
+          accountId,
+        );
+
+        const url = "https://api.linksynergy.com/v1/links/deep_links";
+
+        const data = {
+          url: processedUrl,
+          advertiser_id: Number(brandId),
+        };
+
+        const jsonData = JSON.stringify(data);
+
+        const headers = {
+          accept: "application/json",
+          authorization: `Bearer ${token}`,
+          "content-type": "application/json",
+        };
+
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers,
+            body: jsonData,
+          });
+
+          if (response.status === 200) {
+            const responseJson = await response.json();
+
+            // Type guard
+            if (isExpectedResponse(responseJson)) {
+              const affiliateUrl =
+                responseJson.advertiser.deep_link.deep_link_url;
+              clickUrl = affiliateUrl;
+            }
+          }
+        } catch (error) {
+          console.error("Error generating affiliate link:", error);
+        }
       }
     }
   }
@@ -568,6 +629,29 @@ export async function processLink({
     },
     error: null,
   };
+}
+
+// Type guard function
+function isExpectedResponse(data: unknown): data is {
+  advertiser: {
+    deep_link: {
+      deep_link_url: string;
+    };
+  };
+} {
+  // Check if the data has the expected structure
+  return (
+    typeof data === "object" &&
+    data !== null &&
+    "advertiser" in data &&
+    typeof data.advertiser === "object" &&
+    data.advertiser !== null &&
+    "deep_link" in data.advertiser &&
+    typeof data.advertiser.deep_link === "object" &&
+    data.advertiser.deep_link !== null &&
+    "deep_link_url" in data.advertiser.deep_link &&
+    typeof data.advertiser.deep_link.deep_link_url === "string"
+  );
 }
 
 export function combineTagIds({

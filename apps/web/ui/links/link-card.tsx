@@ -384,7 +384,7 @@ export default function LinkCard({
                   className="whitespace-nowrap text-sm text-gray-500"
                   suppressHydrationWarning
                 >
-                  Affiliate URL:
+                  Affiliate URL
                 </p>
                 <a
                   href={aff_url}
