@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu } from "lucide-react";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import * as React from "react";
 
 import { MarketingButton } from "@dub/ui/src/button-marketing";
@@ -19,11 +19,10 @@ import { AppLink } from "./app-link";
 export function MarketingMenu() {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
-  const searchParams = useSearchParams();
 
   React.useEffect(() => {
     setOpen(false);
-  }, [pathname, searchParams]); // remove searchParams if not needed
+  }, [pathname]); // remove searchParams if not needed
 
   return (
     <Sheet open={open} onOpenChange={(value) => setOpen(value)}>
