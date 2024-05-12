@@ -136,6 +136,9 @@ importers:
       bottleneck:
         specifier: ^2.19.5
         version: 2.19.5
+      class-variance-authority:
+        specifier: ^0.7.0
+        version: 0.7.0
       cmdk:
         specifier: ^0.2.0
         version: 0.2.0(@types/react@18.2.48)(react-dom@18.2.0)(react@18.2.0)
@@ -5877,7 +5880,7 @@ packages:
       '@react-native-community/cli-tools': 11.3.7
       chalk: 4.1.2
       execa: 5.1.1
-      fast-xml-parser: 4.3.2
+      fast-xml-parser: 4.3.6
       glob: 7.2.3
       ora: 5.4.1
     transitivePeerDependencies:
@@ -9696,13 +9699,6 @@ packages:
 
   /fast-xml-parser@4.2.5:
     resolution: {integrity: sha512-B9/wizE4WngqQftFPmdaMYlXoJlJOYxGQOanC77fq9k8+Z0v5dDSVh+3glErdIROP//s/jgb7ZuxKfB8nVyo0g==}
-    hasBin: true
-    dependencies:
-      strnum: 1.0.5
-    dev: false
-
-  /fast-xml-parser@4.3.2:
-    resolution: {integrity: sha512-rmrXUXwbJedoXkStenj1kkljNF7ugn5ZjR9FJcwmCfcCbtOMDghPajbc+Tck6vE6F5XsDmx+Pr2le9fw8+pXBg==}
     hasBin: true
     dependencies:
       strnum: 1.0.5

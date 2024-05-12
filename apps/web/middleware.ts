@@ -3,6 +3,7 @@ import {
   AppMiddleware,
   LinkMiddleware,
   RootMiddleware,
+  isHomeHostname,
 } from "@/lib/middleware";
 import { parse } from "@/lib/middleware/utils";
 import {
@@ -32,6 +33,12 @@ export const config = {
 export default async function middleware(req: NextRequest, ev: NextFetchEvent) {
   const { domain, path, key } = parse(req);
 
+  // HomePage
+  if (isHomeHostname(domain)) {
+    return NextResponse.rewrite(
+      new URL(`/marketing${path === "/" ? "" : path}`, req.url),
+    );
+  }
   // for App
   if (APP_HOSTNAMES.has(domain)) {
     return AppMiddleware(req);
