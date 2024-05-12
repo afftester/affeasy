@@ -12,7 +12,7 @@ import useSWR from "swr";
 
 const tabs: Array<"Networks"> = ["Networks"];
 
-export default async function NetworksPageClient() {
+export default function NetworksPageClient() {
   const { setShowAddEditNetworkModal, AddEditNetworkModal } =
     useAddEditNetworkModal({});
 
