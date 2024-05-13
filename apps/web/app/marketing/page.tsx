@@ -10,7 +10,7 @@ import { Hero } from "./marketing-components/hero";
 // import { StatusPageCard } from "@/components/marketing/status-page/card";
 import { MarketingLayout } from "./marketing-components/marketing-layout";
 
-export default async function Page() {
+export default function Page() {
   return (
     <MarketingLayout>
       <div className="grid gap-8">
