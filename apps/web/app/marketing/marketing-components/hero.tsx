@@ -1,6 +1,5 @@
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { Suspense } from "react";
 
 import { Badge } from "@dub/ui/src/badge-marketing";
 import { MarketingButton as Button } from "@dub/ui/src/button-marketing";
@@ -46,19 +45,10 @@ export function Hero() {
           >
             <Link href="/github" target="_blank">
               Star on GitHub{" "}
-              <Suspense fallback={<StarsBadgeFallback />}></Suspense>
             </Link>
           </Button>
         </div>
       </div>
     </div>
-  );
-}
-
-function StarsBadgeFallback() {
-  return (
-    <Badge variant="secondary" className="ml-1">
-      ~
-    </Badge>
   );
 }

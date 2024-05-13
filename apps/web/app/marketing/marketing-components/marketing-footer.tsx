@@ -6,7 +6,7 @@ import { Shell } from "../_components/shell";
 import { socialsConfig } from "../config/socials";
 import { BrandName } from "./brand-name";
 import { SocialIconButton } from "./social-icon-button";
-import { StatusWidgetContainer } from "./status-widget-suspense";
+// import { StatusWidgetContainer } from "./status-widget-suspense";
 
 interface Props {
   className?: string;
@@ -28,7 +28,7 @@ export function MarketingFooter({ className }: Props) {
                 </span>
               </p>
             </div>
-            <StatusWidgetContainer slug="status" />
+            {/* <StatusWidgetContainer slug="status" /> */}
           </div>
           <div className="order-2 flex flex-col gap-3 text-sm">
             <p className="text-foreground font-semibold">Resources</p>

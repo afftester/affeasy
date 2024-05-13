@@ -9,6 +9,7 @@ import { MarketingButton } from "@dub/ui/src/button-marketing";
 import { cn } from "@dub/utils";
 import { marketingPagesConfig } from "../config/pages";
 import { BrandName } from "./brand-name";
+import { MarketingMenu } from "./marketing-menu";
 
 interface Props {
   className?: string;
@@ -44,7 +45,9 @@ export function MarketingHeader({ className }: Props) {
         })}
       </div>
       <div className="flex items-center justify-end gap-3 md:col-span-1">
-        <div className="block md:hidden">{/* <MarketingMenu /> */}</div>
+        <div className="block md:hidden">
+          <MarketingMenu />
+        </div>
       </div>
     </header>
   );
