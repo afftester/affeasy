@@ -30,8 +30,6 @@ importers:
         specifier: ^1.12.5
         version: 1.12.5
 
-  apps/docs: {}
-
   apps/web:
     dependencies:
       '@boxyhq/saml-jackson':
@@ -176,8 +174,8 @@ importers:
         specifier: ^3.0.5
         version: 3.0.5
       lucide-react:
-        specifier: ^0.299.0
-        version: 0.299.0(react@18.2.0)
+        specifier: ^0.386.0
+        version: 0.386.0(react@18.2.0)
       nanoid:
         specifier: ^5.0.1
         version: 5.0.1
@@ -11215,8 +11213,8 @@ packages:
       react: 18.2.0
     dev: false
 
-  /lucide-react@0.299.0(react@18.2.0):
-    resolution: {integrity: sha512-59MiDzDzFI/efHhb4n0vGdXelMNwou7JlAFvVS4boA1G/7aYU7garPciYo73CODzkhrhz0JOgdtSTPSe5dMrlQ==}
+  /lucide-react@0.386.0(react@18.2.0):
+    resolution: {integrity: sha512-K1sQRMjJSkVJ6Uhr+z0eaBWLHLvFK3caOefFkjp3T9ntuLQEx46tYqKQC6uJKw9Bh8sA+kpQhZN41Z0cMPO65w==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
@@ -13175,7 +13173,7 @@ packages:
         optional: true
     dependencies:
       prettier: 3.2.5
-      prettier-plugin-organize-imports: 3.2.4(prettier@3.2.5)(typescript@5.1.6)
+      prettier-plugin-organize-imports: 3.2.4(prettier@3.2.5)(typescript@5.2.2)
     dev: true
 
   /prettier@3.2.5:
@@ -14022,6 +14020,7 @@ packages:
 
   /rimraf@2.6.3:
     resolution: {integrity: sha512-mwqeW5XsA2qAejG46gYdENaxXjx9onRNCfn7L0duuP4hCuTIi/QO7PDK07KJfp1d+izWPrzEJDcSqBa0OZQriA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
     dependencies:
       glob: 7.2.3
