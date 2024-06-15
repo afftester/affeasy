@@ -77,9 +77,9 @@ export const cardConfig = {
       },
     ],
   },
-  alerts: {
-    icon: "siren",
-    title: "Alerting",
+  networks: {
+    icon: "thumbsup",
+    title: "Major Affiliate Networks Supported",
     features: [
       {
         icon: "sparkles",

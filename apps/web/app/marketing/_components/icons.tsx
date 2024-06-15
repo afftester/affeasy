@@ -51,6 +51,7 @@ import {
   Zap,
   AreaChart,
   BicepsFlexed,
+  ThumbsUp,
 } from "lucide-react";
 import type { LucideIcon, LucideProps } from "lucide-react";
 
@@ -75,6 +76,7 @@ export const Icons = {
   tag: Tag,
   areachart: AreaChart,
   bicepsflexed: BicepsFlexed,
+  thumbsup: ThumbsUp,
   trash: Trash,
   twitter: TwitterIcon,
   globe: Globe2,

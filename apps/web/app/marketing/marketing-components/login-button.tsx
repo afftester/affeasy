@@ -11,7 +11,6 @@ export function LoginButton({ className, ...props }: ButtonProps) {
   // const { domain = "dub.co" } = useParams() as { domain: string };
 
   const { data: session } = useSession();
-  console.log(session);
 
   return (
     <MarketingButton

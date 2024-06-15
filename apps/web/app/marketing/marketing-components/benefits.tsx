@@ -1,7 +1,3 @@
-import Link from "next/link";
-
-import { MarketingButton as Button } from "@dub/ui/src/button-marketing";
-
 import { cardConfig } from "../config/features";
 import {
   CardContainer,

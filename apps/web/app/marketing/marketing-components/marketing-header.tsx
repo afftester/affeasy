@@ -48,7 +48,7 @@ export function MarketingHeader({ className }: Props) {
         <div className="block md:hidden">
           <MarketingMenu />
         </div>
-        <LoginButton />
+        {/* <LoginButton /> */}
       </div>
     </header>
   );
