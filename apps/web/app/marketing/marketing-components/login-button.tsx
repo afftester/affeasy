@@ -10,9 +10,8 @@ import Link from "next/link";
 export function LoginButton({ className, ...props }: ButtonProps) {
   // const { domain = "dub.co" } = useParams() as { domain: string };
 
-  const { data: session, status } = useSession() || {
-    status: "unauthenticated", // if `useSession` is undefined, we're on a non dub.co domain
-  };
+  const { data: session } = useSession();
+  console.log(session);
 
   return (
     <MarketingButton
@@ -22,9 +21,9 @@ export function LoginButton({ className, ...props }: ButtonProps) {
     >
       {session ? (
         <Link href={APP_DOMAIN}>Dashboard</Link>
-      ) : status === "unauthenticated" ? (
+      ) : (
         <Link href={`${APP_DOMAIN}/login`}>Sign Up</Link>
-      ) : null}
+      )}
     </MarketingButton>
   );
 }

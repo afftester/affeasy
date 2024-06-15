@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { MarketingButton } from "@dub/ui/src/button-marketing";
-// import { LoginButton } from "./login-button";
+import { LoginButton } from "./login-button";
 
 import { cn } from "@dub/utils";
 import { marketingPagesConfig } from "../config/pages";
@@ -48,6 +48,7 @@ export function MarketingHeader({ className }: Props) {
         <div className="block md:hidden">
           <MarketingMenu />
         </div>
+        <LoginButton />
       </div>
     </header>
   );

@@ -49,6 +49,8 @@ import {
   Webhook,
   Youtube,
   Zap,
+  AreaChart,
+  BicepsFlexed,
 } from "lucide-react";
 import type { LucideIcon, LucideProps } from "lucide-react";
 
@@ -71,6 +73,8 @@ export const Icons = {
   "message-circle": MessageCircle,
   calendar: Calendar,
   tag: Tag,
+  areachart: AreaChart,
+  bicepsflexed: BicepsFlexed,
   trash: Trash,
   twitter: TwitterIcon,
   globe: Globe2,
