@@ -11,7 +11,10 @@ export default function Page() {
     <MarketingLayout>
       <div className="grid gap-8">
         <Hero />
-        <BenefitsCard />
+        <div className="bg-[#FFFFFF]">
+          <BenefitsCard />
+        </div>
+
         <AffiliateNetworksCard />
       </div>
     </MarketingLayout>

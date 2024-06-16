@@ -1,5 +1,6 @@
 import sharedConfig from "@dub/tailwind-config/tailwind.config.ts";
 import type { Config } from "tailwindcss";
+const { fontFamily } = require("tailwindcss/defaultTheme");
 
 const config: Pick<Config, "presets"> = {
   presets: [
@@ -26,6 +27,9 @@ const config: Pick<Config, "presets"> = {
               "0%": { transform: "translateX(0)" },
               "100%": { transform: "translateX(-150%)" },
             },
+          },
+          fontFamily: {
+            heading: ["var(--font-heading)", ...fontFamily.sans],
           },
         },
       },

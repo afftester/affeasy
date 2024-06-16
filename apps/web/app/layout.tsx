@@ -5,8 +5,13 @@ import { cn, constructMetadata } from "@dub/utils";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Toaster } from "sonner";
+import LocalFont from "next/font/local";
 
 export const metadata = constructMetadata();
+const calSans = LocalFont({
+  src: "../public/fonts/CalSans-SemiBold.woff2",
+  variable: "--font-heading",
+});
 
 export default function RootLayout({
   children,
@@ -14,7 +19,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={cn(satoshi.variable, inter.variable)}>
+    <html
+      lang="en"
+      className={cn(satoshi.variable, inter.variable, calSans.variable)}
+    >
       <body>
         <TooltipProvider>
           <Toaster closeButton />

@@ -22,7 +22,7 @@ export function MarketingHeader({ className }: Props) {
     <header
       className={cn("grid w-full grid-cols-2 gap-2 md:grid-cols-5", className)}
     >
-      <div className="flex items-center md:col-span-1">
+      <div className="flex items-center md:col-span-1 ">
         <BrandName />
       </div>
       <div className="border-border mx-auto hidden items-center justify-center rounded-full border px-2 backdrop-blur-[2px] md:col-span-3 md:flex md:gap-1">
@@ -48,7 +48,7 @@ export function MarketingHeader({ className }: Props) {
         <div className="block md:hidden">
           <MarketingMenu />
         </div>
-        {/* <LoginButton /> */}
+        <LoginButton />
       </div>
     </header>
   );

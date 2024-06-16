@@ -19,7 +19,7 @@ export function AffiliateNetworksCard() {
       <CardHeader>
         <CardIcon icon={icon} />
         <CardTitle>
-          <p className="text-black">{title}</p>
+          <p className="text-foreground font-heading text-black">{title}</p>
         </CardTitle>
       </CardHeader>
       <BentoGridDemo />

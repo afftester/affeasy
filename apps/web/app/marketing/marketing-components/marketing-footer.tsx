@@ -21,11 +21,8 @@ export function MarketingFooter({ className }: Props) {
             <div>
               <BrandName />
               <p className="text-muted-foreground mt-2 text-sm font-light">
-                We are on a mission to provide a reliable, easy and fast way to
-                monitor your APIs and websites.{" "}
-                <span className="underline decoration-dotted underline-offset-2">
-                  Let&apos;s end <code>us-east-1</code> privilege together.
-                </span>
+                Affiliate Marketing Made Easy! One-Stop Affiliate Link
+                Generator.
               </p>
             </div>
             {/* <StatusWidgetContainer slug="status" /> */}

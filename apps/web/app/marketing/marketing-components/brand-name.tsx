@@ -8,7 +8,7 @@ export function BrandName() {
   return (
     <Link
       href="/"
-      className="font-cal text-muted-foreground hover:text-foreground text-lg"
+      className="font-heading text-muted-foreground hover:text-foreground text-lg"
     >
       AffEasy
     </Link>

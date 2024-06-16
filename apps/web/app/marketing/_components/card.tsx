@@ -89,7 +89,7 @@ export function CardFeature(props: FeatureDescription) {
       <p className="flex flex-col">
         <span>
           <FeatureIcon className="text-foreground/80 mb-1 mr-1.5 inline-flex h-4 w-4" />
-          <span className="text-foreground font-medium">
+          <span className="text-foreground font-heading">
             {props.catchline.replace(".", "")}
           </span>{" "}
         </span>
