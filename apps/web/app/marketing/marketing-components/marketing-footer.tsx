@@ -32,8 +32,6 @@ export function MarketingFooter({ className }: Props) {
             <FooterLink href="/blog" label="Blog" />
             <FooterLink href="/pricing" label="Pricing" />
             <FooterLink href="https://docs.openstatus.dev" label="Docs" />
-            <FooterLink href="/oss-friends" label="OSS Friends" />
-            <FooterLink href="/status" label="External Providers Monitoring" />
           </div>
           <div className="order-3 flex flex-col gap-3 text-sm">
             <p className="text-foreground font-semibold">Company</p>
@@ -41,11 +39,6 @@ export function MarketingFooter({ className }: Props) {
             <FooterLink href="/changelog" label="Changelog" />
             <FooterLink href="/legal/terms" label="Terms" />
             <FooterLink href="/legal/privacy" label="Privacy" />
-          </div>
-          <div className="order-3 flex flex-col gap-3 text-sm">
-            <p className="text-foreground font-semibold">Tools</p>
-            <FooterLink href="/play/checker" label="Speed Checker" />
-            <FooterLink href="https://openstat.us" label="All Status Codes" />
           </div>
         </div>
         <div className="flex items-center justify-between gap-3">
