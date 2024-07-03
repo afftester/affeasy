@@ -1,8 +1,8 @@
+import z from "@/lib/zod";
+import { capitalize } from "@dub/utils";
 import { NextResponse } from "next/server";
 import { ZodError } from "zod";
 import { generateErrorMessage } from "zod-error";
-import z from "@/lib/zod";
-import { capitalize } from "@dub/utils";
 import { PlanProps } from "../types";
 
 export const ErrorCode = z.enum([
@@ -45,7 +45,7 @@ const ErrorSchema = z.object({
     }),
     doc_url: z.string().optional().openapi({
       description: "A URL to more information about the error code reported.",
-      example: "https://dub.co/docs/api-reference",
+      example: "https://affeasy.link/docs/api-reference",
     }),
   }),
 });
@@ -72,7 +72,7 @@ export class DubApiError extends Error {
   }
 }
 
-const docErrorUrl = "https://dub.co/docs/api-reference/errors";
+const docErrorUrl = "https://affeasy.link/docs/api-reference/errors";
 
 export function fromZodError(error: ZodError): ErrorResponse {
   return {

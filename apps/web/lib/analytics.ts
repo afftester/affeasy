@@ -55,7 +55,7 @@ export const intervalData = {
     granularity: "day",
   },
   all: {
-    // Dub.co founding date
+    // AffEasy founding date
     startDate: new Date("2022-09-22"),
     granularity: "month",
   },

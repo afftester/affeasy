@@ -26,6 +26,7 @@ export default async function AdminMiddleware(req: NextRequest) {
 
   if (response?.projectId === DUB_WORKSPACE_ID) {
     isAdmin = true;
+    console.log("test");
   }
 
   if (path === "/login" && isAdmin) {
@@ -35,6 +36,6 @@ export default async function AdminMiddleware(req: NextRequest) {
   }
 
   return NextResponse.rewrite(
-    new URL(`/admin.dub.co${path === "/" ? "" : path}`, req.url),
+    new URL(`/admin.affeasy.link${path === "/" ? "" : path}`, req.url),
   );
 }

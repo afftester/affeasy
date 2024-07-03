@@ -39,7 +39,7 @@ module.exports = {
   images: {
     remotePatterns: [
       {
-        hostname: "assets.dub.co", // for Dub's static assets
+        hostname: "assets.affeasy.link", // for Dub's static assets
       },
       {
         hostname: "dubassets.com", // for Dub's user generated images
@@ -101,7 +101,7 @@ module.exports = {
             value: "app.dub.sh",
           },
         ],
-        destination: "https://app.dub.co",
+        destination: "https://app.affeasy.link",
         permanent: true,
         statusCode: 301,
       },
@@ -113,7 +113,7 @@ module.exports = {
             value: "app.dub.sh",
           },
         ],
-        destination: "https://app.dub.co/:path*",
+        destination: "https://app.affeasy.link/:path*",
         permanent: true,
         statusCode: 301,
       },
@@ -127,7 +127,7 @@ module.exports = {
                 value: "dub.sh",
               },
             ],
-            destination: `https://dub.co/${segment}`,
+            destination: `https://affeasy.link/${segment}`,
             permanent: true,
             statusCode: 301,
           },
@@ -139,7 +139,7 @@ module.exports = {
                 value: "dub.sh",
               },
             ],
-            destination: `https://dub.co/${segment}/:path*`,
+            destination: `https://affeasy.link/${segment}/:path*`,
             permanent: true,
             statusCode: 301,
           }
@@ -153,7 +153,7 @@ module.exports = {
             value: "dub.sh",
           },
         ],
-        destination: "https://dub.co/tools/metatags",
+        destination: "https://affeasy.link/tools/metatags",
         permanent: true,
         statusCode: 301,
       },
@@ -162,7 +162,7 @@ module.exports = {
         has: [
           {
             type: "host",
-            value: "dub.co",
+            value: "affeasy.link",
           },
         ],
         destination: "/tools/metatags",
@@ -177,7 +177,7 @@ module.exports = {
             value: "staging.dub.sh",
           },
         ],
-        destination: "https://dub.co",
+        destination: "https://affeasy.link",
         permanent: true,
         statusCode: 301,
       },
@@ -189,7 +189,7 @@ module.exports = {
             value: "preview.dub.sh",
           },
         ],
-        destination: "https://preview.dub.co",
+        destination: "https://preview.affeasy.link",
         permanent: true,
         statusCode: 301,
       },
@@ -201,7 +201,7 @@ module.exports = {
             value: "admin.dub.sh",
           },
         ],
-        destination: "https://admin.dub.co",
+        destination: "https://admin.affeasy.link",
         permanent: true,
         statusCode: 301,
       },

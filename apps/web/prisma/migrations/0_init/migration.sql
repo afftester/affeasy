@@ -217,7 +217,7 @@ CREATE TABLE `Domain` (
     `verified` BOOLEAN NOT NULL DEFAULT false,
     `target` VARCHAR(191) NULL,
     `type` VARCHAR(191) NOT NULL DEFAULT 'redirect',
-    `placeholder` VARCHAR(191) NOT NULL DEFAULT 'https://dub.co/help/article/what-is-dub',
+    `placeholder` VARCHAR(191) NOT NULL DEFAULT 'https://affeasy.link/help/article/what-is-dub',
     `description` VARCHAR(191) NULL,
     `projectId` VARCHAR(191) NULL,
     `primary` BOOLEAN NOT NULL DEFAULT false,

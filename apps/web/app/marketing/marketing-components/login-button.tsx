@@ -7,8 +7,6 @@ import { APP_DOMAIN, cn } from "@dub/utils";
 import Link from "next/link";
 
 export function LoginButton({ className, ...props }: ButtonProps) {
-  // const { domain = "dub.co" } = useParams() as { domain: string };
-
   return (
     <MarketingButton
       asChild

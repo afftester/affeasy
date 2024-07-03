@@ -41,7 +41,7 @@ export async function generateMetadata({
   return constructMetadata({
     title:
       isDubDomain(domain) || link.project?.plan === "free"
-        ? `${title} - Dub.co`
+        ? `${title} - AffEasy`
         : title,
     description,
     image,
@@ -127,7 +127,7 @@ export default async function PasswordProtectedLinkPage({
               className="h-10 w-10 rounded-full"
             />
           ) : (
-            <a href="https://dub.co" target="_blank" rel="noreferrer">
+            <a href="https://affeasy.link" target="_blank" rel="noreferrer">
               <Logo />
             </a>
           )}

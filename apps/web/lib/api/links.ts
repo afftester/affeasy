@@ -114,7 +114,7 @@ export async function getLinksForWorkspace({
       tagId: tags?.[0]?.id ?? null, // backwards compatibility
       tags,
       shortLink,
-      qrCode: `https://api.dub.co/qr?url=${shortLink}`,
+      qrCode: `https://api.affeasy.link/qr?url=${shortLink}`,
       workspaceId: `ws_${link.projectId}`,
     };
   });
@@ -750,7 +750,7 @@ export async function addLink(link: LinkWithTagIdsProps) {
     tagId: tags?.[0]?.id ?? null, // backwards compatibility
     tags,
     shortLink,
-    qrCode: `https://api.dub.co/qr?url=${shortLink}`,
+    qrCode: `https://api.affeasy.link/qr?url=${shortLink}`,
     workspaceId: `ws_${response.projectId}`,
   };
 }
@@ -822,7 +822,7 @@ export async function bulkCreateLinks({
       shortLink,
       tagId: tags?.[0]?.id ?? null, // backwards compatibility
       tags,
-      qrCode: `https://api.dub.co/qr?url=${shortLink}`,
+      qrCode: `https://api.affeasy.link/qr?url=${shortLink}`,
       workspaceId: `ws_${link.projectId}`,
     };
   });
@@ -987,7 +987,7 @@ export async function editLink({
     tagId: tags?.[0]?.id ?? null, // backwards compatibility
     tags,
     shortLink,
-    qrCode: `https://api.dub.co/qr?url=${shortLink}`,
+    qrCode: `https://api.affeasy.link/qr?url=${shortLink}`,
     workspaceId: `ws_${response.projectId}`,
   };
 }

@@ -104,7 +104,7 @@ export const POST = async (req: Request) => {
             limiter.schedule(() =>
               sendEmail({
                 email: user.email as string,
-                subject: `Thank you for upgrading to Dub.co ${plan.name}!`,
+                subject: `Thank you for upgrading to AffEasy ${plan.name}!`,
                 react: UpgradeEmail({
                   name: user.name,
                   email: user.email as string,
@@ -247,9 +247,9 @@ export const POST = async (req: Request) => {
           workspaceUsers.map((email) =>
             sendEmail({
               email,
-              from: "steven@dub.co",
-              subject: "Feedback on your Dub.co experience?",
-              text: "Hey!\n\nI noticed you recently cancelled your Dub.co subscription – we're sorry to see you go!\n\nI'd love to hear your feedback on your experience with Dub – what could we have done better?\n\nThanks!\n\nSteven Tey\nFounder, Dub.co",
+              from: "steven@AffEasy",
+              subject: "Feedback on your AffEasy experience?",
+              text: "Hey!\n\nI noticed you recently cancelled your AffEasy subscription – we're sorry to see you go!\n\nI'd love to hear your feedback on your experience with Dub – what could we have done better?\n\nThanks!\n\nSteven Tey\nFounder, AffEasy",
             }),
           ),
         ]);

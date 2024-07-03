@@ -4,7 +4,7 @@ import ImpersonateWorkspace from "./components/impersonate-workspace";
 import RefreshDomain from "./components/refresh-domain";
 
 export const metadata = constructMetadata({
-  title: "Dub Admin",
+  title: "AffEasy Admin",
   noIndex: true,
 });
 

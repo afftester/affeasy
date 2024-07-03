@@ -7,12 +7,12 @@ import type {
 } from "@boxyhq/saml-jackson";
 import jackson from "@boxyhq/saml-jackson";
 
-export const samlAudience = "https://saml.dub.co";
+export const samlAudience = "https://saml.affeasy.link";
 
 const opts: JacksonOption = {
   externalUrl:
     process.env.NODE_ENV === "production"
-      ? "https://api.dub.co"
+      ? "https://api.affeasy.link"
       : `${process.env.NEXTAUTH_URL}`,
   samlPath:
     process.env.NODE_ENV === "production"

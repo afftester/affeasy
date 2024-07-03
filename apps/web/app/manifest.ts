@@ -2,9 +2,9 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Dub.co App",
-    short_name: "Dub.co",
-    description: "Dub.co – the open-source link management infrastructure.",
+    name: "AffEasy App",
+    short_name: "AffEasy",
+    description: "AffEasy – Affiliate Marketing Made Easy",
     start_url: "/",
     display: "standalone",
     background_color: "#ffffff",

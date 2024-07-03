@@ -5,7 +5,7 @@ import { ShieldBan } from "lucide-react";
 export const runtime = "edge";
 
 export const metadata = constructMetadata({
-  title: "Banned Link – Dub.co",
+  title: "Banned Link – AffEasy",
   description: "This link has been banned for violating our terms of service.",
   noIndex: true,
 });
@@ -23,7 +23,7 @@ export default async function BannedPage() {
           This link has been banned for violating our terms of service.
         </p>
         <a
-          href="https://dub.co"
+          href="https://affeasy.link"
           className="rounded-full bg-gray-800 px-10 py-2 font-medium text-white transition-colors hover:bg-black"
         >
           Create Your Free Branded Link

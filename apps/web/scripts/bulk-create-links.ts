@@ -23,7 +23,7 @@ async function main() {
       await redis.lpush(`import:csv:${projectId}`, ...links);
 
       await qstash.publishJSON({
-        url: `https://app.dub.co/api/cron/import/csv`,
+        url: `https://app.affeasy.link/api/cron/import/csv`,
         body: {
           projectId,
           userId,

@@ -32,7 +32,7 @@ export async function GET(req: NextRequest) {
     const { url, size, level, fgColor, bgColor, includeMargin } =
       getQRCodeQuerySchema.parse(params);
 
-    // const logo = req.nextUrl.searchParams.get("logo") || "https://assets.dub.co/logo.png";
+    // const logo = req.nextUrl.searchParams.get("logo") || "https://assets.affeasy.link/logo.png";
 
     return new ImageResponse(
       QRCodeSVG({
