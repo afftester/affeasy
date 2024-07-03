@@ -12,7 +12,6 @@ export { default as LoadingDots } from "./loading-dots";
 export { default as LoadingSpinner } from "./loading-spinner";
 
 // dub logos
-export { default as Logo } from "./logo";
 export { default as LogoType } from "./logotype";
 
 // brand logos
