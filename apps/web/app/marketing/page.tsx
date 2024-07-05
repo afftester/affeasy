@@ -1,10 +1,11 @@
 "use client";
 
 // import { AlertCard } from "@/components/marketing/alert/card";
-import { Hero } from "./marketing-components/hero";
+import { FAQ } from "./marketing-components/FAQ";
 import { BenefitsCard } from "./marketing-components/benefits";
-import { AffiliateNetworksCard } from "./marketing-components/networks/card";
+import { Hero } from "./marketing-components/hero";
 import { MarketingLayout } from "./marketing-components/marketing-layout";
+import { AffiliateNetworksCard } from "./marketing-components/networks/card";
 
 export default function Page() {
   return (
@@ -17,6 +18,7 @@ export default function Page() {
 
         <AffiliateNetworksCard />
       </div>
+      <FAQ />
     </MarketingLayout>
   );
 }
