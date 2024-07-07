@@ -18,7 +18,7 @@ export function BenefitsCard() {
       <CardHeader>
         <CardIcon icon={icon} />
         <CardTitle>
-          <h3 className="text-foreground font-semibold text-black">{title}</h3>
+          <p className="text-foreground font-semibold text-black">{title}</p>
         </CardTitle>
       </CardHeader>
       <CardContent>
