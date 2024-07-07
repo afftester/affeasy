@@ -16,14 +16,14 @@ const Questions = [
   },
   {
     title: "What are the advantages of the premium plan?",
-    content: `The AffEasy Premium Plan takes your affiliate marketing efforts to the next level by offering a suite of advanced features and benefits. While our standard plan provides excellent functionality for beginners, the Premium Plan is designed for serious marketers looking to maximize their potential.\n\nWith the Premium Plan, you'll enjoy significantly higher usage limits, allowing you to create and manage more affiliate links across a broader range of networks. This increased capacity is perfect for growing businesses or those managing multiple campaigns simultaneously.`,
+    content: `The Premium Plan takes your affiliate marketing efforts to the next level by offering a suite of advanced features and benefits. While our standard plan provides excellent functionality for beginners, the Premium Plan is designed for serious marketers looking to maximize their potential.\n\nWith the Premium Plan, you'll enjoy significantly higher usage limits, allowing you to create and manage more affiliate links across a broader range of networks. This increased capacity is perfect for growing businesses or those managing multiple campaigns simultaneously.`,
   },
 ];
 
 export const FAQ = () => {
   return (
     <div className="my-10 flex w-full flex-col justify-center gap-1 px-3 py-4 text-center md:my-20 md:p-6">
-      <h3 className="font-heading text-3xl">Frequently Asked Questions</h3>
+      <h3 className="text-3xl font-semibold">Frequently Asked Questions</h3>
       <div className="my-10">
         <Accordion collapsible type="single">
           {Questions.map(({ title, content }) => (
