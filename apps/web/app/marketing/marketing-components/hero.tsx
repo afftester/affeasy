@@ -24,7 +24,7 @@ export function Hero() {
       <div className="my-4 flex justify-center">
         <div className="text-center sm:block sm:text-right">
           <Button
-            className="w-48 rounded-full sm:w-auto"
+            className="w-48 rounded-md sm:w-auto"
             asChild
             variant={"primary"}
           >

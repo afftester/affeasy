@@ -1,6 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
+import { Logo } from "@dub/ui";
 import { cn } from "@dub/utils";
 import { Shell } from "../_components/shell";
 import { socialsConfig } from "../config/socials";
@@ -19,10 +20,10 @@ export function MarketingFooter({ className }: Props) {
         <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
           <div className="col-span-2 flex flex-col gap-3">
             <div>
+              <Logo className="h-11 w-11" />
               <BrandName />
               <p className="text-muted-foreground mt-2 text-sm font-light">
-                Affiliate Marketing Made Easy! <br></br>One-Stop Affiliate Link
-                Generator.
+                Affiliate Marketing Platform for Modern Marketers
               </p>
             </div>
             {/* <StatusWidgetContainer slug="status" /> */}

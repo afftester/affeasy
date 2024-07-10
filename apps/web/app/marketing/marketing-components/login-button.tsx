@@ -10,7 +10,7 @@ export function LoginButton({ className, ...props }: ButtonProps) {
   return (
     <MarketingButton
       asChild
-      className={cn("rounded-full", className)}
+      className={cn("rounded-md", className)}
       variant={"primary"}
       {...props}
     >
