@@ -1,32 +1,5 @@
 export function Background() {
   return (
-    <div style={styles.backgroundMain}>
-      <div style={styles.backgroundMainAfter} />
-    </div>
+    <div className="absolute inset-x-0 top-0 -z-10 h-full w-screen bg-white bg-[radial-gradient(#e3e1e1_0.9px,#ffffff_0.9px)] bg-[length:10px_10px] bg-[center_top] [image-rendering:pixelated] [mask-image:linear-gradient(to_bottom,transparent,20%,white,80%,transparent)]"></div>
   );
 }
-
-const styles: { [key: string]: React.CSSProperties } = {
-  backgroundMain: {
-    width: "100vw",
-    minHeight: "100vh",
-    position: "fixed",
-    zIndex: -1,
-    display: "flex",
-    justifyContent: "center",
-    padding: "120px 24px 160px 24px",
-    pointerEvents: "none",
-  },
-
-  backgroundMainAfter: {
-    content: '""',
-    backgroundImage: "url(https://assets.dub.co/misc/grid.svg)",
-    zIndex: -1,
-    position: "absolute",
-    width: "100%",
-    height: "100%",
-    top: 0,
-    opacity: 0.5,
-    filter: "invert(1)",
-  },
-};

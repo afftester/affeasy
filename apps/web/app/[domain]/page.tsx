@@ -13,7 +13,7 @@ export async function generateMetadata({
   } Custom Domain`;
   const description = `${params.domain.toUpperCase()} is a custom domain on ${
     process.env.NEXT_PUBLIC_APP_NAME
-  } - an open-source link management tool for modern marketing teams to create, share, and track short links.`;
+  } - an affiliate marketing platform for modern marketers.`;
 
   return constructMetadata({
     title,

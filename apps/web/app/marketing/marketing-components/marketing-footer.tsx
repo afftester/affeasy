@@ -21,7 +21,7 @@ export function MarketingFooter({ className }: Props) {
             <div>
               <BrandName />
               <p className="text-muted-foreground mt-2 text-sm font-light">
-                Affiliate Marketing Made Easy! One-Stop Affiliate Link
+                Affiliate Marketing Made Easy! <br></br>One-Stop Affiliate Link
                 Generator.
               </p>
             </div>

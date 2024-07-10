@@ -15,11 +15,11 @@ export const openApiObject: ZodOpenApiObject = {
   info: {
     title: "AffEasy API",
     description:
-      "Dub is link management infrastructure for companies to create marketing campaigns, link sharing features, and referral programs.",
+      "AffEasy is an affiliate marketing platform for modern marketers.",
     version: "0.0.1",
     contact: {
       name: "AffEasy Support",
-      email: "support@AffEasy",
+      email: "support@affeasy.link",
       url: "https://affeasy.link/api",
     },
     license: {

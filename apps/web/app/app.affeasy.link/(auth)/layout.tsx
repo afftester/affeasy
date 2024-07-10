@@ -1,5 +1,5 @@
-import { Background } from "@dub/ui";
 import { ReactNode } from "react";
+import { Background } from "../../marketing/marketing-components/background";
 
 export const runtime = "edge";
 

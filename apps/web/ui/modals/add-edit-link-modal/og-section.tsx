@@ -278,7 +278,7 @@ export default function OGSection({
                 minRows={3}
                 maxLength={120}
                 className="block w-full rounded-md border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:outline-none focus:ring-gray-500 sm:text-sm"
-                placeholder={`${process.env.NEXT_PUBLIC_APP_NAME} - open-source link management infrastructure.`}
+                placeholder={`${process.env.NEXT_PUBLIC_APP_NAME} - affiliate marketing platform for modern marketers.`}
                 value={title || ""}
                 onChange={(e) => {
                   setData({ ...data, title: e.target.value });

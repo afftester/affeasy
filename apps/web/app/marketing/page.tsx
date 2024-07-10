@@ -1,6 +1,5 @@
 "use client";
 
-// import { AlertCard } from "@/components/marketing/alert/card";
 import { FAQ } from "./marketing-components/FAQ";
 import { BenefitsCard } from "./marketing-components/benefits";
 import { Hero } from "./marketing-components/hero";
@@ -10,15 +9,18 @@ import { AffiliateNetworksCard } from "./marketing-components/networks/card";
 export default function Page() {
   return (
     <MarketingLayout>
-      <div className="grid gap-8">
-        <Hero />
-        <div className="bg-[#FFFFFF]">
-          <BenefitsCard />
+      <div className="flex flex-col items-center">
+        <div className="grid w-full gap-8">
+          <Hero />
+          <div className="bg-[#FFFFFF]">
+            <BenefitsCard />
+          </div>
+          <AffiliateNetworksCard />
         </div>
-
-        <AffiliateNetworksCard />
+        <div className="w-full max-w-4xl px-4">
+          <FAQ />
+        </div>
       </div>
-      <FAQ />
     </MarketingLayout>
   );
 }
