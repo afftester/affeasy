@@ -28,7 +28,7 @@ function MobileNav({ onClose }: MobileNavProps) {
 
   return (
     <div className="fixed inset-0 top-16 z-50 flex flex-col overflow-hidden md:hidden">
-      <div className="animate-in slide-in-from-bottom-80 relative z-10 flex h-1/3 min-h-[200px] flex-col bg-white px-4 py-6 shadow-md">
+      <div className="animate-in slide-in-from-bottom-80 relative z-10 flex min-h-[200px] flex-col bg-white px-4 py-6 shadow-md">
         <nav className="flex flex-grow flex-col items-start space-y-4">
           {marketingPagesConfig.map(({ href, title, segment }) => {
             const isExternal = href.startsWith("http");
@@ -41,7 +41,7 @@ function MobileNav({ onClose }: MobileNavProps) {
             );
           })}
         </nav>
-        <div className="mt-auto flex justify-between gap-2 pb-4">
+        <div className="mt-6 flex justify-between gap-2 pb-4">
           <ul className="flex flex-wrap gap-2">
             {socialsConfig.map((props, i) => (
               <li key={i}>
