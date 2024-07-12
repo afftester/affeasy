@@ -10,7 +10,7 @@ export function Hero() {
   return (
     <div className="my-10 flex w-full flex-col justify-center gap-1 px-3 py-4 text-center md:my-20 md:p-6">
       <div className="flex flex-col gap-6">
-        <h1 className="text-foreground font-heading text-4xl md:text-8xl">
+        <h1 className="text-foreground font-heading text-6xl md:text-8xl">
           Affiliate Marketing
           <br />
           Made
