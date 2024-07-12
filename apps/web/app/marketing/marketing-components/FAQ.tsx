@@ -22,16 +22,18 @@ const Questions = [
 
 export const FAQ = () => {
   return (
-    <div className="my-10 flex w-full flex-col justify-center gap-1 px-3 py-4 text-center md:my-20 md:p-6">
-      <h3 className="text-3xl font-semibold">Frequently Asked Questions</h3>
+    <div className="my-10 w-full px-3 py-4 md:my-20">
+      <h3 className="text-left text-3xl font-semibold">
+        Frequently Asked Questions
+      </h3>
       <div className="my-10">
         <Accordion collapsible type="single">
           {Questions.map(({ title, content }) => (
             <AccordionItem key={title} value={title}>
-              <AccordionTrigger>{title}</AccordionTrigger>
+              <AccordionTrigger className="text-left">{title}</AccordionTrigger>
               <AccordionContent>
                 {content.split("\n").map((paragraph, index) => (
-                  <p key={index} className="mb-2">
+                  <p key={index} className="mb-2 text-left">
                     {paragraph}
                   </p>
                 ))}

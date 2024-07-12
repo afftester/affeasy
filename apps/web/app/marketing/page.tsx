@@ -17,7 +17,7 @@ export default function Page() {
           </div>
           <AffiliateNetworksCard />
         </div>
-        <div className="w-full max-w-4xl px-4">
+        <div className="w-full max-w-4xl">
           <FAQ />
         </div>
       </div>

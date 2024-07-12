@@ -2,6 +2,7 @@
 import { APP_DOMAIN } from "@dub/utils";
 import { CheckIcon } from "lucide-react";
 import Link from "next/link";
+import { useState } from "react";
 import { MarketingLayout } from "../marketing-components/marketing-layout";
 
 interface PricingTierProps {
@@ -44,21 +45,24 @@ const PricingTier: React.FC<PricingTierProps> = ({
       <span className="text-4xl font-bold">${price}</span>
       <span className="text-gray-600">/{period}</span>
     </div>
-    <p className="mb-4 text-gray-600">Billed yearly</p>
-    <Link href={`${APP_DOMAIN}/login`}>
-      <button
-        className={`mb-6 w-full rounded-full py-2 ${
-          color === "bg-black"
-            ? "bg-black text-white"
-            : color === "bg-blue-500"
-              ? "bg-blue-500 text-white"
-              : "bg-teal-800 text-white"
-        }`}
-      >
-        {buttonText}
-      </button>
-    </Link>
-
+    <p className="mb-4 text-gray-600">Billed monthly</p>
+    <div className="-mx-6 mb-6">
+      <div className="bg-gray-100 px-6 py-4">
+        <Link href={`${APP_DOMAIN}/login`}>
+          <button
+            className={`w-full rounded-full py-2 ${
+              color === "bg-black"
+                ? "bg-black text-white"
+                : color === "bg-blue-500"
+                  ? "bg-blue-500 text-white"
+                  : "bg-teal-800 text-white"
+            }`}
+          >
+            {buttonText}
+          </button>
+        </Link>
+      </div>
+    </div>
     <p className="mb-2 font-semibold">
       {title === "Free"
         ? "What's included:"
@@ -84,6 +88,8 @@ const PricingTier: React.FC<PricingTierProps> = ({
 );
 
 export default function PricingSection() {
+  const [isAnnual, setIsAnnual] = useState(false);
+
   const tiers = [
     {
       title: "Free",
@@ -105,7 +111,7 @@ export default function PricingSection() {
     {
       title: "Pro",
       subtitle: "For startups & small businesses",
-      price: "19",
+      price: isAnnual ? "15" : "19",
       period: "month",
       buttonText: "Get started with Pro",
       isPopular: true,
@@ -124,7 +130,7 @@ export default function PricingSection() {
     {
       title: "Business",
       subtitle: "For larger teams with increased usage",
-      price: "49",
+      price: isAnnual ? "39" : "49",
       period: "month",
       buttonText: "Get started with Business",
       color: "bg-teal-800",
@@ -150,11 +156,35 @@ export default function PricingSection() {
         <p className="mt-4 text-xl text-gray-600">
           Choose the plan that's right for you
         </p>
+        <div className="mt-8 flex justify-center">
+          <div className="relative inline-flex rounded-full bg-gray-100 p-1">
+            <button
+              className={`rounded-full px-4 py-2 text-sm font-medium ${
+                !isAnnual ? "bg-white shadow-sm" : ""
+              }`}
+              onClick={() => setIsAnnual(false)}
+            >
+              Monthly
+            </button>
+            <button
+              className={`rounded-full px-4 py-2 text-sm font-medium ${
+                isAnnual ? "bg-white shadow-sm" : ""
+              }`}
+              onClick={() => setIsAnnual(true)}
+            >
+              Annual
+            </button>
+          </div>
+        </div>
       </div>
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-3">
           {tiers.map((tier, index) => (
-            <PricingTier key={index} {...tier} />
+            <PricingTier
+              key={index}
+              {...tier}
+              period={isAnnual ? "month" : "month"}
+            />
           ))}
         </div>
       </div>
