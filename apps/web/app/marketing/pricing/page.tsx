@@ -14,6 +14,7 @@ interface PricingTierProps {
   features: string[];
   isPopular?: boolean;
   color: string;
+  isAnnual: boolean;
 }
 
 const PricingTier: React.FC<PricingTierProps> = ({
@@ -25,6 +26,7 @@ const PricingTier: React.FC<PricingTierProps> = ({
   features,
   isPopular,
   color,
+  isAnnual,
 }) => (
   <div
     className={`rounded-lg bg-white p-6 ${isPopular ? "relative ring-2 ring-blue-500" : "border"}`}
@@ -45,7 +47,13 @@ const PricingTier: React.FC<PricingTierProps> = ({
       <span className="text-4xl font-bold">${price}</span>
       <span className="text-gray-600">/{period}</span>
     </div>
-    <p className="mb-4 text-gray-600">Billed monthly</p>
+    <p className="mb-4 text-gray-600">
+      {title === "Free"
+        ? "Free forever"
+        : isAnnual
+          ? "Billed yearly"
+          : "Billed monthly"}
+    </p>
     <div className="-mx-6 mb-6">
       <div className="bg-gray-100 px-6 py-4">
         <Link href={`${APP_DOMAIN}/login`}>
@@ -180,11 +188,7 @@ export default function PricingSection() {
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-3">
           {tiers.map((tier, index) => (
-            <PricingTier
-              key={index}
-              {...tier}
-              period={isAnnual ? "month" : "month"}
-            />
+            <PricingTier key={index} {...tier} isAnnual={isAnnual} />
           ))}
         </div>
       </div>
