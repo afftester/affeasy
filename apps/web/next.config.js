@@ -1,3 +1,4 @@
+const { withContentlayer } = require("next-contentlayer");
 const REDIRECT_SEGMENTS = [
   "pricing",
   "blog",
@@ -8,7 +9,7 @@ const REDIRECT_SEGMENTS = [
 ];
 
 /** @type {import('next').NextConfig} */
-module.exports = {
+const nextConfig = {
   reactStrictMode: false,
   experimental: {
     optimizePackageImports: ["@dub/ui", "@dub/utils"],
@@ -208,3 +209,5 @@ module.exports = {
     ];
   },
 };
+
+module.exports = withContentlayer(nextConfig);

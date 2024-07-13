@@ -10,7 +10,8 @@
       "@/pages/*": ["pages/*"],
       "@/styles/*": ["styles/*"],
       "@/ui/*": ["ui/*"],
-      "@/lib/*": ["lib/*"]
+      "@/lib/*": ["lib/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "downlevelIteration": true,
     "forceConsistentCasingInFileNames": true,
@@ -30,6 +31,12 @@
       }
     ]
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".contentlayer/generated"
+  ],
   "exclude": ["node_modules"]
 }
