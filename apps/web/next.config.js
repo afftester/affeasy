@@ -1,4 +1,3 @@
-const { withContentlayer } = require("next-contentlayer");
 const REDIRECT_SEGMENTS = [
   "pricing",
   "blog",
@@ -210,4 +209,4 @@ const nextConfig = {
   },
 };
 
-module.exports = withContentlayer(nextConfig);
+module.exports = nextConfig;
