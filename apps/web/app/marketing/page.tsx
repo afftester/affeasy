@@ -1,5 +1,3 @@
-"use client";
-
 import { FAQ } from "./marketing-components/FAQ";
 import { BenefitsCard } from "./marketing-components/benefits";
 import { Hero } from "./marketing-components/hero";

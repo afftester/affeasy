@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 
 import { MarketingButton as Button } from "@dub/ui/src/button-marketing";

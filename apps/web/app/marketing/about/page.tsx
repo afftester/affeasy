@@ -1,6 +1,4 @@
-"use client";
 import { allUnrelateds } from "contentlayer/generated";
-
 import { Mdx } from "../_components/mdx";
 import { Shell } from "../_components/shell";
 import { MarketingLayout } from "../marketing-components/marketing-layout";
@@ -26,7 +24,7 @@ export default function AboutPage() {
           </p>
         </div>
         <div className="flex flex-col gap-8 md:flex-row">
-          <div className="mr-20 md:w-1/4">
+          <div className="mr-20 md:mr-0 md:w-1/4">
             <Member {...members[0]} />
           </div>
           <div className="md:w-3/4">

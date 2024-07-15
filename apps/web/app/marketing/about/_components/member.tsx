@@ -1,11 +1,12 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 
 import { MarketingButton as Button } from "@dub/ui/src/button-marketing";
 import { cn } from "@dub/utils";
 
-import { Icons } from "../../_components/icons";
 import type { ValidIcon } from "../../_components/icons";
+import { Icons } from "../../_components/icons";
 
 export interface MemberProps {
   name: string;
