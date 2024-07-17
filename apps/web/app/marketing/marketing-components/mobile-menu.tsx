@@ -9,6 +9,7 @@ import { marketingPagesConfig } from "../config/pages";
 import { socialsConfig } from "../config/socials";
 import { LoginButton } from "./login-button";
 import { SocialIconButton } from "./social-icon-button";
+
 // Custom hook for locking body scroll
 function useLockBody() {
   React.useEffect(() => {
@@ -18,6 +19,7 @@ function useLockBody() {
     };
   }, []);
 }
+
 interface MobileNavProps {
   onClose: () => void;
 }
@@ -35,7 +37,12 @@ function MobileNav({ onClose }: MobileNavProps) {
             const externalProps = isExternal ? { target: "_blank" } : {};
             const isActive = pathname.startsWith(href);
             return (
-              <Link href={href} {...externalProps} className="text-lg">
+              <Link
+                key={href} // Added unique key prop
+                href={href}
+                {...externalProps}
+                className="text-lg"
+              >
                 {title}
               </Link>
             );

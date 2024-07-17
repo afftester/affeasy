@@ -1,5 +1,7 @@
 export function Background() {
   return (
-    <div className="absolute inset-x-0 top-0 -z-10 h-full w-screen bg-white bg-[radial-gradient(#e3e1e1_0.9px,#ffffff_0.9px)] bg-[length:10px_10px] bg-[center_top] [image-rendering:pixelated] [mask-image:linear-gradient(to_bottom,transparent,20%,white,80%,transparent)]"></div>
+    <div className="fixed inset-0 -z-10 min-h-screen w-full bg-white">
+      <div className="absolute inset-0 bg-[radial-gradient(#e3e1e1_0.9px,transparent_0.9px)] bg-[length:10px_10px] [mask-image:linear-gradient(to_bottom,transparent,rgba(255,255,255,0.2)_10%,rgba(255,255,255,0.8)_30%,white_50%,rgba(255,255,255,0.8)_70%,rgba(255,255,255,0.2)_90%,transparent)]"></div>
+    </div>
   );
 }
