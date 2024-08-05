@@ -64,6 +64,35 @@ function AddEditNetworkModal({
     props || DEFAULT_USER_ADVERTISER_PROPS,
   );
 
+  const [changedFields, setChangedFields] = useState<Record<string, any>>({});
+
+  useEffect(() => {
+    if (props) {
+      setData(props);
+      setChangedFields({});
+    } else {
+      setData(DEFAULT_USER_ADVERTISER_PROPS);
+      setChangedFields({});
+    }
+  }, [props]);
+
+  const handleInputChange = (field: string, value: string) => {
+    setData((prevData) => ({ ...prevData, [field]: value }));
+
+    // For API key and client secret, we store the full value in changedFields
+    // but only display the partial value in the input
+    if (field === "partialApiKey") {
+      setChangedFields((prevFields) => ({ ...prevFields, apiKey: value }));
+    } else if (field === "partialClientSecret") {
+      setChangedFields((prevFields) => ({
+        ...prevFields,
+        clientSecret: value,
+      }));
+    } else {
+      setChangedFields((prevFields) => ({ ...prevFields, [field]: value }));
+    }
+  };
+
   useEffect(() => {
     // for a new link (no props), set the networkName to the name of the first network
     if (networks && !props && networks.length > 0) {
@@ -74,12 +103,12 @@ function AddEditNetworkModal({
   const {
     id,
     advertiserId,
-    apiKey,
+    partialApiKey,
     username,
-    password,
+    partialPassword,
     accountId,
     clientId,
-    clientSecret,
+    partialClientSecret,
     websiteId,
   } = data;
 
@@ -201,11 +230,21 @@ function AddEditNetworkModal({
             onSubmit={async (e) => {
               e.preventDefault();
               setSaving(true);
-              // @ts-ignore – exclude extra attributes from `data` object before sending to API
-              const { ...rest } = data;
-              const bodyData = {
-                ...rest,
-              };
+
+              const bodyData = props
+                ? { id: props.id, ...changedFields }
+                : {
+                    advertiserId: data.advertiserId,
+                    username: data.username,
+                    password: data.partialPassword,
+                    apiKey: changedFields.apiKey || data.partialApiKey,
+                    accountId: data.accountId,
+                    websiteId: data.websiteId,
+                    clientId: data.clientId,
+                    clientSecret:
+                      changedFields.clientSecret || data.partialClientSecret,
+                  };
+
               fetch(endpoint.url, {
                 method: endpoint.method,
                 headers: {
@@ -266,9 +305,9 @@ function AddEditNetworkModal({
                 <select
                   disabled={!!props}
                   value={advertiserId}
-                  onChange={(e) => {
-                    setData({ ...data, advertiserId: e.target.value });
-                  }}
+                  onChange={(e) =>
+                    handleInputChange("advertiserId", e.target.value)
+                  }
                   className={cn(
                     "w-full rounded-md border border-gray-300 bg-gray-50 pl-4 pr-8 text-sm text-gray-500 focus:border-gray-300 focus:outline-none focus:ring-0",
                     props && "cursor-not-allowed",
@@ -303,9 +342,9 @@ function AddEditNetworkModal({
                         value={websiteId ?? ""}
                         required
                         autoComplete="off"
-                        onChange={(e) => {
-                          setData({ ...data, websiteId: e.target.value });
-                        }}
+                        onChange={(e) =>
+                          handleInputChange("websiteId", e.target.value)
+                        }
                         className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
                         aria-invalid="true"
                       />
@@ -327,12 +366,12 @@ function AddEditNetworkModal({
                         placeholder={
                           "https://dub.co/help/article/what-is-apiKey"
                         }
-                        value={apiKey ?? ""}
+                        value={partialApiKey ?? ""}
                         required
                         autoComplete="off"
-                        onChange={(e) => {
-                          setData({ ...data, apiKey: e.target.value });
-                        }}
+                        onChange={(e) =>
+                          handleInputChange("partialApiKey", e.target.value)
+                        }
                         className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
                         aria-invalid="true"
                       />
@@ -357,9 +396,9 @@ function AddEditNetworkModal({
                         value={accountId ?? ""}
                         required
                         autoComplete="off"
-                        onChange={(e) => {
-                          setData({ ...data, accountId: e.target.value });
-                        }}
+                        onChange={(e) =>
+                          handleInputChange("accountId", e.target.value)
+                        }
                         className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
                         aria-invalid="true"
                       />
@@ -387,9 +426,9 @@ function AddEditNetworkModal({
                         value={clientId ?? ""}
                         required
                         autoComplete="off"
-                        onChange={(e) => {
-                          setData({ ...data, clientId: e.target.value });
-                        }}
+                        onChange={(e) =>
+                          handleInputChange("clientId", e.target.value)
+                        }
                         className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
                         aria-invalid="true"
                       />
@@ -411,12 +450,15 @@ function AddEditNetworkModal({
                         placeholder={
                           "https://dub.co/help/article/what-is-clientSecret"
                         }
-                        value={clientSecret ?? ""}
+                        value={partialClientSecret ?? ""}
                         required
                         autoComplete="off"
-                        onChange={(e) => {
-                          setData({ ...data, clientSecret: e.target.value });
-                        }}
+                        onChange={(e) =>
+                          handleInputChange(
+                            "partialClientSecret",
+                            e.target.value,
+                          )
+                        }
                         className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
                         aria-invalid="true"
                       />
@@ -441,9 +483,9 @@ function AddEditNetworkModal({
                         value={accountId ?? ""}
                         required
                         autoComplete="off"
-                        onChange={(e) => {
-                          setData({ ...data, accountId: e.target.value });
-                        }}
+                        onChange={(e) =>
+                          handleInputChange("accountId", e.target.value)
+                        }
                         className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
                         aria-invalid="true"
                       />

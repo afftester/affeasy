@@ -17,10 +17,8 @@ export const GET = withSession(async ({ searchParams }) => {
     });
 
     if (brand) {
-      console.log(brand);
       return NextResponse.json(brand);
     } else {
-      console.log("No brand");
       return NextResponse.json({ error: "Brand not found" }, { status: 404 });
     }
   } catch (error) {

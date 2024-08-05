@@ -17,11 +17,14 @@ export interface LinkWithTagIdsProps extends LinkProps {
 export interface UserAdvertiserWithNameProps {
   id: string;
   advertiserId: string;
-  apiKey?: string;
+  partialApiKey?: string;
+  encryptedApiKey?: string;
   username?: string;
-  password?: string;
+  partialPassword?: string;
+  encryptedPassword?: string;
   clientId?: string;
-  clientSecret?: string;
+  partialClientSecret?: string;
+  encryptedClientSecret?: string;
   accountId?: string;
   websiteId?: string;
   advertiser: {

@@ -1,3 +1,4 @@
+import { decrypt } from "@/lib/auth";
 import {
   isBlacklistedDomain,
   isBlacklistedKey,
@@ -511,7 +512,9 @@ export async function processLink({
       const advertiserId = userBrandRelationship.advertiserId;
 
       if (advertiserId === "1") {
-        const apiKey = userBrandRelationship.userAdvertiserRelation.apiKey;
+        const encryptedApiKey =
+          userBrandRelationship.userAdvertiserRelation.encryptedApiKey || "";
+        const apiKey = decrypt(encryptedApiKey);
         const brandId =
           userBrandRelationship.brandAdvertiserRelation.brandIdAtAdvertiser;
         const websiteId =
@@ -556,7 +559,9 @@ export async function processLink({
           userBrandRelationship.userAdvertiserRelation;
 
         const clientId = userAdvertiserRelation.clientId || "";
-        const clientSecret = userAdvertiserRelation.clientSecret || "";
+        const encryptedClientSecret =
+          userAdvertiserRelation.encryptedClientSecret || "";
+        const clientSecret = decrypt(encryptedClientSecret);
         const accountId = userAdvertiserRelation.accountId || "";
 
         if (!clientId || !clientSecret || !accountId) {

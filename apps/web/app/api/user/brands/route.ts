@@ -1,5 +1,5 @@
 import { generateRakutenToken } from "@/lib/advertisers";
-import { withSession } from "@/lib/auth";
+import { decrypt, withSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { XMLParser } from "fast-xml-parser";
 import { NextResponse } from "next/server";
@@ -23,11 +23,12 @@ export const POST = withSession(async ({ req, session }) => {
   }
 
   const accountId = relationship.accountId;
-  const apiKey = relationship.apiKey;
+  const encryptedApiKey = relationship.encryptedApiKey;
   const advertiserId = relationship.advertiserId;
 
   if (advertiserId === "1") {
     // Call the CJ advertiser lookup API to get a list of advertisers for the account
+    const apiKey = decrypt(encryptedApiKey);
     const url = "https://advertiser-lookup.api.cj.com/v2/advertiser-lookup";
     const params = {
       "requestor-cid": accountId,
@@ -139,7 +140,8 @@ export const POST = withSession(async ({ req, session }) => {
     }
   } else if (advertiserId === "2") {
     const clientId = relationship.clientId;
-    const clientSecret = relationship.clientSecret;
+    const encryptedClientSecret = relationship.encryptedClientSecret;
+    const clientSecret = decrypt(encryptedClientSecret);
     const token = await generateRakutenToken(clientId, clientSecret, accountId);
     const accessUrl =
       "https://api.linksynergy.com/linklocator/1.0/getMerchByAppStatus/approved";

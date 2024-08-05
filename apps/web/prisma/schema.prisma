@@ -30,11 +30,14 @@ model UserAdvertiserRelationship {
   id                     String                  @id @default(cuid())
   userId                 String
   advertiserId           String
-  apiKey                 String?
+  partialApiKey           String?
+  encryptedApiKey        String?  
   username               String?
-  password               String?
+  partialPassword         String?
+  encryptedPassword      String?
   clientId               String?
-  clientSecret           String?
+  partialClientSecret     String?
+  encryptedClientSecret  String?
   accountId              String?
   websiteId              String?
   user                   User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
