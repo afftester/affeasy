@@ -1,6 +1,6 @@
-import { Background } from "@dub/ui";
 import { constructMetadata } from "@dub/utils";
 import { Suspense } from "react";
+import { Background } from "../../../marketing/marketing-components/background";
 import WelcomePageClient from "./page-client";
 
 export const runtime = "nodejs";

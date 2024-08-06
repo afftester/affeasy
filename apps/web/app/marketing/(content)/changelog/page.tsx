@@ -1,4 +1,3 @@
-"use client";
 import { allChangelogs } from "contentlayer/generated";
 
 import { Mdx } from "../../_components/mdx";
@@ -15,7 +14,7 @@ export default async function Changelog() {
     <Shell>
       <Timeline
         title="Changelog"
-        description="All the latest features, fixes and work to OpenStatus."
+        description="All the latest features, fixes and work to AffEasy."
       >
         {changelogs.map((changelog) => (
           <Timeline.Article
