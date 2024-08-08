@@ -13,6 +13,7 @@ export function LoginButton({ className, ...props }: ButtonProps) {
       className={cn("rounded-md", className)}
       variant={"primary"}
       {...props}
+      size={"lg"}
     >
       <Link href={`${APP_DOMAIN}/login`}>Sign In</Link>
     </MarketingButton>
