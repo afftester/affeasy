@@ -7,7 +7,7 @@ import { MarketingButton as Button } from "@dub/ui/src/button-marketing";
 import { Shell } from "../../_components/shell";
 import { Timeline } from "../../_components/timeline";
 
-export default async function Post() {
+export default function Post() {
   const posts = allPosts.sort(
     (a, b) =>
       new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime(),
@@ -17,7 +17,7 @@ export default async function Post() {
     <Shell>
       <Timeline
         title="Blog"
-        description="All the latest articles and news from OpenStatus."
+        description="All the latest articles and news from AffEasy."
       >
         {posts.map((post) => (
           <Timeline.Article
