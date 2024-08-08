@@ -7,7 +7,7 @@ import { FlipWords } from "./flip-words";
 import { APP_DOMAIN } from "@dub/utils";
 
 export function Hero() {
-  const words = ["Easy", "Breezy"];
+  const words = ["Easy"];
   return (
     <div className="my-10 flex w-full flex-col justify-center gap-1 px-3 py-4 text-center md:my-20 md:p-6">
       <div className="flex flex-col gap-6">
