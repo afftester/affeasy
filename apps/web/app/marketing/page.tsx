@@ -7,10 +7,10 @@ import { AffiliateNetworksCard } from "./marketing-components/networks/card";
 export default function Page() {
   return (
     <MarketingLayout>
-      <div className="flex flex-col items-center">
+      <div className="mx-auto flex flex-col items-center">
         <div className="grid w-full gap-8">
           <Hero />
-          <div className="bg-[#FFFFFF]">
+          <div>
             <BenefitsCard />
           </div>
           <AffiliateNetworksCard />
