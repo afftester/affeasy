@@ -28,9 +28,14 @@ export function BenefitsCard() {
 
   return (
     <div>
-      <div className="flex w-full max-w-6xl items-center justify-center">
-        <h2 className="text-foreground mb-5 text-2xl font-semibold md:text-4xl">
-          Simplify your affiliate marketing
+      <div className="flex w-full max-w-6xl flex-col items-center justify-center gap-1">
+        <div className="flex justify-center">
+          <span className="inline-flex items-center rounded-full bg-blue-50 px-4 py-1 text-xs font-medium text-black md:text-sm">
+            Features
+          </span>
+        </div>
+        <h2 className="text-foreground mb-5 text-center text-2xl font-semibold md:text-4xl">
+          Affiliate Marketing, Simplified
         </h2>
       </div>
       <div className="my-12 grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
