@@ -1,44 +1,41 @@
+import { BarChart3Icon, Globe, Link, Zap } from "lucide-react";
+
 export function BenefitsCard() {
   const benefits = [
     {
       title: "Unified Network Access",
       description:
         "Effortlessly connect to multiple affiliate networks through a single, streamlined dashboard. Simplify your workflow and manage everything in one place.",
-      icon: "🌐",
+      icon: <Globe />,
     },
     {
       title: "Instant Link Generation",
       description:
         "Eliminate the manual process of creating affiliate links. Generate and manage affiliate links in seconds with AffEasy",
-      icon: "⚡",
+      icon: <Zap />,
     },
     {
       title: "Advanced Analytics",
       description:
         "Leverage powerful analytics to gain deep insights into your link performance. Monitor clicks, conversions, and more with ease.",
-      icon: "📊",
+      icon: <BarChart3Icon />,
     },
     {
       title: "Free Short Links",
       description:
         "Automatically generate short, shareable links to enhance user engagement and streamline your affiliate marketing efforts.",
-      icon: "🔗",
+      icon: <Link />,
     },
   ];
 
   return (
-    <div>
-      <div className="flex w-full max-w-6xl flex-col items-center justify-center gap-1">
-        <div className="flex justify-center">
-          <span className="inline-flex items-center rounded-full bg-blue-50 px-4 py-1 text-xs font-medium text-black md:text-sm">
-            Features
-          </span>
-        </div>
+    <div className="mx-auto">
+      <div className="mt-12 flex w-full max-w-6xl flex-col items-center justify-center gap-1">
         <h2 className="text-foreground mb-5 text-center text-2xl font-semibold md:text-4xl">
-          Affiliate Marketing, Simplified
+          Affiliate Marketing, Supercharged
         </h2>
       </div>
-      <div className="my-12 grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
+      <div className="mt-12 grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2">
         {benefits.map((benefit, index) => (
           <div
             key={index}
