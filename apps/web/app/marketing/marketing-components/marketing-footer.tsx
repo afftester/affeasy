@@ -20,7 +20,9 @@ export function MarketingFooter({ className }: Props) {
         <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
           <div className="col-span-2 flex flex-col gap-3">
             <div>
-              <Logo className="h-11 w-11" />
+              <Link href="/">
+                <Logo className="h-11 w-11" />
+              </Link>
               <BrandName />
               <p className="text-muted-foreground mt-2 text-sm font-light">
                 Affiliate Marketing Platform for Modern Marketers

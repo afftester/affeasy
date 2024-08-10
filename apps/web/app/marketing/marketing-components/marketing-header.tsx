@@ -3,12 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+import { Logo } from "@dub/ui";
 import { MarketingButton } from "@dub/ui/src/button-marketing";
 import { LoginButton } from "./login-button";
 
 import { cn } from "@dub/utils";
 import { marketingPagesConfig } from "../config/pages";
-import { BrandName } from "./brand-name";
 import { MobileMenu } from "./mobile-menu";
 
 interface Props {
@@ -23,7 +23,9 @@ export function MarketingHeader({ className }: Props) {
       className={cn("grid w-full grid-cols-2 gap-2 md:grid-cols-5", className)}
     >
       <div className="flex items-center md:col-span-1 ">
-        <BrandName />
+        <Link href="/">
+          <Logo className="h-11 w-11" />
+        </Link>
       </div>
       <div className="border-border mx-auto hidden items-center justify-center rounded-full border px-2 backdrop-blur-[2px] md:col-span-3 md:flex md:gap-1">
         {marketingPagesConfig.map(({ href, title, segment }) => {
