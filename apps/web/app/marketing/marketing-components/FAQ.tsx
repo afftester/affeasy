@@ -22,8 +22,8 @@ const Questions = [
 
 export const FAQ = () => {
   return (
-    <div className="my-10 w-full px-3 py-4 md:my-20">
-      <h3 className="text-left text-3xl font-semibold">
+    <div className="mt-10 w-full px-3 py-4 md:my-20">
+      <h3 className="text-left text-2xl font-semibold md:text-3xl">
         Frequently Asked Questions
       </h3>
       <div className="my-10">

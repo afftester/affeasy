@@ -5,7 +5,6 @@ import { Hero } from "./marketing-components/hero";
 import { Hero2 } from "./marketing-components/hero2";
 import { MarketingLayout } from "./marketing-components/marketing-layout";
 import AffiliateNetworksCard from "./marketing-components/networks-card";
-import StatsCard from "./marketing-components/stats-card";
 export default function Page() {
   return (
     <MarketingLayout>
@@ -16,7 +15,7 @@ export default function Page() {
           <BenefitsCard />
           <AffiliateNetworksCard />
           <Hero2 />
-          <StatsCard />
+          {/* <StatsCard /> */}
         </div>
         <div className="w-full max-w-4xl">
           <FAQ />
