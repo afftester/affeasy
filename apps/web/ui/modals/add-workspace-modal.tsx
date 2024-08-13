@@ -140,7 +140,7 @@ function AddWorkspaceModalHelper({
               va.track("Created Workspace");
               await mutate("/api/workspaces");
               if (welcomeFlow) {
-                router.push(`/welcome?type=upgrade&slug=${slug}`);
+                router.push(`/welcome?type=addNetwork&slug=${slug}`);
               } else {
                 router.push(`/${slug}`);
                 toast.success("Successfully created workspace!");

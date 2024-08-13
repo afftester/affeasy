@@ -48,7 +48,6 @@ function AddEditNetworkModal({
   props?: UserAdvertiserWithNameProps;
 }) {
   const params = useParams() as { slug?: string };
-  const { slug } = params;
   const router = useRouter();
   const pathname = usePathname();
 
@@ -177,10 +176,11 @@ function AddEditNetworkModal({
 
   const randomIdx = Math.floor(Math.random() * 100);
   const welcomeFlow = pathname === "/welcome";
+  const searchParams = useSearchParams();
+  const slug = welcomeFlow ? searchParams?.get("slug") : params.slug;
 
   const { isMobile } = useMediaQuery();
 
-  const searchParams = useSearchParams();
   const { queryParams } = useRouterStuff();
 
   return (
@@ -190,7 +190,8 @@ function AddEditNetworkModal({
       preventDefaultClose={true}
       onClose={() => {
         if (welcomeFlow) {
-          router.back();
+          router.push(`/${slug}`);
+          setShowAddEditNetworkModal(false);
         } else if (searchParams.has("newLink")) {
           queryParams({
             del: ["newLink"],
@@ -199,21 +200,17 @@ function AddEditNetworkModal({
       }}
     >
       <div className="scrollbar-hide grid max-h-[95vh] w-full divide-x divide-gray-100 overflow-auto md:overflow-hidden">
-        {!welcomeFlow && (
-          <button
-            onClick={() => {
-              setShowAddEditNetworkModal(false);
-              if (searchParams.has("newLink")) {
-                queryParams({
-                  del: ["newLink"],
-                });
-              }
-            }}
-            className="group absolute right-0 top-0 z-20 m-3 hidden rounded-full p-2 text-gray-500 transition-all duration-75 hover:bg-gray-100 focus:outline-none active:bg-gray-200 md:block"
-          >
-            <X className="h-5 w-5" />
-          </button>
-        )}
+        <button
+          onClick={() => {
+            setShowAddEditNetworkModal(false);
+            if (welcomeFlow) {
+              router.push(`/${slug}`);
+            }
+          }}
+          className="group absolute right-0 top-0 z-20 m-3 hidden rounded-full p-2 text-gray-500 transition-all duration-75 hover:bg-gray-100 focus:outline-none active:bg-gray-200 md:block"
+        >
+          <X className="h-5 w-5" />
+        </button>
 
         <div
           className="scrollbar-hide rounded-l-2xl md:max-h-[95vh] md:overflow-auto"
@@ -272,8 +269,8 @@ function AddEditNetworkModal({
                   }
 
                   // for welcome page, redirect to links page after adding a link
-                  if (pathname === "/welcome") {
-                    router.push("/links");
+                  if (welcomeFlow) {
+                    router.push(`/${slug}`);
                     setShowAddEditNetworkModal(false);
                   }
 

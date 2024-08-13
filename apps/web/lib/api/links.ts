@@ -510,7 +510,6 @@ export async function processLink({
     });
     if (userBrandRelationship) {
       const advertiserId = userBrandRelationship.advertiserId;
-      console.log(advertiserId);
 
       if (advertiserId === "1") {
         const encryptedApiKey =
