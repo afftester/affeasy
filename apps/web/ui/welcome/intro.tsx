@@ -1,19 +1,21 @@
+import { Logo } from "@dub/ui";
 import { STAGGER_CHILD_VARIANTS } from "@dub/utils";
-import Spline from "@splinetool/react-spline";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 
 export default function Intro() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
-  const onLoad = () => {
-    setLoading(false);
-  };
-  // workarouond to avoid the blinking effect when Spline loads
-  const [opacity] = useDebounce(loading ? 0 : 1, 200);
 
+  // Simulate loading delay
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const [opacity] = useDebounce(loading ? 0 : 1, 200);
   const [showText] = useDebounce(loading ? false : true, 800);
 
   return (
@@ -24,14 +26,11 @@ export default function Intro() {
     >
       <div
         className={`${
-          loading ? "scale-[25%] blur-md" : "scale-100 blur-0"
-        } mt-[7vh] h-[50vh] w-screen object-cover transition-all duration-1000`}
+          loading ? "scale-75 blur-md" : "scale-100 blur-0"
+        } mt-[7vh] flex h-[50vh] w-screen items-center justify-center transition-all duration-1000`}
+        style={{ opacity: opacity }}
       >
-        <Spline
-          onLoad={onLoad}
-          style={{ opacity: opacity }}
-          scene="https://prod.spline.design/cJkq6hsiUPNRHeMf/scene.splinecode"
-        />
+        <Logo className="h-64 w-64" /> {/* Adjust size as needed */}
       </div>
       {showText && (
         <motion.div
@@ -56,8 +55,9 @@ export default function Intro() {
             className="max-w-md text-gray-600 transition-colors sm:text-lg"
             variants={STAGGER_CHILD_VARIANTS}
           >
-            {process.env.NEXT_PUBLIC_APP_NAME} gives you marketing superpowers
-            with short links that stand out.
+            {process.env.NEXT_PUBLIC_APP_NAME} gives you affiliate marketing
+            superpowers with the ability to create affiliate links from all
+            major affiliate networks in one-location!
           </motion.p>
           <motion.button
             variants={STAGGER_CHILD_VARIANTS}

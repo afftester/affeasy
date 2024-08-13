@@ -1,3 +1,4 @@
+import networkCount from "@/lib/swr/network-count";
 import useDomains from "@/lib/swr/use-domains";
 import useLinksCount from "@/lib/swr/use-links-count";
 import useUsers from "@/lib/swr/use-users";
@@ -26,6 +27,7 @@ function CompleteSetupModal({
 
   const { verified } = useDomains();
   const { data: count } = useLinksCount();
+  const { data: advertiserCount } = networkCount();
   const { users } = useUsers();
   const { users: invites } = useUsers({ invites: true });
   const { setShowAddEditLinkModal } = useContext(ModalContext);
@@ -33,19 +35,19 @@ function CompleteSetupModal({
   const tasks = useMemo(() => {
     return [
       {
-        display: "Configure your custom domain",
-        cta: `/${slug}/domains`,
-        checked: verified,
+        display: "Connect an affiliate network",
+        cta: `/settings/networks`,
+        checked: advertiserCount > 0,
       },
       {
-        display: "Create or import your links",
+        display: "Create your first affiliate link",
         cta: `/${slug}`,
         checked: count > 0,
       },
       {
-        display: "Invite your teammates",
-        cta: `/${slug}/settings/people`,
-        checked: (users && users.length > 1) || (invites && invites.length > 0),
+        display: "Add a custom domain",
+        cta: `/${slug}/domains`,
+        checked: verified,
       },
     ];
   }, [slug, verified, count]);

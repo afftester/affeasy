@@ -36,18 +36,18 @@ export default function Interim() {
         className="text-gray-600 transition-colors sm:text-lg"
         variants={STAGGER_CHILD_VARIANTS}
       >
-        Have your own domain? Start creating branded short links for free.{" "}
+        Have your own domain? Start creating branded affiliate links for free.{" "}
         <br className="hidden sm:block" />
-        Don't have one? Use the default{" "}
+        Don't have one? Start with the default{" "}
         <a
           className="text-gray-500 underline transition-colors hover:text-gray-700"
           target="_blank"
           rel="noreferrer"
-          href="https://dub.sh"
+          href="https://offrs.us"
         >
-          dub.sh
+          offrs.us
         </a>{" "}
-        domain to create short links.
+        domain for now.
       </motion.p>
       <motion.div
         variants={STAGGER_CHILD_VARIANTS}
@@ -64,7 +64,7 @@ export default function Interim() {
             height={250}
             className="pointer-events-none -mb-3 -mt-8 w-48 sm:w-60"
           />
-          <p>I have a domain</p>
+          <p>I have my own domain</p>
         </button>
         <button
           onClick={() =>
@@ -73,13 +73,13 @@ export default function Interim() {
           className="flex flex-col items-center justify-center overflow-hidden p-5 transition-colors hover:bg-gray-50 md:p-10"
         >
           <img
-            src="/_static/illustrations/call-waiting.svg"
+            src="/_static/illustrations/podcast.svg"
             alt="No links yet"
             width={250}
             height={250}
             className="pointer-events-none -mb-3 -mt-8 w-48 sm:w-60"
           />
-          <p>I don't have a domain</p>
+          <p>I want to use the default domain</p>
         </button>
       </motion.div>
     </motion.div>

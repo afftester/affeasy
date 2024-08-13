@@ -1,7 +1,9 @@
 "use client";
 
+import networkCount from "@/lib/swr/network-count";
 import useDomains from "@/lib/swr/use-domains";
 import useLinksCount from "@/lib/swr/use-links-count";
+
 import useUsers from "@/lib/swr/use-users";
 import useWorkspace from "@/lib/swr/use-workspace";
 import { ModalContext } from "@/ui/modals/provider";
@@ -55,7 +57,8 @@ export default function NavTabs() {
         !error &&
         !loadingDomains &&
         !domain &&
-        linksCount === 0 && <OnboardingChecklist />}
+        linksCount !== undefined &&
+        linksCount <= 10 && <OnboardingChecklist />}
     </div>
   );
 }
@@ -63,14 +66,13 @@ const OnboardingChecklist = () => {
   const { setShowCompleteSetupModal } = useContext(ModalContext);
   const { verified } = useDomains();
   const { data: links } = useLinksCount();
+  const { data: advertiserCount } = networkCount();
   const { users } = useUsers();
   const { users: invites } = useUsers({ invites: true });
 
   const remainder = useMemo(() => {
     return (
-      (verified ? 0 : 1) +
-      (links > 0 ? 0 : 1) +
-      ((users && users.length > 1) || (invites && invites.length > 0) ? 0 : 1)
+      (verified ? 0 : 1) + (links > 0 ? 0 : 1) + (advertiserCount > 0 ? 0 : 1)
     );
   }, [links, invites, users, verified]);
 
