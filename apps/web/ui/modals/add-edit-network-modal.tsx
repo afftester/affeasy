@@ -492,23 +492,38 @@ function AddEditNetworkModal({
                     </div>
                   </div>
                 </>
+              ) : advertiserId === "3" ? (
+                <>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`url-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Website ID
+                      </label>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="websiteID"
+                        id={`websiteID-${randomIdx}`}
+                        placeholder={
+                          "https://dub.co/help/article/what-is-websiteID"
+                        }
+                        value={websiteId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("websiteId", e.target.value)
+                        }
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                </>
               ) : null}
             </div>
-
-            {/* Divider
-            <div className="relative pb-3 pt-5">
-              <div
-                className="absolute inset-0 flex items-center px-4 md:px-16"
-                aria-hidden="true"
-              >
-                <div className="w-full border-t border-gray-300" />
-              </div>
-              <div className="relative flex justify-center">
-                <span className="bg-gray-50 px-2 text-sm text-gray-500">
-                  Optional
-                </span>
-              </div>
-            </div> */}
 
             <div
               className={`${

@@ -510,6 +510,7 @@ export async function processLink({
     });
     if (userBrandRelationship) {
       const advertiserId = userBrandRelationship.advertiserId;
+      console.log(advertiserId);
 
       if (advertiserId === "1") {
         const encryptedApiKey =
@@ -614,6 +615,22 @@ export async function processLink({
         } catch (error) {
           console.error("Error generating affiliate link:", error);
         }
+      } else if (advertiserId === "3") {
+        const userAdvertiserRelation =
+          userBrandRelationship.userAdvertiserRelation;
+
+        const websiteId = userAdvertiserRelation.websiteId || "";
+
+        if (!websiteId) {
+          // Handle the case where any of the required values are missing
+          return {
+            link: payload,
+            error: "Missing credentials for Amazon Affiliate Program.",
+            code: "unprocessable_entity",
+          };
+        }
+
+        clickUrl = `${processedUrl}?&tag=${websiteId}`;
       }
     }
   }

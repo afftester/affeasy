@@ -265,6 +265,53 @@ export const POST = withSession(async ({ req, session }) => {
         { status: 500 },
       );
     }
+  } else if (advertiserId === "3") {
+    try {
+      const brand = await prisma.brand.findFirst({
+        where: {
+          url: "www.amazon.com",
+        },
+        include: {
+          advertisers: {
+            where: { advertiserId: advertiserId },
+          },
+          userBrandRelationships: {
+            where: { userId: session.user.id, advertiserId },
+          },
+        },
+      });
+
+      if (brand) {
+        let userBrandRelationship = brand.userBrandRelationships[0];
+
+        if (!userBrandRelationship) {
+          // Create a new userBrandRelationship only if it doesn't exist
+          userBrandRelationship = await prisma.userBrandRelationship.create({
+            data: {
+              userId: session.user.id,
+              brandId: brand.id,
+              advertiserId,
+              userAdvertiserRelationId: relationship.id,
+              brandAdvertiserRelationId: brand.advertisers[0].id,
+            },
+          });
+        }
+
+        return NextResponse.json([{ brand, userBrandRelationship }]);
+      } else {
+        // Handle case where Amazon brand is not found in the database
+        return NextResponse.json(
+          { error: "Amazon brand not found in database" },
+          { status: 404 },
+        );
+      }
+    } catch (error) {
+      console.error("Error processing Amazon advertiser:", error);
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 },
+      );
+    }
   } else {
     return NextResponse.json(
       { error: "Invalid advertiser ID" },
