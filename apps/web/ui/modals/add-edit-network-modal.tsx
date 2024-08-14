@@ -59,6 +59,11 @@ function AddEditNetworkModal({
     fetcher,
   );
 
+  const { data: existingNetworks } = useSWR<UserAdvertiserWithNameProps[]>(
+    "/api/user/networks",
+    fetcher,
+  );
+
   const [data, setData] = useState<UserAdvertiserWithNameProps>(
     props || DEFAULT_USER_ADVERTISER_PROPS,
   );
@@ -227,6 +232,20 @@ function AddEditNetworkModal({
             onSubmit={async (e) => {
               e.preventDefault();
               setSaving(true);
+
+              const networkExists = existingNetworks?.some(
+                (network) =>
+                  network.advertiserId === data.advertiserId &&
+                  network.id !== props?.id,
+              );
+
+              if (networkExists) {
+                toast.error(
+                  "You have already connected this network to AffEasy. We don't currently support multiple connections of the same affiliate network.",
+                );
+                setSaving(false);
+                return;
+              }
 
               const bodyData = props
                 ? { id: props.id, ...changedFields }
