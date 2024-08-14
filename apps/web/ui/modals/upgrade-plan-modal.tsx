@@ -110,7 +110,7 @@ function UpgradePlanModal({
           className="text-center text-sm text-gray-500"
           variants={STAGGER_CHILD_VARIANTS}
         >
-          Enjoy higher limits and extra features <br /> with Dub.co{" "}
+          Enjoy higher limits and extra features <br /> with AffEasy{" "}
           {selectedPlan.name}
         </motion.p>
       </motion.div>
@@ -281,6 +281,7 @@ function UpgradePlanModal({
                 .then(async (res) => {
                   if (currentPlan === "free") {
                     const data = await res.json();
+                    console.log(data);
                     const { id: sessionId } = data;
                     const stripe = await getStripe();
                     stripe?.redirectToCheckout({ sessionId });
@@ -352,13 +353,12 @@ function UpgradePlanModal({
                 Skip for now
               </Link>
             ) : (
-              <a
-                href={`${HOME_DOMAIN}/enterprise`}
-                target="_blank"
+              <Link
+                href={`/${slug}`}
                 className="text-center text-xs text-gray-500 underline-offset-4 transition-all hover:text-gray-800 hover:underline"
               >
-                Looking for enterprise?
-              </a>
+                Skip for now
+              </Link>
             )}
           </div>
         </motion.div>
