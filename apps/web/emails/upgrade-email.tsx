@@ -15,8 +15,8 @@ import {
 import Footer from "./components/footer";
 
 export default function UpgradeEmail({
-  name = "Brendon Urie",
-  email = "panic@thedis.co",
+  name = "James Jeremie",
+  email = "jeremie@james.com",
   plan = "Pro",
 }: {
   name: string | null;
@@ -27,7 +27,7 @@ export default function UpgradeEmail({
   return (
     <Html>
       <Head />
-      <Preview>Thank you for upgrading to Dub.co {plan}!</Preview>
+      <Preview>Thank you for upgrading to AffEasy {plan}!</Preview>
       <Tailwind>
         <Body className="mx-auto my-auto bg-white font-sans">
           <Container className="mx-auto my-10 max-w-[500px] rounded border border-solid border-gray-200 px-10 py-5">
@@ -54,13 +54,13 @@ export default function UpgradeEmail({
               Hey{name && ` ${name}`}!
             </Text>
             <Text className="text-sm leading-6 text-black">
-              My name is Steven, and I'm the founder of Dub. I wanted to
+              My name is Ritanshu, and I'm the founder of AffEasy. I wanted to
               personally reach out to thank you for upgrading to{" "}
               <Link
                 href={planDetails.link}
                 className="font-medium text-blue-600 no-underline"
               >
-                Dub.co {plan}
+                AffEasy {plan}
               </Link>
               !
             </Text>
@@ -80,7 +80,7 @@ export default function UpgradeEmail({
                 open-source
               </Link>{" "}
               business. Your support means the world to us and helps us continue
-              to build and improve Dub.co.
+              to build and improve AffEasy.
             </Text>
             <Text className="text-sm leading-6 text-black">
               On the {plan} plan, you now have access to:
@@ -95,7 +95,7 @@ export default function UpgradeEmail({
               happy to help!
             </Text>
             <Text className="text-sm font-light leading-6 text-gray-400">
-              Steven from Dub
+              Ritanshu from AffEasy
             </Text>
             <Footer email={email} marketing />
           </Container>

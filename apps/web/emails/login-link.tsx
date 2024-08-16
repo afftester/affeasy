@@ -15,7 +15,7 @@ import {
 import Footer from "./components/footer";
 
 export default function LoginLink({
-  email = "panic@thedis.co",
+  email = "jeremey@james.com",
   url = "http://localhost:8888/api/auth/callback/email?callbackUrl=http%3A%2F%2Fapp.localhost%3A3000%2Flogin&token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&email=youremail@gmail.com",
 }: {
   email: string;
@@ -24,7 +24,7 @@ export default function LoginLink({
   return (
     <Html>
       <Head />
-      <Preview>Your Dub.co Login Link</Preview>
+      <Preview>Your AffEasy Login Link</Preview>
       <Tailwind>
         <Body className="mx-auto my-auto bg-white font-sans">
           <Container className="mx-auto my-10 max-w-[500px] rounded border border-solid border-gray-200 px-10 py-5">
@@ -41,7 +41,7 @@ export default function LoginLink({
               Your Login Link
             </Heading>
             <Text className="text-sm leading-6 text-black">
-              Welcome to Dub.co!
+              Welcome to AffEasy!
             </Text>
             <Text className="text-sm leading-6 text-black">
               Please click the magic link below to sign in to your account.

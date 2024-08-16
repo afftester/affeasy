@@ -43,7 +43,7 @@ export default function LinksLimitAlert({
     <Html>
       <Head />
       <Preview>
-        Your Dub workspace, {name} has used {percentage.toString()}% of its
+        Your AffEasy workspace, {name} has used {percentage.toString()}% of its
         links limit for the month.
       </Preview>
       <Tailwind>
@@ -59,12 +59,12 @@ export default function LinksLimitAlert({
               />
             </Section>
             <Heading className="mx-0 my-7 p-0 text-center text-xl font-semibold text-black">
-              Dub.co Links Limit Alert
+              AffEasy Links Limit Alert
             </Heading>
             <Text className="text-sm leading-6 text-black">
-              Your Dub.co workspace,{" "}
+              Your AffEasy workspace,{" "}
               <Link
-                href={`https://app.dub.co/${slug}`}
+                href={`https://app.affeasy.link/${slug}`}
                 className="text-black underline"
               >
                 <strong>{name}</strong>
@@ -112,7 +112,7 @@ export default function LinksLimitAlert({
             <Section className="mb-8 text-center">
               <Link
                 className="rounded-full bg-black px-6 py-3 text-center text-[12px] font-semibold text-white no-underline"
-                href={`https://app.dub.co/${slug}?upgrade=${nextPlan.name.toLowerCase()}}`}
+                href={`https://app.affeasy.link/${slug}?upgrade=${nextPlan.name.toLowerCase()}}`}
               >
                 Upgrade my plan
               </Link>

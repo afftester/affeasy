@@ -88,7 +88,7 @@ export default function LinksImported({
               <strong>
                 imported {Intl.NumberFormat("en-us").format(count)} links
               </strong>{" "}
-              from {provider} into your Dub.co workspace,{" "}
+              from {provider} into your AffEasy workspace,{" "}
               <Link
                 href={`https://app.dub.co/${workspaceSlug}`}
                 className="font-medium text-blue-600 no-underline"

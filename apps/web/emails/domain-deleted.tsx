@@ -15,9 +15,9 @@ import {
 import Footer from "./components/footer";
 
 export default function DomainDeleted({
-  email = "panic@thedis.co",
-  domain = "dub.sh",
-  workspaceSlug = "dub",
+  email = "jeremy@james.com",
+  domain = "je.best",
+  workspaceSlug = "fubar",
 }: {
   email: string;
   domain: string;
@@ -44,30 +44,30 @@ export default function DomainDeleted({
             </Heading>
             <Text className="text-sm leading-6 text-black">
               Your domain <code className="text-purple-600">{domain}</code> for
-              your Dub.co workspace{" "}
+              your AffEasy workspace{" "}
               <Link
-                href={`https://app.dub.co/${workspaceSlug}`}
+                href={`https://app.affeasy.link/${workspaceSlug}`}
                 className="font-medium text-blue-600 no-underline"
               >
                 {workspaceSlug}↗
               </Link>{" "}
               has been invalid for 30 days. As a result, it has been deleted
-              from Dub.
+              from AffEasy.
             </Text>
             <Text className="text-sm leading-6 text-black">
               If you would like to restore the domain, you can easily create it
-              again on Dub.co with the link below.
+              again on AffEasy with the link below.
             </Text>
             <Section className="my-8 text-center">
               <Link
                 className="rounded-full bg-black px-6 py-3 text-center text-[12px] font-semibold text-white no-underline"
-                href={`https://app.dub.co/${workspaceSlug}/domains`}
+                href={`https://app.affeasy.link/${workspaceSlug}/domains`}
               >
                 Add a domain
               </Link>
             </Section>
             <Text className="text-sm leading-6 text-black">
-              If you did not want to keep using this domain on Dub.co anyway,
+              If you did not want to keep using this domain on AffEasy anyway,
               you can simply ignore this email.
             </Text>
             <Footer email={email} />

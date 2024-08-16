@@ -224,7 +224,7 @@ function AddEditNetworkModal({
           <div className="z-10 flex flex-col items-center justify-center space-y-3 border-b border-gray-200 bg-white px-4 pb-8 pt-8 transition-all md:sticky md:top-0 md:px-16">
             <LinkLogo />
             <h3 className="max-w-sm truncate text-lg font-medium">
-              {props ? `Edit Network` : "Add a new Network"}
+              {props ? `Edit Network` : "Add a new Affiliate Network"}
             </h3>
           </div>
 
