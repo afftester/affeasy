@@ -19,15 +19,13 @@ export default function InvalidDomain({
   domain = "fire.hot",
   workspaceSlug = "ice",
   invalidDays = 14,
-  appDomain = "affeasy.link",
 }: {
   email: string;
   domain: string;
   workspaceSlug: string;
   invalidDays: number;
-  appDomain: string;
 }): JSX.Element {
-  const notificationSettingsUrl = `https://app.${appDomain}/${workspaceSlug}/settings/notifications`;
+  const notificationSettingsUrl = `https://app.affeasy.link/${workspaceSlug}/settings/notifications`;
 
   return (
     <Html>
