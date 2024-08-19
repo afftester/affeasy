@@ -15,16 +15,20 @@ import {
 import Footer from "./components/footer";
 
 export default function InvalidDomain({
-  email = "panic@thedis.co",
-  domain = "dub.sh",
-  workspaceSlug = "dub",
+  email = "fire@water.co",
+  domain = "fire.hot",
+  workspaceSlug = "ice",
   invalidDays = 14,
+  appDomain = "affeasy.link",
 }: {
   email: string;
   domain: string;
   workspaceSlug: string;
   invalidDays: number;
+  appDomain: string;
 }): JSX.Element {
+  const notificationSettingsUrl = `https://app.${appDomain}/${workspaceSlug}/settings/notifications`;
+
   return (
     <Html>
       <Head />
@@ -35,9 +39,8 @@ export default function InvalidDomain({
             <Section className="mt-8">
               <Img
                 src={DUB_LOGO}
-                width="40"
                 height="40"
-                alt="Dub"
+                alt="AffEasy"
                 className="mx-auto my-0"
               />
             </Section>
@@ -46,9 +49,9 @@ export default function InvalidDomain({
             </Heading>
             <Text className="text-sm leading-6 text-black">
               Your domain <code className="text-purple-600">{domain}</code> for
-              your Dub.co workspace{" "}
+              your AffEasy workspace{" "}
               <Link
-                href={`https://app.dub.co/${workspaceSlug}`}
+                href={`https://app.affeasy.link/${workspaceSlug}`}
                 className="font-medium text-blue-600 no-underline"
               >
                 {workspaceSlug}↗
@@ -57,21 +60,21 @@ export default function InvalidDomain({
             </Text>
             <Text className="text-sm leading-6 text-black">
               If your domain remains unconfigured for 30 days, it will be
-              automatically deleted from Dub.co. Please click the link below to
+              automatically deleted from AffEasy. Please click the link below to
               configure your domain.
             </Text>
             <Section className="my-8 text-center">
               <Link
                 className="rounded-full bg-black px-6 py-3 text-center text-[12px] font-semibold text-white no-underline"
-                href={`https://app.dub.co/${workspaceSlug}/domains`}
+                href={`https://app.affeasy.link/${workspaceSlug}/settings/domains`}
               >
                 Configure domain
               </Link>
             </Section>
             <Text className="text-sm leading-6 text-black">
-              If you do not want to keep this domain on Dub.co, you can{" "}
+              If you do not want to keep this domain on AffEasy, you can{" "}
               <Link
-                href={`https://app.dub.co/${workspaceSlug}/domains`}
+                href={`https://app.affeasy.link/${workspaceSlug}/settings/domains`}
                 className="font-medium text-blue-600 no-underline"
               >
                 delete it
@@ -83,7 +86,10 @@ export default function InvalidDomain({
                   } days.`
                 : "this will be the last time we will email you about this."}
             </Text>
-            <Footer email={email} />
+            <Footer
+              email={email}
+              notificationSettingsUrl={notificationSettingsUrl}
+            />
           </Container>
         </Body>
       </Tailwind>

@@ -20,31 +20,31 @@ import Footer from "./components/footer";
 
 export default function ClicksSummary({
   email = "panic@thedis.co",
-  appName = "Dub.co",
-  appDomain = "dub.co",
-  workspaceName = "Acme",
-  workspaceSlug = "acme",
-  totalClicks = 63689,
-  createdLinks = 25,
+  appName = "AffEasy",
+  appDomain = "affeasy.link",
+  workspaceName = "Fire",
+  workspaceSlug = "fire",
+  totalClicks = 69420,
+  createdLinks = 22,
   topLinks = [
     {
-      link: "acme.com/sales",
+      link: "fire.com/sales",
       clicks: 2187,
     },
     {
-      link: "acme.com/instagram",
+      link: "fire.com/instagram",
       clicks: 1820,
     },
     {
-      link: "acme.com/facebook",
+      link: "fire.com/facebook",
       clicks: 1552,
     },
     {
-      link: "acme.com/twitter",
+      link: "fire.com/twitter",
       clicks: 1229,
     },
     {
-      link: "acme.com/linkedin",
+      link: "fire.com/linkedin",
       clicks: 1055,
     },
   ],
@@ -61,6 +61,8 @@ export default function ClicksSummary({
     clicks: number;
   }[];
 }) {
+  const notificationSettingsUrl = `https://app.${appDomain}/${workspaceSlug}/settings/notifications`;
+
   return (
     <Html>
       <Head />
@@ -73,7 +75,6 @@ export default function ClicksSummary({
             <Section className="mt-8">
               <Img
                 src={DUB_LOGO}
-                width="40"
                 height="40"
                 alt={appName}
                 className="mx-auto my-0"
@@ -173,7 +174,10 @@ export default function ClicksSummary({
                 </Section>
               </>
             )}
-            <Footer email={email} />
+            <Footer
+              email={email}
+              notificationSettingsUrl={notificationSettingsUrl}
+            />
           </Container>
         </Body>
       </Tailwind>
