@@ -3,8 +3,8 @@
   "name": "OpenStatus Docs",
   "openapi": "https://api.openstatus.dev/v1/openapi",
   "logo": {
-    "dark": "/logo/OpenStatus-dark.svg",
-    "light": "/logo/OpenStatus-light.svg"
+    "dark": "/logo/logo-dark.svg",
+    "light": "/logo/logo-light.svg"
   },
   "api": {
     "baseUrl": "https://api.openstatus.dev/v1",
@@ -21,7 +21,7 @@
     "suggestEdit": true,
     "thumbsRating": true
   },
-  "favicon": "/favicon.svg",
+  "favicon": "/favicon-32x32.png",
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
@@ -33,17 +33,17 @@
   },
   "topbarLinks": [
     {
-      "name": "Discord",
-      "url": "https://www.openstatus.dev/discord"
+      "name": "Support",
+      "url": "mailto:support@affeasy.link"
     },
     {
       "name": "GitHub",
-      "url": "https://github.com/openstatushq/openstatus"
+      "url": "https://github.com/afftester/afftester"
     }
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://www.openstatus.dev/app"
+    "url": "https://app.affeasy.link"
   },
   "tabs": [
     {
@@ -59,18 +59,27 @@
     {
       "name": "GitHub",
       "icon": "github",
-      "url": "https://github.com/openstatushq/openstatus"
-    },
-    {
-      "name": "Community",
-      "icon": "discord",
-      "url": "https://www.openstatus.dev/discord"
+      "url": "https://github.com/afftester/afftester"
     }
   ],
   "navigation": [
     {
       "group": "Introduction",
       "pages": ["introduction"]
+    },
+    {
+      "group": "Quickstart Guide",
+      "pages": [
+        "quickstart/guide",
+        {
+          "group": "Connect an Affiliate Network",
+          "pages": [
+            "quickstart/affiliate-networks/introduction",
+            "quickstart/affiliate-networks/rakuten",
+            "quickstart/affiliate-networks/commision-junction"
+          ]
+        }
+      ]
     },
     {
       "group": "Synthetic Monitoring",
