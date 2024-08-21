@@ -65,7 +65,7 @@
   "navigation": [
     {
       "group": "Introduction",
-      "pages": ["introduction"]
+      "pages": ["introduction", "how-it-works"]
     },
     {
       "group": "Quickstart Guide",
@@ -76,7 +76,8 @@
           "pages": [
             "quickstart/affiliate-networks/introduction",
             "quickstart/affiliate-networks/rakuten",
-            "quickstart/affiliate-networks/commision-junction"
+            "quickstart/affiliate-networks/commision-junction",
+            "quickstart/affiliate-networks/amazon"
           ]
         }
       ]

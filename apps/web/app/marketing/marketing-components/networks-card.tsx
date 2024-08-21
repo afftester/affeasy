@@ -3,7 +3,7 @@ import Image from "next/image";
 const statisticsData = [
   { label: "Amazon", logo: "/amazon.svg" },
   { label: "Commission Junction", logo: "/cj.svg" },
-  { label: "Rakuten", logo: "/rakuten.webp" },
+  { label: "Rakuten", logo: "/rakuten.svg" },
   { label: "EBay", logo: "/ebay.webp", comingSoon: true },
   { label: "HOWL", logo: "/howl.svg", comingSoon: true },
   { label: "PepperJam", logo: "/pepperjam.webp", comingSoon: true },
@@ -47,7 +47,7 @@ export default function AffiliateNetworksCard() {
         ))}
       </div>
       <p className="mt-8 text-center text-sm text-gray-500">
-        * Support Coming Soon for some networks
+        Support coming soon for some networks
       </p>
     </div>
   );

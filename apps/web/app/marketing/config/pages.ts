@@ -217,7 +217,7 @@ export const marketingPagesConfig = [
     icon: "credit-card",
   },
   {
-    href: "https://docs.openstatus.dev",
+    href: "https://docs.affeasy.link",
     description: "The documentation for AffEasy.",
     title: "Docs",
     segment: "docs",

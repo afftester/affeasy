@@ -34,7 +34,7 @@ export function MarketingFooter({ className }: Props) {
             <p className="text-foreground font-semibold">Resources</p>
             <FooterLink href="/blog" label="Blog" />
             <FooterLink href="/pricing" label="Pricing" />
-            <FooterLink href="https://docs.openstatus.dev" label="Docs" />
+            <FooterLink href="https://docs.affeasy.link" label="Help" />
           </div>
           <div className="order-3 flex flex-col gap-3 text-sm">
             <p className="text-foreground font-semibold">Company</p>
