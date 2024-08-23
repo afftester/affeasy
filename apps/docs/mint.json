@@ -14,7 +14,7 @@
     }
   },
   "metadata": {
-    "og:image": "https://www.openstatus.dev/api/og"
+    "og:image": "https://affeasy.link/_static/thumbnail.jpg"
   },
   "feedback": {
     "raiseIssue": true,
@@ -45,16 +45,7 @@
     "name": "Get Started",
     "url": "https://app.affeasy.link"
   },
-  "tabs": [
-    {
-      "name": "API Reference",
-      "url": "api-reference"
-    },
-    {
-      "name": "Contributor Guides",
-      "url": "contributing"
-    }
-  ],
+  "tabs": [],
   "anchors": [
     {
       "name": "GitHub",
@@ -81,121 +72,6 @@
           ]
         }
       ]
-    },
-    {
-      "group": "Synthetic Monitoring",
-      "pages": [
-        "synthetic/overview",
-        {
-          "group": "Features",
-          "pages": [
-            "synthetic/features/incident",
-            "synthetic/features/heartbeat",
-            "synthetic/features/monitor",
-            {
-              "group": "Notifications",
-              "pages": [
-                "synthetic/features/notification",
-                {
-                  "group": "Notification Channels",
-                  "pages": [
-                    "synthetic/features/notification/discord",
-                    "synthetic/features/notification/phone-call",
-                    "synthetic/features/notification/slack",
-                    "synthetic/features/notification/sms",
-                    "synthetic/features/notification/telegram"
-                  ]
-                }
-              ]
-            },
-            "synthetic/features/status-page",
-            "synthetic/features/status-report",
-            "synthetic/features/status-page-subscribers"
-          ]
-        }
-      ]
-    },
-    {
-      "group": "Real User Monitoring",
-      "pages": ["rum/overview"]
-    },
-    {
-      "group": "Developer Tools",
-      "pages": [
-        "packages/react",
-        "packages/status-widget",
-        "packages/terraform"
-      ]
-    },
-    {
-      "group": "Contributor Guides",
-      "pages": [
-        "contributing/requirements",
-        "contributing/get-started",
-        "contributing/setup-env",
-        "contributing/setup"
-      ]
-    },
-    {
-      "group": "API Documentation",
-      "icon": "code",
-      "pages": [
-        "api-reference/auth",
-        {
-          "group": "Incident",
-          "pages": [
-            "api-reference/incident/get-incident:id",
-            "api-reference/incident/get-incident",
-            "api-reference/incident/put-incident:id"
-          ]
-        },
-        {
-          "group": "Monitor",
-          "pages": [
-            "api-reference/monitor/get-monitor:id",
-            "api-reference/monitor/get-monitor",
-            "api-reference/monitor/delete-monitor:id",
-            "api-reference/monitor/post-monitor",
-            "api-reference/monitor/put-monitor:id"
-          ]
-        },
-        {
-          "group": "Notification",
-          "pages": [
-            "api-reference/notification/get-notification",
-            "api-reference/notification/get-notification:id",
-            "api-reference/notification/post-notification"
-          ]
-        },
-        {
-          "group": "Page",
-          "pages": [
-            "api-reference/page/get-page",
-            "api-reference/page/get-page:id",
-            "api-reference/page/post-page",
-            "api-reference/page/put-page:id",
-            "api-reference/page/post-page:id/update"
-          ]
-        },
-        {
-          "group": "Status Report",
-          "pages": [
-            "api-reference/status_report/get-status_report:id",
-            "api-reference/status_report/get-status_report",
-            "api-reference/status_report/delete-status_report:id",
-            "api-reference/status_report/post-status_report",
-            "api-reference/status_report/post-status_report:id/update"
-          ]
-        },
-        {
-          "group": "Status Report Udpate",
-          "pages": [
-            "api-reference/status_report_update/get-status_report_update:id",
-            "api-reference/status_report_update/post-status_report_update"
-          ]
-        },
-        "api-reference/checker"
-      ]
     }
   ],
   "analytics": {
@@ -204,9 +80,7 @@
     }
   },
   "footerSocials": {
-    "website": "https://www.openstatus.dev",
-    "twitter": "https://twitter.com/openstatushq",
-    "discord": "https://www.openstatus.dev/discord",
-    "github": "https://github.com/openstatushq/openstatus"
+    "website": "https://affeasy.link",
+    "github": "https://github.com/afftester/afftester"
   }
 }

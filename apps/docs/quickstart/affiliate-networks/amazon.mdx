@@ -1,132 +1,112 @@
 ---
 title: "Amazon"
-description: "Learn how to connect your Amazon Affiliate account to AffEasy"
+description: "This guide will walk you through the process of connecting your Amazon Affiliate account to AffEasy, streamlining your affiliate marketing workflow."
 ---
 
-import Prerequisites from "/snippets/sdk-prerequisites.mdx";
-import LinkArguments from "/snippets/link-arguments.mdx";
+## 1. Prerequisites
 
-<Prerequisites />
+Before you begin, ensure you have:
 
-## 3. Create link
+- An active Amazon Associates Account
+- An [AffEasy account](https://app.affeasy.link)
 
-Let's create a short link using the [Dub Python SDK](https://d.to/python).
+<Tip>
+  If you don't have an Amazon Associates account, [sign up
+  here](https://affiliate-program.amazon.com/signup)
+</Tip>
 
-```python views.py
-def create_link(request):
-  res = d.links.create(request=operations.CreateLinkRequestBody(
-    url='https://google.com',
-  ))
+## 2. Obtain Your Amazon Store ID
 
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
-```
+- Log in to your Amazon Associates account.
+- From the settings dropdown, select [Manage Your Tracking IDs](https://affiliate-program.amazon.com/home/account/tag/manage)
 
-<Accordion title="Full list of available attributes for the Link model">
-  <LinkArguments />
-</Accordion>
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/amazon/amazon-settings.png"
+    alt="Amazon Tag Settings Menu"
+    width="1200"
+    height="630"
+  />
+</Frame>
 
-## 3a. Create link with `externalId`
+- On the Manage Your Tracking IDs page, you'll see a list of your tracking IDs (also known as Store IDs or tags). Locate the tracking ID that you want to conenct to AffEasy
+  Your tracking ID is the alphanumeric code (e.g. store-20).
 
-Optionally, you can also pass an `externalId` field which is a unique identifier for the link in your own database to associate it with the link in Dub's system.
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/amazon/amazon-tracking-id.png"
+    alt="Amazon Store ID"
+    width="1200"
+    height="630"
+  />
+</Frame>
+- Copy your chosen tracking ID. You'll need this for the next step when connecting
+to AffEasy.
+<Info>
+  AffEasy currently supports one tracking ID per account. We're working on
+  supporting multiple tracking IDs in the future.
+</Info>
 
-```python views.py
-def create_link(request):
-  res = d.links.create(request=operations.CreateLinkRequestBody(
-    url='https://google.com',
-    external_id='12345',
-  ))
+## 3. Connect Amazon to AffEasy
 
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
-```
+- Go to your [AffEasy account settings.](https://app.affeasy.link/settings/networks)
+- Click "Add".
 
-## 4. Upsert link
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/affeasy-network.png"
+    alt="AffEasy Add Network"
+    width="1200"
+    height="630"
+  />
+</Frame>
 
-Dub Python SDK provides a method to create or update a link so you don't have to worry about checking if the link already exists.
+- Select "Amazon" from the list.
+- Enter your Store ID in the provided field.
+- Click "Add Network" to finalize the integration.
 
-```python views.py
-def upsert_link(request):
-  res = d.links.upsert(request=operations.UpsertLinkRequestBody(
-    url='https://google.com',
-  ))
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/amazon/affeasy-addamazon.png"
+    alt="AffEasy Add Amazon"
+    width="300"
+    height="150"
+  />
+</Frame>
 
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
-```
+## What's Next
 
-## 5. Update link
+Congratulations! Your Amazon Associates account is now connected to AffEasy. Here's what you can expect:
 
-Let's update an existing link using the Dub Python SDK.
+You can now create affiliate links for Amazon products directly from your AffEasy dashboard.
+AffEasy will automatically use your Store ID when generating Amazon affiliate links.
 
-You can do that in two ways:
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/amazon/affeasy-amazonadded.png"
+    alt="AffEasy Amazon Added"
+    width="1200"
+    height="630"
+  />
+</Frame>
+<Tip>
+  To learn how to create Amazon affiliate links using AffEasy, check out our
+  [comprehensive link creation
+  guide](http://docs.affeasy.link/quickstart/guide).
+</Tip>
 
-- Using the link's `linkId` in Dub's system.
-- Using the link's `externalId` in your own database (prefixed with `ext_`).
+## Troubleshooting
 
-```python views.py
-# Update a link by its linkId
-def update_link(request):
-  res = d.links.update(link_id="clx1gvi9o0005hf5momm6f7hj", request_body=operations.UpdateLinkRequestBody(
-    url='https://google.uk',
-  ))
+If you encounter any issues during the integration process:
 
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
+- Double-check that you've entered your Store ID correctly.
+- Ensure your Amazon Associates account is in good standing.
+- Clear your browser cache and try again.
+- Contact AffEasy support if problems persist.
 
-# Update a link by its externalId
-def update_link_external(request):
-  res = d.links.update(external_id="ext_12345", request_body=operations.UpdateLinkRequestBody(
-    url='https://google.uk',
-  ))
-
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
-```
-
-## 6. Retrieve analytics for link
-
-Dub allows you to retrieve analytics for a link using the Dub Python SDK.
-
-```python views.py
-# Retrieve the timeseries analytics for the last 7 days for a link
-def analytics(request):
-  res = d.analytics.retrieve(request=operations.RetrieveAnalyticsRequest(
-    link_id='clx1gvi9o0005hf5momm6f7hj',
-    interval='7d',
-    group_by='timeseries',
-  ))
-
-  return JsonResponse(res)
-```
-
-Simliarly, you can retrieve analytics for a link using the `externalId` field.
-
-```python views.py
-# Retrieve the timeseries analytics for the last 7 days for a link
-def analytics(request):
-  res = d.analytics.retrieve(request=operations.RetrieveAnalyticsRequest(
-    external_id='ext_12345',
-    interval='7d',
-    group_by='timeseries',
-  ))
-
-  return JsonResponse(res)
-```
-
-## 7. Examples
-
-<CardGroup cols={2}>
-  <Card
-    title="Python Example"
-    icon="arrow-up-right-from-square"
-    href="https://github.com/dubinc/examples/tree/main/python/django"
-  >
-    See the full example on GitHub.
-  </Card>
-</CardGroup>
+We're constantly improving our integration process. If you have any feedback or suggestions, please let us know!
