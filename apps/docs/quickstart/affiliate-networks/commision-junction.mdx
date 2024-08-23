@@ -1,132 +1,170 @@
 ---
-title: "Commision Junction (CJ)"
-description: "Learn how to connect your Commision Junction account to AffEasy"
+title: "Commission Junction (CJ)"
+description: "This guide will walk you through the process of connecting your Commission Junction (CJ) account to AffEasy, streamlining your affiliate marketing workflow."
 ---
 
-import Prerequisites from "/snippets/sdk-prerequisites.mdx";
-import LinkArguments from "/snippets/link-arguments.mdx";
+## 1. Prerequisites
 
-<Prerequisites />
+Before you begin, ensure you have:
 
-## 3. Create link
+- An active [Commission Junction (CJ) Publisher Account](https://www.cj.com/)
+- An AffEasy account
 
-Let's create a short link using the [Dub Python SDK](https://d.to/python).
+<Tip>
+  If you don't have a CJ publisher account, [sign up
+  here](https://signup.cj.com/member/signup/publisher/#/)
+</Tip>
 
-```python views.py
-def create_link(request):
-  res = d.links.create(request=operations.CreateLinkRequestBody(
-    url='https://google.com',
-  ))
+## 2. Obtain Your CJ CID
 
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
-```
+- Log in to your CJ publisher account.
+- On the dashboard, locate your CID.
+- Copy the CID (it should be a string of numbers).
 
-<Accordion title="Full list of available attributes for the Link model">
-  <LinkArguments />
-</Accordion>
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/cj/cj-dashboard.png"
+    alt="CJ Dashboard"
+    width="1200"
+    height="630"
+  />
+</Frame>
 
-## 3a. Create link with `externalId`
+## 3. Obtain Your CJ Property ID
 
-Optionally, you can also pass an `externalId` field which is a unique identifier for the link in your own database to associate it with the link in Dub's system.
+- From your dashboard, navigate to the [promotional properties](https://accounts.cj.com/promotional-properties) settings.
 
-```python views.py
-def create_link(request):
-  res = d.links.create(request=operations.CreateLinkRequestBody(
-    url='https://google.com',
-    external_id='12345',
-  ))
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/cj/cj-promotional.png"
+    alt="CJ Dashboard"
+    width="1200"
+    height="630"
+  />
+</Frame>
 
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
-```
+- On the dashboard, locate the Property ID.
+- Copy the Property ID (it should be a string of numbers).
 
-## 4. Upsert link
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/cj/cj-website.png"
+    alt="CJ Dashboard"
+    width="1200"
+    height="630"
+  />
+</Frame>
 
-Dub Python SDK provides a method to create or update a link so you don't have to worry about checking if the link already exists.
+<Info>
+  
+  AffEasy currently supports one property ID per account. We're working on supporting multiple IDs in the future.
 
-```python views.py
-def upsert_link(request):
-  res = d.links.upsert(request=operations.UpsertLinkRequestBody(
-    url='https://google.com',
-  ))
+</Info>
 
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
-```
+## 4. Create a New Peronal Access Token
 
-## 5. Update link
+- Route to the [CJ developers portal ](https://developers.cj.com/). You should be automatically logged in. If not, use the same credentials as your main CJ account.
+- Route to the [Personal Access Tokens settings page](https://developers.cj.com/account/personal-access-tokens)
 
-Let's update an existing link using the Dub Python SDK.
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/cj/cj-developer.png"
+    alt="CJ Generate Key"
+    width="1200"
+    height="630"
+  />
+</Frame>
 
-You can do that in two ways:
+- Give your token a name (e.g., "AffEasy Integration").
+- Click "Register".
+- After creation, copy the provided Personal Access Token
 
-- Using the link's `linkId` in Dub's system.
-- Using the link's `externalId` in your own database (prefixed with `ext_`).
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/cj/cj-token.png"
+    alt="CJ Generate Key"
+    width="1200"
+    height="630"
+  />
+</Frame>
 
-```python views.py
-# Update a link by its linkId
-def update_link(request):
-  res = d.links.update(link_id="clx1gvi9o0005hf5momm6f7hj", request_body=operations.UpdateLinkRequestBody(
-    url='https://google.uk',
-  ))
+<Info>
+  The token will only be shown once. If you don't copy it immediately, you'll
+  need to create a new one.
+</Info>
 
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
+## 5. Connect CJ to AffEasy
 
-# Update a link by its externalId
-def update_link_external(request):
-  res = d.links.update(external_id="ext_12345", request_body=operations.UpdateLinkRequestBody(
-    url='https://google.uk',
-  ))
+- Go to your [AffEasy account settings.](https://app.affeasy.link/settings/networks)
+- Click "Add".
 
-  return JsonResponse({
-    'short_link': res.link_schema.short_link
-  })
-```
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/affeasy-network.png"
+    alt="AffEasy Add Network"
+    width="1200"
+    height="630"
+  />
+</Frame>
 
-## 6. Retrieve analytics for link
+- Select Commission Junction (CJ) from the list.
+- Enter the following details:
+  - Website ID: Your Property ID (from Step 3)
+  - Account ID: Your CID (from Step 2)
+  - API Key: Your Personal Access Token (from Step 4)
+- Click "Add Network" to finalize the integration.
 
-Dub allows you to retrieve analytics for a link using the Dub Python SDK.
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/cj/affeasy-addcj.png"
+    alt="AffEasy Add CJ"
+    width="300"
+    height="150"
+  />
+</Frame>
 
-```python views.py
-# Retrieve the timeseries analytics for the last 7 days for a link
-def analytics(request):
-  res = d.analytics.retrieve(request=operations.RetrieveAnalyticsRequest(
-    link_id='clx1gvi9o0005hf5momm6f7hj',
-    interval='7d',
-    group_by='timeseries',
-  ))
+## What's Next
 
-  return JsonResponse(res)
-```
+Congratulations! Your Commission Junction account is now connected to AffEasy. Here's what you can expect:
 
-Simliarly, you can retrieve analytics for a link using the `externalId` field.
+- AffEasy will automatically sync your CJ brand partnerships.
+- You can now create affiliate links for your CJ brands directly from your AffEasy dashboard.
+- No need to use CJ's tools for link generation anymore.
 
-```python views.py
-# Retrieve the timeseries analytics for the last 7 days for a link
-def analytics(request):
-  res = d.analytics.retrieve(request=operations.RetrieveAnalyticsRequest(
-    external_id='ext_12345',
-    interval='7d',
-    group_by='timeseries',
-  ))
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="images/affiliate-networks/cj/affeasy-cjadded.png"
+    alt="AffEasy CJ Added"
+    width="1200"
+    height="630"
+  />
+</Frame>
 
-  return JsonResponse(res)
-```
+<Tip>
+  To learn how to create affiliate links using AffEasy, check out our
+  [comprehensive link creation
+  guide](http://docs.affeasy.link/quickstart/guide).
+</Tip>
 
-## 7. Examples
+## Troubleshooting
 
-<CardGroup cols={2}>
-  <Card
-    title="Python Example"
-    icon="arrow-up-right-from-square"
-    href="https://github.com/dubinc/examples/tree/main/python/django"
-  >
-    See the full example on GitHub.
-  </Card>
-</CardGroup>
+If you encounter any issues during the integration process:
+
+- Double-check all entered information for accuracy.
+- Ensure your CJ account is in good standing.
+- Ensure that the information was entered correctly:
+  - Website ID: Your Property ID (from Step 3)
+  - Account ID: Your CID (from Step 2)
+  - API Key: Your Personal Access Token (from Step 4)
+- Clear your browser cache and try again.
+- Contact AffEasy support if problems persist.
+
+We're constantly improving our integration process. If you have any feedback or suggestions, please let us know!
