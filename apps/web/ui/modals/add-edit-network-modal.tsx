@@ -4,6 +4,7 @@ import useWorkspace from "@/lib/swr/use-workspace";
 import { UserAdvertiserWithNameProps } from "@/lib/types";
 import LinkLogo from "@/ui/links/link-logo";
 import { X } from "@/ui/shared/icons";
+import { HelpCircle } from "lucide-react";
 import { toast } from "sonner";
 import { mutate } from "swr";
 
@@ -347,13 +348,21 @@ function AddEditNetworkModal({
                       >
                         Website ID
                       </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
                     </div>
                     <div className="relative mt-1 flex rounded-md shadow-sm">
                       <input
                         name="websiteID"
                         id={`websiteID-${randomIdx}`}
                         placeholder={
-                          "https://dub.co/help/article/what-is-websiteID"
+                          "https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
                         }
                         value={websiteId ?? ""}
                         required
@@ -374,13 +383,21 @@ function AddEditNetworkModal({
                       >
                         API Key
                       </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
                     </div>
                     <div className="relative mt-1 flex rounded-md shadow-sm">
                       <input
                         name="apiKey"
                         id={`apiKey-${randomIdx}`}
                         placeholder={
-                          "https://dub.co/help/article/what-is-apiKey"
+                          "https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
                         }
                         value={partialApiKey ?? ""}
                         required
@@ -401,13 +418,21 @@ function AddEditNetworkModal({
                       >
                         Account ID
                       </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
                     </div>
                     <div className="relative mt-1 flex rounded-md shadow-sm">
                       <input
                         name="accountId"
                         id={`accountId-${randomIdx}`}
                         placeholder={
-                          "https://dub.co/help/article/what-is-accountId"
+                          "https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
                         }
                         value={accountId ?? ""}
                         required
@@ -431,13 +456,21 @@ function AddEditNetworkModal({
                       >
                         Client ID
                       </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
                     </div>
                     <div className="relative mt-1 flex rounded-md shadow-sm">
                       <input
                         name="clientId"
                         id={`clientId-${randomIdx}`}
                         placeholder={
-                          "https://dub.co/help/article/what-is-clientId"
+                          "https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
                         }
                         value={clientId ?? ""}
                         required
@@ -458,13 +491,21 @@ function AddEditNetworkModal({
                       >
                         Client Secret
                       </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
                     </div>
                     <div className="relative mt-1 flex rounded-md shadow-sm">
                       <input
                         name="clientSecret"
                         id={`clientSecret-${randomIdx}`}
                         placeholder={
-                          "https://dub.co/help/article/what-is-clientSecret"
+                          "https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
                         }
                         value={partialClientSecret ?? ""}
                         required
@@ -488,13 +529,21 @@ function AddEditNetworkModal({
                       >
                         Account ID
                       </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
                     </div>
                     <div className="relative mt-1 flex rounded-md shadow-sm">
                       <input
                         name="accountId"
                         id={`accountId-${randomIdx}`}
                         placeholder={
-                          "https://dub.co/help/article/what-is-accountId"
+                          "https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
                         }
                         value={accountId ?? ""}
                         required
@@ -518,13 +567,21 @@ function AddEditNetworkModal({
                       >
                         Website ID
                       </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/amazon"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
                     </div>
                     <div className="relative mt-1 flex rounded-md shadow-sm">
                       <input
                         name="websiteID"
                         id={`websiteID-${randomIdx}`}
                         placeholder={
-                          "https://dub.co/help/article/what-is-websiteID"
+                          "https://docs.affeasy.link/quickstart/affiliate-networks/amazon"
                         }
                         value={websiteId ?? ""}
                         required
