@@ -349,7 +349,7 @@ function AddEditNetworkModal({
                         Website ID
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction#3-obtain-your-cj-property-id"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
@@ -384,7 +384,7 @@ function AddEditNetworkModal({
                         API Key
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction#4-create-a-new-peronal-access-token"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
@@ -419,7 +419,7 @@ function AddEditNetworkModal({
                         Account ID
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction#2-obtain-your-cj-cid"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
@@ -457,7 +457,7 @@ function AddEditNetworkModal({
                         Client ID
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/rakuten#5-connect-rakuten-to-affeasy"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
@@ -492,7 +492,7 @@ function AddEditNetworkModal({
                         Client Secret
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/rakuten#5-connect-rakuten-to-affeasy"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
@@ -505,7 +505,7 @@ function AddEditNetworkModal({
                         name="clientSecret"
                         id={`clientSecret-${randomIdx}`}
                         placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
+                          "https://docs.affeasy.link/quickstart/affiliate-networks/rakuten#5-connect-rakuten-to-affeasy"
                         }
                         value={partialClientSecret ?? ""}
                         required
@@ -530,7 +530,7 @@ function AddEditNetworkModal({
                         Account ID
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/rakuten#2-obtain-your-site-id-sid"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"

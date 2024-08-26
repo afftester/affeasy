@@ -1,6 +1,7 @@
 import { DUB_LOGO, formatDate } from "@dub/utils";
 import {
   Body,
+  Button,
   Container,
   Head,
   Heading,
@@ -21,47 +22,83 @@ export default function APIKeyCreated({
   email: string;
   apiKeyName: string;
 }) {
+  const creationDate = formatDate(new Date().toString());
+
   return (
     <Html>
       <Head />
-      <Preview>New API Key Created</Preview>
+      <Preview>
+        New API Key "{apiKeyName}" Created for Your AffEasy Account
+      </Preview>
       <Tailwind>
-        <Body className="mx-auto my-auto bg-white font-sans">
-          <Container className="mx-auto my-10 max-w-[500px] rounded border border-solid border-gray-200 px-10 py-5">
-            <Section className="mt-8">
+        <Body className="bg-gray-50 font-sans">
+          <Container className="mx-auto my-10 max-w-[600px] rounded-lg border border-solid border-gray-200 bg-white p-10 shadow-md">
+            <Section className="mb-8 text-center">
               <Img
                 src={DUB_LOGO}
-                width="40"
-                height="40"
+                width="60"
+                height="60"
                 alt="AffEasy"
-                className="mx-auto my-0"
+                className="mx-auto"
               />
             </Section>
-            <Heading className="mx-0 my-7 p-0 text-center text-xl font-semibold text-black">
+            <Heading className="mb-6 text-center text-2xl font-bold text-gray-800">
               New API Key Created
             </Heading>
-            <Text className="text-sm leading-6 text-black">
-              You created a new API key for your AffEasy account with the name{" "}
-              <strong>"{apiKeyName}"</strong> on{" "}
-              {formatDate(new Date().toString())}.
+            <Text className="mb-4 text-base leading-6 text-gray-700">
+              Hello,
             </Text>
-            <Section className="my-8 text-center">
-              <Link
-                className="rounded-full bg-black px-6 py-3 text-center text-[12px] font-semibold text-white no-underline"
+            <Text className="mb-4 text-base leading-6 text-gray-700">
+              This is to inform you that a new API key has been created for your
+              AffEasy account with the following details:
+            </Text>
+            <Section className="mb-6 rounded-lg bg-gray-100 p-4">
+              <Text className="mb-2 text-sm font-semibold text-gray-700">
+                API Key Name:{" "}
+                <span className="font-bold text-blue-600">{apiKeyName}</span>
+              </Text>
+              <Text className="mb-2 text-sm font-semibold text-gray-700">
+                Creation Date:{" "}
+                <span className="font-bold text-blue-600">{creationDate}</span>
+              </Text>
+            </Section>
+            <Text className="mb-6 text-base leading-6 text-gray-700">
+              For security reasons, we don't display the full API key in this
+              email. You can view and manage your API keys in your account
+              settings.
+            </Text>
+            <Section className="mb-8 text-center">
+              <Button
+                className="rounded-md bg-black px-5 py-5 font-semibold text-white no-underline hover:bg-blue-700"
                 href="https://app.affeasy.link/settings/tokens"
               >
                 View API Keys
-              </Link>
+              </Button>
             </Section>
-            <Text className="text-sm leading-6 text-black">
-              If you did not create this API key, you can{" "}
-              <Link
-                href="https://app.affeasy.link/settings/tokens"
-                className="text-black underline"
-              >
-                <strong>delete this key</strong>
-              </Link>{" "}
-              from your account.
+            <Text className="mb-6 text-base leading-6 text-gray-700">
+              If you did not create this API key, please take immediate action:
+            </Text>
+            <ol className="mb-6 list-decimal pl-6 text-base leading-6 text-gray-700">
+              <li className="mb-2">
+                <Link
+                  href="https://app.affeasy.link/settings/tokens"
+                  className="font-medium text-blue-600 no-underline hover:underline"
+                >
+                  Delete this API key
+                </Link>{" "}
+                from your account.
+              </li>
+              <li className="mb-2">
+                Review your account activity for any suspicious actions.
+              </li>
+              <li>
+                Consider changing your account password and enabling two-factor
+                authentication if you haven't already.
+              </li>
+            </ol>
+            <Text className="mb-8 text-base leading-6 text-gray-700">
+              If you have any questions or concerns, please don't hesitate to
+              contact our support team.
             </Text>
             <Footer email={email} />
           </Container>
