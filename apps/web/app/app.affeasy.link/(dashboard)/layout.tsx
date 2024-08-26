@@ -36,7 +36,7 @@ export default function Layout({ children }: { children: ReactNode }) {
                   Changelog
                 </a>
                 <a
-                  href={`${HOME_DOMAIN}/help`}
+                  href={`https://docs.affeasy.link/introduction`}
                   className="hidden text-sm text-gray-500 transition-colors hover:text-gray-700 sm:block"
                   target="_blank"
                 >
