@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "OpenStatus Docs",
+  "name": "AffEasy Docs",
   "openapi": "https://api.openstatus.dev/v1/openapi",
   "logo": {
     "dark": "/logo/logo-dark.svg",
@@ -74,11 +74,7 @@
       ]
     }
   ],
-  "analytics": {
-    "plausible": {
-      "domain": "docs.openstatus.dev"
-    }
-  },
+
   "footerSocials": {
     "website": "https://affeasy.link",
     "github": "https://github.com/afftester/afftester"
