@@ -156,7 +156,7 @@ export const PLANS: Plan[] = [
       yearly: 14.99,
       ids: [
         "price_1PnoUkBot5SAtbDCzdPwXFOA", // new monthly (prod)
-        "price_1PnoVgBot5SAtbDCRV8mVqId", // new yearly (prod)
+        "price_1PnntoBot5SAtbDCAm4IVZhf", // new yearly (prod)
       ],
     },
     limits: {

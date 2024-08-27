@@ -247,9 +247,9 @@ export const POST = async (req: Request) => {
           workspaceUsers.map((email) =>
             sendEmail({
               email,
-              from: "steven@AffEasy",
+              from: "ritanshu@affeasy.link",
               subject: "Feedback on your AffEasy experience?",
-              text: "Hey!\n\nI noticed you recently cancelled your AffEasy subscription – we're sorry to see you go!\n\nI'd love to hear your feedback on your experience with Dub – what could we have done better?\n\nThanks!\n\nSteven Tey\nFounder, AffEasy",
+              text: "Hey!\n\nI noticed you recently cancelled your AffEasy subscription – we're sorry to see you go!\n\nI'd love to hear your feedback on your experience with Dub – what could we have done better?\n\nThanks!\n\nRitanshu Dokania\nFounder, AffEasy",
             }),
           ),
         ]);
