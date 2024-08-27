@@ -229,7 +229,7 @@ model Domain {
   verified    Boolean   @default(false)
   target      String?
   type        String    @default("redirect")
-  placeholder String    @default("https://affeasy.link/help/article/what-is-dub")
+  placeholder String    @default("https://docs.affeasy.link/quickstart/guide")
   description String?
   projectId   String?
   primary     Boolean   @default(false)

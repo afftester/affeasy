@@ -405,7 +405,7 @@ function AddEditLinkModal({
                     placeholder={
                       domains?.find(({ slug }) => slug === domain)
                         ?.placeholder ||
-                      "https://dub.co/help/article/what-is-dub"
+                      "https://docs.affeasy.link/quickstart/guide"
                     }
                     value={url}
                     autoFocus={!key && !isMobile}

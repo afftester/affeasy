@@ -73,7 +73,7 @@ export const DUB_DOMAINS = [
     publicStats: false,
     target: `https://${process.env.NEXT_PUBLIC_APP_DOMAIN}`,
     type: "redirect",
-    placeholder: "https://dub.co/help/article/what-is-dub",
+    placeholder: "https://docs.affeasy.link/quickstart/guide",
     clicks: 0,
     allowedHostnames: [],
     projectId: DUB_WORKSPACE_ID,
