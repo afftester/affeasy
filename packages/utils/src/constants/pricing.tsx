@@ -155,8 +155,10 @@ export const PLANS: Plan[] = [
       monthly: 19.99,
       yearly: 14.99,
       ids: [
+        "price_1PsYefBot5SAtbDCowyygG7f", // monthly test
         "price_1PnoUkBot5SAtbDCzdPwXFOA", // new monthly (prod)
-        "price_1PnntoBot5SAtbDCAm4IVZhf", // new yearly (prod)
+        "price_1PnntoBot5SAtbDCAm4IVZhf", // new yearly (test)
+        "price_1PnoVgBot5SAtbDCRV8mVqId", // new yearly (prod)
       ],
     },
     limits: {
@@ -200,6 +202,8 @@ export const PLANS: Plan[] = [
     ids: [
       "price_1PnoSSBot5SAtbDCIUHXGZKT", // new monthly (prod)
       "price_1PnoR6Bot5SAtbDCzCAbUkXI", // new yearly (prod)
+      "price_1PsYn3Bot5SAtbDCgPu1XpoY", // business monthly (test)
+      "price_1PsYnnBot5SAtbDCmRdPPFFs", // business yearly (prod)
     ],
   }),
 ];
