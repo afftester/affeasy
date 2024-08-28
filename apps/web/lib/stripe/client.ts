@@ -5,11 +5,12 @@ let stripePromise: Promise<StripeProps | null>;
 
 export const getStripe = () => {
   if (!stripePromise) {
-    stripePromise = loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_LIVE ??
-        process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY ??
-        "",
-    );
+    const isProd = process.env.NODE_ENV === "production";
+    const publishableKey = isProd
+      ? process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY_LIVE
+      : process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY;
+
+    stripePromise = loadStripe(publishableKey ?? "");
   }
 
   return stripePromise;
