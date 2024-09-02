@@ -29,7 +29,7 @@ export default function DomainConfiguration({
               value: txtVerification.value,
             },
           ]}
-          warning="Warning: if you are using this domain for another site, setting this TXT record will transfer domain ownership away from that site and break it. Please exercise caution when setting this record; make sure that the domain that is shown in the TXT verification value is actually the <b><i>domain you want to use on Dub.co</i></b> – <b><i>not your production site</i></b>."
+          warning="Warning: if you are using this domain for another site, setting this TXT record will transfer domain ownership away from that site and break it. Please exercise caution when setting this record; make sure that the domain that is shown in the TXT verification value is actually the <b><i>domain you want to use on AffEasy</i></b> – <b><i>not your production site</i></b>."
         />
       </div>
     );
@@ -69,7 +69,7 @@ export default function DomainConfiguration({
             {
               type: recordType,
               name: recordType === "A" ? "@" : subdomain ?? "www",
-              value: recordType === "A" ? `76.76.21.21` : `cname.dub.co`,
+              value: recordType === "A" ? `76.76.21.21` : `cname.affeasy.link`,
               ttl: "86400",
             },
           ]}
@@ -122,7 +122,7 @@ export default function DomainConfiguration({
           {
             type: recordType,
             name: recordType === "A" ? "@" : subdomain ?? "www",
-            value: recordType === "A" ? `76.76.21.21` : `cname.dub.co`,
+            value: recordType === "A" ? `76.76.21.21` : `cname.affeasy.link`,
             ttl: "86400",
           },
         ]}
