@@ -89,7 +89,9 @@ export function QRCodePicker({
       ...(showLogo && {
         imageSettings: {
           src:
-            logo && plan !== "free" ? logo : "https://dub.co/_static/logo.svg",
+            logo && plan !== "free"
+              ? logo
+              : "https://affeasy.link/mstile-144x144.png",
           height: 256,
           width: 256,
           excavate: true,
@@ -188,7 +190,7 @@ export function QRCodePicker({
               <button
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `https://api.dub.co/qr?url=${linkConstructor({
+                    `https://api.affeasy.link/qr?url=${linkConstructor({
                       key: props.key,
                       domain: props.domain,
                     })}`,
@@ -232,7 +234,7 @@ export function QRCodePicker({
                           src:
                             logo && plan !== "free"
                               ? logo
-                              : "https://dub.co/_static/logo.svg",
+                              : "https://affeasy.link/mstile-144x144.png",
                         },
                       }),
                     }),
