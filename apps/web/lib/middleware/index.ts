@@ -5,7 +5,6 @@ export { default as RootMiddleware } from "./root";
 
 export const HOME_HOSTNAMES = new Set([
   "affeasy.link",
-  "offrs.link",
   "home.localhost:8888",
   "localhost",
 ]);

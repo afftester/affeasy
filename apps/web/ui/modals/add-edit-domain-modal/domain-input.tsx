@@ -126,7 +126,7 @@ export default function DomainInput({
             Domain is already in use.{" "}
             <a
               className="underline"
-              href="mailto:support@dub.co?subject=My Domain Is Already In Use"
+              href="mailto:support@affeasy.link?subject=My Domain Is Already In Use"
             >
               Contact us
             </a>{" "}
@@ -173,7 +173,7 @@ export default function DomainInput({
       )}
       {(domain.includes("/") || domainType === "website") && (
         <p className="mt-2 text-sm text-gray-500">
-          Want to set up Dub.co to handle redirects on a subpath instead?{" "}
+          Want to set up AffEasy to handle redirects on a subpath instead?{" "}
           <a
             href={`${HOME_DOMAIN}/help/article/how-to-use-dub-with-subpath`}
             target="_blank"
