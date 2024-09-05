@@ -1,0 +1,134 @@
+---
+title: "How to add a custom domain"
+"og:title": "How to add a custom domain to AffEasy"
+description: "Learn how to add a custom domain to your AffEasy workspace for free - no credit card required."
+icon: globe
+---
+
+Whenever you're creating a short link for marketing purposes, it is important to use a custom domain for better brand recognition and click-through rates.
+At AffEasy, we have one of the most generous custom domain limits in the industry – you can add up to 3 custom domains to your workspace for free, and even more with our paid plans.
+
+- [**Free plan**](https://affeasy.link/pricing): 3 domains
+- [**Pro plan**](https://affeasy.link/pricing): 10 domains
+- [**Business plan**](https://affeasy.link/pricing): 40 domains
+
+In this guide, we will learn how to add a custom domain to your AffEasy workspace.
+
+## Prerequisites
+
+<AccordionGroup>
+  <Accordion title="An AffEasy account">
+    If you don't have one, you can create one for free
+    [here](https://app.affeasy.link).
+  </Accordion>
+  <Accordion title="A domain">
+    If you don't have one, you can choose one and purchase it from domain
+    registrars like [Namecheap](https://www.namecheap.com/),
+    [GoDaddy](https://www.godaddy.com/),
+    [Cloudflare](https://www.cloudflare.com/products/registrar/).
+  </Accordion>
+</AccordionGroup>
+
+## Step 1: Add a Custom Domain
+
+Once you have a custom domain, you can add it to your AffEasy project by following these steps:
+
+1. Navigate to your workspace's Domains page – you can do that by clicking on the Domains link in the menu bar at the top of your workspace dashboard.
+2. Click on the Add Domain button.
+
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="/images/domains/domain-dashboard.png"
+    alt="Link Builder"
+    width="1200"
+    height="630"
+  />
+</Frame>
+
+3. Enter the domain you want to use and click Add domain.
+
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="/images/domains/add-domain.png"
+    alt="Link Builder"
+    width="1200"
+    height="630"
+  />
+</Frame>
+
+## Step 2: Configure Your Domain
+
+After adding your domain, you'll be presented with a DNS record that you'll need to add to your domain's DNS settings.
+
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="/images/domains/domain-config.png"
+    alt="Link Builder"
+    width="1200"
+    height="630"
+  />
+</Frame>
+
+**Step 2a: Adding an Apex Domain**\
+If you're adding an apex domain (e.g. example.com), you'll need to add an A record with the following values:
+
+- **Name**: @ (or leave it blank)
+- **Value**: 76.76.21.21
+- **TTL**: 86400 (or the highest value possible)
+
+**Step 2b: Adding a Subdomain**\
+If you're adding a subdomain (e.g. go.example.com), you'll need to add a CNAME record with the following values:
+
+- **Name**: go (or whatever subdomain you want to use)
+- **Value**: cname.affeasy.link
+- **TTL**: 86400 (or the highest value possible)
+
+Note that we do not support using www. as a subdomain, since the www. subdomain will always redirect to the apex domain instead.
+
+We recommend using the following variations for your subdomains:
+
+- go.example.com
+- try.example.com
+- links.example.com
+- l.example.com
+
+<Warning>
+  If you're using Cloudflare as your DNS provider, you might need to configure
+  some extra steps for it to work properly. Please refer to our [guide on using
+  Cloudflare domains](/domains/cloudflare-domains) with AffEasy for more
+  information.
+</Warning>
+
+## Step 3 (Optional): Verify Domain Ownership
+
+This step is only applicable if you are adding a domain that is currently being used on another platform that requires verification.
+To verify that you own the domain, you'll need to add a TXT record with the following
+values:
+
+- Name: \_vercel
+- Value: vc-domain-verify=go.yourdomain.com... (the exact value will be provided to you on the AffEasy dashboard)
+
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="/images/domains/domain-verify.png"
+    alt="Link Builder"
+    width="1200"
+    height="630"
+  />
+</Frame>
+
+<Warning>
+  If you are using this domain for another site, setting this TXT record may
+  affect that site. Please exercise caution when setting this record. For
+  example: Make sure that the domain shown in the TXT verification value (e.g.
+  go.yourdomain.com) is actually the domain you want to use as a custom domain
+  on AffEasy – and not your production site.
+</Warning>
+
+## How Long Do I Have to Wait for My Domain to Work?
+
+Domain configuration can take anywhere between 1 to 24 hours to complete. If your domain still doesn't work after 24 hours, please [send us an email](mailto:support@affeasy.link) and we'll be happy to help you out.

@@ -497,7 +497,7 @@ export const withSession =
           throw new DubApiError({
             code: "bad_request",
             message:
-              "Misconfigured authorization header. Did you forget to add 'Bearer '? Learn more: https://d.to/auth",
+              "Misconfigured authorization header. Did you forget to add 'Bearer '? Learn more: https://docs.affeasy.link/api-reference/introduction#authentication",
           });
         }
         const apiKey = authorizationHeader.replace("Bearer ", "");

@@ -1,0 +1,80 @@
+---
+title: "Using Cloudflare Domains with AffEasy"
+"og:title": "How to Use Cloudflare Domains with AffEasy"
+description: "Learn how to properly configure Cloudflare domains for your AffEasy workspace"
+icon: cloud
+---
+
+## Prerequisites
+
+<AccordionGroup>
+  <Accordion title="An AffEasy account">
+    If you haven't already, [create an account](https://app.affeasy.link) to get
+    started.
+  </Accordion>
+  <Accordion title="A custom domain added to AffEasy">
+    If you haven't already, you'll need to [add your custom
+    domain](/domains/add-custom-domain) to your AffEasy workspace.
+  </Accordion>
+</AccordionGroup>
+
+If you're using a domain on Cloudflare for your AffEasy workspace, you might need to configure a few extra steps to ensure that your domain works properly.
+
+## Using Cloudflare's DNS Only (Recommended)
+
+We recommend using Cloudflare's DNS only mode for your custom domain. This ensures that requests/clicks to your short links will always reach AffEasy directly instead of being served through Cloudflare – which can lead to **inaccurate analytics data**.
+
+Configuring Cloudflare as DNS only is also better for redirect speeds, since you avoid having your users' requests get proxied through Cloudflare, which adds additional latency.
+
+To set this up, follow these steps:
+
+1. Go to your Cloudflare dashboard and select your domain.
+2. Click on the **DNS** tab on the sidebar menu.
+3. Under **Records**, find the record pointing to AffEasy and click on the **Edit** button.
+4. Change the **Proxy status** to **DNS only** (the cloud icon should be grey).
+5. Click on the **Save** button.
+
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="/images/domains/cloudflare-dns.png"
+    alt="Set your domain's Proxy status to DNS only on Cloudflare"
+    width="1200"
+    height="630"
+  />
+</Frame>
+
+This will ensure that the traffic to your domain is not proxied through Cloudflare and is sent directly to AffEasy.
+
+## Using Cloudflare's Proxy
+
+<Warning>
+  Using Cloudflare's Proxy can potentially **cause inaccuracies in analytics
+  data**. This is because using a proxy will send all traffic through the proxy
+  first, then to AffEasy. This will result in incorrect geolocation data being
+  presented and the public IP address of your proxy being sent.
+</Warning>
+
+If you still want to use Cloudflare's proxy for your custom domain, you'll need to make sure that your SSL/TLS encryption mode is set to "Full" on Cloudflare.
+
+Follow these steps:
+
+1. Go to your Cloudflare dashboard and select your domain.
+2. Click on the **SSL/TLS** tab on the sidebar menu.
+3. Under **Overview**, select the **Full** option.
+
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="/images/domains/cloudflare-full.png"
+    alt="SSL/TLS encryption mode set to Full on Cloudflare"
+    width="1200"
+    height="630"
+  />
+</Frame>
+
+## Conclusion
+
+To ensure the most accurate analytics and fastest redirect speeds, we recommend using **Cloudflare's DNS only mode** instead of their proxy. This configuration allows AffEasy to function optimally with your Cloudflare-managed domain.
+
+If you encounter any issues or have questions about using Cloudflare domains with AffEasy, please [contact our support team](mailto:support@affeasy.link) for assistance.

@@ -106,7 +106,7 @@ export default function WelcomeEmail({
             >
               3. Learn more about{" "}
               <Link
-                href="https://affeasy.com/api"
+                href="https://docs.affeasy.link/how-it-works"
                 className="font-medium text-blue-600 no-underline hover:underline"
               >
                 how AffEasy works

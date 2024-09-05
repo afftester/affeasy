@@ -45,7 +45,12 @@
     "name": "Get Started",
     "url": "https://app.affeasy.link"
   },
-  "tabs": [],
+  "tabs": [
+    {
+      "name": "API Reference",
+      "url": "api-reference"
+    }
+  ],
   "anchors": [
     {
       "name": "GitHub",
@@ -72,6 +77,15 @@
           ]
         }
       ]
+    },
+    {
+      "group": "Custom Domains",
+      "pages": ["domains/add-custom-domain", "domains/cloudflare-domains"]
+    },
+    {
+      "group": "API Documentation",
+      "icon": "code",
+      "pages": ["api-reference/introduction"]
     }
   ],
 

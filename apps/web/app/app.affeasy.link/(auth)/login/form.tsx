@@ -110,7 +110,7 @@ export default function LoginForm() {
               name="email"
               autoFocus={!isMobile}
               type="email"
-              placeholder="panic@thedis.co"
+              placeholder="easy@affiliate.life"
               autoComplete="email"
               required
               value={email}
@@ -182,7 +182,7 @@ export default function LoginForm() {
             />
           </div>
         )}
-        <Button
+        {/* <Button
           text="Continue with SAML SSO"
           variant="secondary"
           {...(!showSSOOption && {
@@ -195,7 +195,7 @@ export default function LoginForm() {
           })}
           loading={clickedSSO}
           disabled={clickedGoogle || clickedEmail}
-        />
+        /> */}
       </form>
       {noSuchAccount ? (
         <p className="text-center text-sm text-red-500">
