@@ -76,6 +76,10 @@
       "pages": ["domains/add-custom-domain", "domains/cloudflare-domains"]
     },
     {
+      "group": "Workspace",
+      "pages": ["workspace/what-is-workspace", "workspace/get-workspace-id"]
+    },
+    {
       "group": "API Documentation",
       "icon": "code",
       "pages": ["api-reference/introduction"]

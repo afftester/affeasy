@@ -132,7 +132,7 @@ export const withAuth = (
     if (authorizationHeader) {
       if (!authorizationHeader.includes("Bearer ")) {
         return new Response(
-          "Misconfigured authorization header. Did you forget to add 'Bearer '? Learn more: https://d.to/auth ",
+          "Misconfigured authorization header. Did you forget to add 'Bearer '? Learn more: https://docs.affeasy.link/api-reference/introduction#authentication ",
           {
             status: 400,
           },
@@ -171,7 +171,7 @@ export const withAuth = (
           throw new DubApiError({
             code: "not_found",
             message:
-              "Workspace id not found. Did you forget to include a `workspaceId` query parameter? Learn more: https://d.to/id",
+              "Workspace id not found. Did you forget to include a `workspaceId` query parameter? Learn more: https://docs.affeasy.link/workspace/get-workspace-id",
           });
         }
       }
