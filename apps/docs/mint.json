@@ -7,7 +7,7 @@
     "light": "/logo/logo-light.svg"
   },
   "api": {
-    "baseUrl": "https://api.openstatus.dev/v1",
+    "baseUrl": "https://api.affeasy.link",
     "auth": {
       "method": "key",
       "name": "x-openstatus-key"
