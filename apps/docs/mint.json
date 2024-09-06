@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/schema.json",
   "name": "AffEasy Docs",
-  "openapi": "https://api.openstatus.dev/v1/openapi",
+  "openapi": "https://api.affeasy.link",
   "logo": {
     "dark": "/logo/logo-dark.svg",
     "light": "/logo/logo-light.svg"
