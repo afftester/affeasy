@@ -77,7 +77,7 @@
     },
     {
       "group": "Workspace",
-      "pages": ["workspace/what-is-workspace", "workspace/get-workspace-id"]
+      "pages": ["workspace/what-is-a-workspace", "workspace/get-workspace-id"]
     },
     {
       "group": "API Documentation",

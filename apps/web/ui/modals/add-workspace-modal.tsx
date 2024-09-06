@@ -8,11 +8,7 @@ import {
   useMediaQuery,
   useRouterStuff,
 } from "@dub/ui";
-import {
-  FADE_IN_ANIMATION_SETTINGS,
-  HOME_DOMAIN,
-  generateDomainFromName,
-} from "@dub/utils";
+import { FADE_IN_ANIMATION_SETTINGS, generateDomainFromName } from "@dub/utils";
 import slugify from "@sindresorhus/slugify";
 import va from "@vercel/analytics";
 import { motion } from "framer-motion";
@@ -112,7 +108,7 @@ function AddWorkspaceModalHelper({
         <Logo />
         <h3 className="text-lg font-medium">Create a new workspace</h3>
         <a
-          href={`${HOME_DOMAIN}/help/article/what-is-a-workspace`}
+          href={"https://docs.affeasy.link/workspace/what-is-a-workspace"}
           target="_blank"
           rel="noopener noreferrer"
           className="-translate-y-2 text-center text-xs text-gray-500 underline underline-offset-4 hover:text-gray-800"
