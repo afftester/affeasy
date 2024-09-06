@@ -72,6 +72,19 @@
       ]
     },
     {
+      "group": "Plans",
+      "pages": ["plans/pro-plan", "plans/business-plan"]
+    },
+    {
+      "group": "Features",
+      "pages": [
+        "features/how-to-redirect-root-domain",
+        "features/custom-qr-codes",
+        "features/custom-social-media-cards",
+        "features/how-to-use-tags"
+      ]
+    },
+    {
       "group": "Custom Domains",
       "pages": ["domains/add-custom-domain", "domains/cloudflare-domains"]
     },

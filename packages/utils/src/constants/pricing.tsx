@@ -56,7 +56,7 @@ const BUSINESS_PLAN_MODIFIER = ({
 }): Plan => ({
   name,
   tagline: "For larger teams with increased usage",
-  link: "https://affeasy.link/help/article/business-plan",
+  link: "https://docs.affeasy.link/plans/business-plan",
   price: {
     monthly,
     yearly,
@@ -150,7 +150,7 @@ export const PLANS: Plan[] = [
   {
     name: "Pro",
     tagline: "For startups & small businesses",
-    link: "https://affeasy.link/help/article/pro-plan",
+    link: "https://docs.affeasy.link/plans/pro-plan",
     price: {
       monthly: 19.99,
       yearly: 14.99,

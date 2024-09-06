@@ -1,0 +1,108 @@
+---
+title: "Custom Social Media Cards"
+"og:title": "Setting Custom Social Media Cards on AffEasy"
+description: "Learn how to set custom social media cards for your AffEasy links to have full control over how your links look when shared on social media."
+icon: share
+---
+
+AffEasy is the only link management tool that lets you customize the social media cards for your links, giving you full control over how your links appear when shared on social media platforms.
+
+<Note>This feature is only available for **Pro plans and above**.</Note>
+
+## Why set custom social media cards?
+
+When running marketing campaigns, it's crucial to maintain a consistent brand voice across your links. However, this isn't always possible, especially when collaborating with external partners.
+
+For example, if your company was recently featured in a major publication, the default link preview might use a generic image that doesn't accurately reflect your brand.
+
+With AffEasy, you can set a custom-designed social media card for your link, which **significantly improves the click-through rate and performance of your short link**.
+
+## How to set a custom social media card
+
+To use this feature, follow these steps:
+
+1. Open the **link builder** in your AffEasy dashboard.
+2. Toggle the "Custom Social Media Cards" switch. This will reveal the following fields:
+
+   a. **Image**: Upload an image from your computer or drag and drop an image into the field (recommended size: 1200 x 630 pixels, max 1.5MB).
+
+   b. **Title**: Enter the title for the social media card (max 120 characters).
+
+   c. **Description**: Provide a description for the social media card (max 240 characters).
+
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="/images/social-cards/custom-social-card-builder.png"
+    alt="Create custom social media cards for your links"
+    width="600"
+    height="400"
+  />
+</Frame>
+
+## Generating custom social media cards using AI
+
+AffEasy also offers an AI-powered solution to generate custom social media cards. Simply click on the `✨` button in the link builder.
+
+Behind the scenes, **AffEasy AI** leverages advanced Large Language Models (LLMs) to analyze the content of the link and generate an SEO-friendly title and description that can increase click-through rates.
+
+## How do custom social media cards look?
+
+When you share an AffEasy link with a custom social media card, it will display the title, description, and image you set across all social media platforms.
+
+Here's an example of how a custom social media card might appear when shared on Twitter:
+
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="/images/social-cards/example-tweet.png"
+    alt="Example tweet with custom social media card"
+    width="500"
+    height="300"
+  />
+</Frame>
+
+By using AffEasy's custom social media cards feature, you can create more engaging and informative posts that effectively communicate the value of your content to a wider audience.
+
+## Bonus: Add a custom video preview
+
+AffEasy also supports the `og:video` **OpenGraph** tag, allowing you to set a custom video preview for your links.
+
+To set a custom video preview, you can pass a link to your video via the `video` attribute when **creating a link** using our API:
+
+```typescript
+import { AffEasy } from "affeasy";
+
+const affeasy = new AffEasy();
+
+await affeasy.links.create({
+  url: "https://example.com",
+  proxy: true, // proxy must be enabled for custom social media cards to work
+  image: "https://example.com/image.png", // it's recommended to pass a fallback image for platforms that don't support og:video
+  video: "https://example.com/video.mp4",
+});
+```
+
+<Note>
+  We currently do not support uploading custom video previews directly via the
+  dashboard, but please [let us know](mailto:support@affeasy.link) if that's a
+  feature you'd like to see.
+</Note>
+
+Here's a demo of how custom video previews work – let's embed a link (**https://aff.easy/og-video**) that has a custom video preview enabled in Notion:
+
+<Frame>
+  <img
+    className="rounded-lg border border-gray-100"
+    src="/images/social-cards/video-preview-demo.gif"
+    alt="Demo of custom video preview in Notion"
+    width="600"
+    height="400"
+  />
+</Frame>
+
+As you can see, the link unfurls into a video preview when embedded in Notion. However, if you click on the link, it will redirect you to the destination URL.
+
+## Need Help?
+
+If you have any questions about setting up custom social media cards or using any of our advanced features, please don't hesitate to [contact our support team](mailto:support@affeasy.link). We're here to help!
