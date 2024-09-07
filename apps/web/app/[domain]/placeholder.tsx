@@ -1,3 +1,5 @@
+"use client";
+
 import { InlineSnippet, Logo } from "@dub/ui";
 import { STAGGER_CHILD_VARIANTS } from "@dub/utils";
 import va from "@vercel/analytics";
