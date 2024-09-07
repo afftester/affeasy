@@ -33,10 +33,10 @@ export async function generateMetadata({
       description,
       type: "article",
       publishedTime,
-      url: `https://www.openstatus.dev/blog/${slug}`,
+      url: `https://www.affeasy.link/blog/${slug}`,
       images: [
         {
-          url: `https://openstatus.dev/api/og/post?title=${title}&description=${description}&image=${image}`,
+          url: `https://www.affeasy.link/api/og/post?title=${title}&description=${description}&image=${image}`,
         },
       ],
     },
@@ -44,7 +44,7 @@ export async function generateMetadata({
       title,
       description,
       images: [
-        `https://openstatus.dev/api/og/post?title=${title}&description=${description}&image=${image}`,
+        `https://www.affeasy.link/api/og/post?title=${title}&description=${description}&image=${image}`,
       ],
     },
   };
