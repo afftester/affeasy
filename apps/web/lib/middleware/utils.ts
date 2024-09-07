@@ -20,7 +20,7 @@ export const parse = (req: NextRequest) => {
 
   // Here, we are using decodeURIComponent to handle foreign languages like Hebrew
   const key = decodeURIComponent(path.split("/")[1]); // key is the first part of the path (e.g. affeasy.link/stats/github -> stats)
-  const fullKey = decodeURIComponent(path.slice(1)); // fullKey is the full path without the first slash (to account for multi-level subpaths, e.g. d.to/github/repo -> github/repo)
+  const fullKey = decodeURIComponent(path.slice(1)); // fullKey is the full path without the first slash (to account for multi-level subpaths, e.g. offrs.us/github/repo -> github/repo)
 
   return { domain, path, fullPath, key, fullKey };
 };

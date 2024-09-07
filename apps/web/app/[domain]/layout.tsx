@@ -1,13 +1,11 @@
-import { Footer, Nav, NavMobile, ProductHunt } from "@dub/ui";
+import { ReactNode } from "react";
+import { Background } from "../marketing/marketing-components/background";
 
-export default function CustomDomainLayout(props) {
+export default function AuthLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-screen flex-col justify-between bg-gray-50">
-      <NavMobile />
-      <Nav />
-      <ProductHunt />
-      {props.children}
-      <Footer />
-    </div>
+    <>
+      <Background />
+      {children}
+    </>
   );
 }
