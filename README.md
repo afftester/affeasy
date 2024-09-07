@@ -1,18 +1,14 @@
-<a href="https://d.to/ph">
-  <img alt="Dub.co Product Hunt Launch" src="https://github.com/dubinc/dub/assets/28986134/98f4823c-24c9-4a77-a014-1efcaac78054">
-</a>
-
-<a href="https://dub.co">
-  <img alt="Dub.co is the open-source link management infrastructure for modern marketing teams." src="https://github.com/dubinc/dub/assets/28986134/3815d859-afaa-48f9-a9b3-c09964e4d404">
+<a href="https://affeasy.link">
+  <img alt="AffEasy is the #1 affliate marketing platform for modern marketing teams." src="https://github.com/dubinc/dub/assets/28986134/3815d859-afaa-48f9-a9b3-c09964e4d404">
 </a>
 
 
-<h3 align="center">Dub.co</h3>
+<h3 align="center">AffEasy</h3>
 
 <p align="center">
-    The open-source Bitly successor.
+    The #1 affliate marketing platform for modern marketing teams.
     <br />
-    <a href="https://dub.co"><strong>Learn more »</strong></a>
+    <a href="https://affeasy.link"><strong>Learn more »</strong></a>
     <br />
     <br />
     <a href="#introduction"><strong>Introduction</strong></a> ·
