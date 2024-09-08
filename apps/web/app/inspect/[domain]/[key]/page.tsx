@@ -1,11 +1,5 @@
 import { getLinkViaEdge } from "@/lib/planetscale";
-import {
-  Background,
-  Footer,
-  LinkPreview,
-  LinkPreviewPlaceholder,
-  Nav,
-} from "@dub/ui";
+import { Footer, LinkPreview, LinkPreviewPlaceholder, Nav } from "@dub/ui";
 import {
   GOOGLE_FAVICON_URL,
   HOME_DOMAIN,
@@ -15,6 +9,7 @@ import {
 import { unescape } from "html-escaper";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
+import { Background } from "../../../marketing/marketing-components/background";
 import LinkInspectorCard from "./card";
 
 export const runtime = "edge";

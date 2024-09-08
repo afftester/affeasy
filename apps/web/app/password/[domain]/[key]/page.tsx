@@ -1,7 +1,8 @@
 import prisma from "@/lib/prisma";
-import { Background, BlurImage, Logo } from "@dub/ui";
+import { BlurImage, Logo } from "@dub/ui";
 import { constructMetadata, isDubDomain } from "@dub/utils";
 import { notFound, redirect } from "next/navigation";
+import { Background } from "../../../marketing/marketing-components/background";
 import PasswordForm from "./form";
 
 const title = "Password Required";
