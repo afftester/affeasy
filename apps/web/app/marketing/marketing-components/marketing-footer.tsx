@@ -1,4 +1,3 @@
-import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 
 import { Logo } from "@dub/ui";
@@ -20,7 +19,7 @@ export function MarketingFooter({ className }: Props) {
         <div className="grid grid-cols-2 gap-6 md:grid-cols-5">
           <div className="col-span-2 flex flex-col gap-3">
             <div>
-              <Link href="/">
+              <Link href="https://affeasy.link/">
                 <Logo className="h-11 w-11" />
               </Link>
               <BrandName />
@@ -28,20 +27,25 @@ export function MarketingFooter({ className }: Props) {
                 Affiliate Marketing Platform for Modern Marketers
               </p>
             </div>
-            {/* <StatusWidgetContainer slug="status" /> */}
           </div>
           <div className="order-2 flex flex-col gap-3 text-sm">
             <p className="text-foreground font-semibold">Resources</p>
-            <FooterLink href="/blog" label="Blog" />
-            <FooterLink href="/pricing" label="Pricing" />
+            <FooterLink href="https://affeasy.link/blog" label="Blog" />
+            <FooterLink href="https://affeasy.link/pricing" label="Pricing" />
             <FooterLink href="https://docs.affeasy.link" label="Help" />
           </div>
           <div className="order-3 flex flex-col gap-3 text-sm">
             <p className="text-foreground font-semibold">Company</p>
-            <FooterLink href="/about" label="About" />
-            <FooterLink href="/changelog" label="Changelog" />
-            <FooterLink href="/legal/terms" label="Terms" />
-            <FooterLink href="/legal/privacy" label="Privacy" />
+            <FooterLink href="https://affeasy.link/about" label="About" />
+            <FooterLink
+              href="https://affeasy.link/changelog"
+              label="Changelog"
+            />
+            <FooterLink href="https://affeasy.link/legal/terms" label="Terms" />
+            <FooterLink
+              href="https://affeasy.link/legal/privacy"
+              label="Privacy"
+            />
           </div>
         </div>
         <div className="flex items-center justify-between gap-3">
@@ -64,25 +68,12 @@ interface FooterLinkProps {
 }
 
 function FooterLink({ href, label, external = false }: FooterLinkProps) {
-  const isExternal = external || href.startsWith("http");
-
-  const externalProps = isExternal
-    ? {
-        target: "_blank",
-        rel: "noreferrer",
-      }
-    : {};
-
   return (
     <Link
       className="text-muted-foreground hover:text-foreground inline-flex items-center underline underline-offset-4 hover:no-underline"
       href={href}
-      {...externalProps}
     >
       {label}
-      {isExternal ? (
-        <ArrowUpRight className="ml-1 h-4 w-4 flex-shrink-0" />
-      ) : null}
     </Link>
   );
 }

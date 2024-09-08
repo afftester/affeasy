@@ -23,7 +23,7 @@ export function MarketingHeader({ className }: Props) {
       className={cn("grid w-full grid-cols-2 gap-2 md:grid-cols-5", className)}
     >
       <div className="flex items-center md:col-span-1 ">
-        <Link href="/">
+        <Link href="https://affeasy.link/">
           <Logo className="h-11 w-11" />
         </Link>
       </div>

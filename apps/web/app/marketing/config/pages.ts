@@ -195,7 +195,7 @@ export const pagesConfig = [
 
 export const marketingPagesConfig = [
   {
-    href: "/blog",
+    href: "https://affeasy.link/blog",
     title: "Blog",
     description: "All the latest articles and news from AffEasy.",
     segment: "blog",
@@ -203,14 +203,14 @@ export const marketingPagesConfig = [
   },
 
   {
-    href: "/changelog",
+    href: "https://affeasy.link/changelog",
     title: "Changelog",
     description: "All the latest features, fixes and work in AffEasy.",
     segment: "changelog",
     icon: "newspaper",
   },
   {
-    href: "/pricing",
+    href: "https://affeasy.link/pricing",
     title: "Pricing",
     description: "The pricing for AffEasy.",
     segment: "pricing",
