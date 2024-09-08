@@ -23,7 +23,6 @@ export * from "./hooks";
 export * from "./icons";
 
 // layout
-export * from "./background";
 export * from "./footer";
 export * from "./max-width-wrapper";
 export * from "./nav";

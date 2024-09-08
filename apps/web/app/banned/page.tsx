@@ -1,6 +1,8 @@
-import { Background, Footer, Nav } from "@dub/ui";
+import { Footer, Nav } from "@dub/ui";
 import { constructMetadata } from "@dub/utils";
 import { ShieldBan } from "lucide-react";
+
+import { Background } from "../marketing/marketing-components/background";
 
 export const runtime = "edge";
 

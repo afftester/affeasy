@@ -1,17 +1,12 @@
 "use client";
 
 import { Logo } from "@dub/ui";
-import { useParams, useRouter } from "next/navigation";
-
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { MarketingLayout } from "../marketing/marketing-components/marketing-layout";
 
 export default function Page() {
   const { domain } = useParams() as { domain: string };
-  const router = useRouter();
-
-  const handleLearnMore = () => {
-    router.push("https://www.affeasy.link");
-  };
 
   return (
     <MarketingLayout>
@@ -27,12 +22,11 @@ export default function Page() {
         <div>
           The #1 affiliate marketing platform for modern marketing teams.
         </div>
-        <button
-          className="rounded-full bg-gray-900 px-6 py-2 text-white"
-          onClick={handleLearnMore}
-        >
-          Learn More
-        </button>
+        <Link href="https://www.affeasy.link">
+          <button className="rounded-full bg-gray-900 px-6 py-2 text-white">
+            Learn More
+          </button>
+        </Link>
       </div>
     </MarketingLayout>
   );

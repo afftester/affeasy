@@ -1,4 +1,5 @@
-import { Background, LoadingSpinner } from "@dub/ui";
+import { LoadingSpinner } from "@dub/ui";
+import { Background } from "../../../marketing/marketing-components/background";
 
 export default function Loading() {
   return (

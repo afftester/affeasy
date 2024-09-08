@@ -1,6 +1,7 @@
-import { Background, Footer, Nav } from "@dub/ui";
 import { constructMetadata } from "@dub/utils";
 import { TimerOff } from "lucide-react";
+import Link from "next/link";
+import { MarketingLayout } from "../marketing/marketing-components/marketing-layout";
 
 export const runtime = "edge";
 
@@ -13,10 +14,9 @@ export const metadata = constructMetadata({
 
 export default async function ExpiredPage() {
   return (
-    <main className="flex min-h-screen flex-col justify-between">
-      <Nav />
-      <div className="z-10 mx-2 my-10 flex max-w-md flex-col items-center space-y-5 px-2.5 text-center sm:mx-auto sm:max-w-lg sm:px-0 lg:mb-16">
-        <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full border border-gray-300 bg-white/30">
+    <MarketingLayout>
+      <div className="mb-10 flex w-full flex-col items-center justify-center space-y-8 text-center">
+        <div className="text-8xl">
           <TimerOff className="h-6 w-6 text-gray-400" />
         </div>
         <h1 className="font-display text-5xl font-bold">Expired Link</h1>
@@ -24,15 +24,12 @@ export default async function ExpiredPage() {
           This link has expired. Please contact the owner of this link to get a
           new one.
         </p>
-        <a
-          href="https://affeasy.link"
-          className="rounded-full bg-gray-800 px-10 py-2 font-medium text-white transition-colors hover:bg-black"
-        >
-          Create Your Free Branded Link
-        </a>
+        <Link href="https://www.affeasy.link">
+          <button className="rounded-full bg-gray-900 px-6 py-2 text-white">
+            Learn More
+          </button>
+        </Link>
       </div>
-      <Footer />
-      <Background />
-    </main>
+    </MarketingLayout>
   );
 }
