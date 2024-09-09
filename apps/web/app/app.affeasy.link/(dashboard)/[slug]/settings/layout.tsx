@@ -19,10 +19,6 @@ export default function WorkspaceSettingsLayout({
       name: "People",
       segment: "people",
     },
-    {
-      name: "Security",
-      segment: "security",
-    },
   ];
 
   return <SettingsLayout tabs={tabs}>{children}</SettingsLayout>;

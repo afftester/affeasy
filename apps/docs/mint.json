@@ -86,9 +86,9 @@
         "features/utm-builder",
         "features/link-comments",
         "features/device-targeting",
-        "features/expiration-date",
+        "features/link-expiration",
         "features/link-cloaking",
-        "features/password-protection",
+        "features/password-protected-links",
         "features/search-indexing"
       ]
     },

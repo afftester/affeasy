@@ -52,7 +52,7 @@ export default function ExpirationSection({
               <SimpleTooltipContent
                 title="Set an expiration date for your links – after which it won't be accessible."
                 cta="Learn more."
-                href={`${HOME_DOMAIN}/help/article/link-expiration`}
+                href={`https://docs.affeasy.link/features/link-expiration`}
               />
             }
           />
