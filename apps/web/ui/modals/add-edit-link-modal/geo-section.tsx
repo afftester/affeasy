@@ -58,7 +58,7 @@ export default function GeoSection({
               <SimpleTooltipContent
                 title="Redirect your users to different links based on their location."
                 cta="Learn more about geo targeting."
-                href={`${HOME_DOMAIN}/help/article/geo-targeting`}
+                href={`https://docs.affeasy.link/features/geo-targeting`}
               />
             }
           />

@@ -13,7 +13,7 @@ import {
   useMediaQuery,
   useRouterStuff,
 } from "@dub/ui";
-import { HOME_DOMAIN, capitalize, cn } from "@dub/utils";
+import { capitalize, cn } from "@dub/utils";
 import va from "@vercel/analytics";
 import {
   Dispatch,
@@ -88,7 +88,7 @@ function AddEditTagModal({
           <p className="text-sm text-gray-500">
             Use tags to organize your links.{" "}
             <a
-              href={`${HOME_DOMAIN}/help/article/how-to-use-tags#what-is-a-tag`}
+              href={`https://docs.affeasy.link/features/how-to-use-tags#what-is-a-tag`}
               target="_blank"
               rel="noopener noreferrer"
               className="underline underline-offset-4 hover:text-gray-800"

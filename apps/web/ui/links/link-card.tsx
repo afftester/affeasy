@@ -23,7 +23,6 @@ import {
 } from "@dub/ui";
 import { LinkifyTooltipContent } from "@dub/ui/src/tooltip";
 import {
-  HOME_DOMAIN,
   cn,
   fetcher,
   getApexDomain,
@@ -444,7 +443,7 @@ export default function LinkCard({
                     <SimpleTooltipContent
                       title="This link is cloaked. Your users will only see the short link in the browser address bar."
                       cta="Learn more."
-                      href={`${HOME_DOMAIN}/help/article/link-cloaking`}
+                      href={`https://docs.affeasy.link/features/link-cloaking`}
                     />
                   }
                 >
@@ -457,7 +456,7 @@ export default function LinkCard({
                     <SimpleTooltipContent
                       title="This link is password-protected."
                       cta="Learn more."
-                      href={`${HOME_DOMAIN}/help/article/password-protected-links`}
+                      href={`https://docs.affeasy.link/features/password-protected-links`}
                     />
                   }
                 >

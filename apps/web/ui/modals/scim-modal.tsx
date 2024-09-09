@@ -113,11 +113,7 @@ function SCIMModal({
                   <SimpleTooltipContent
                     title="Your directory provider is the IDP you use to manage your users."
                     cta={selectedProvider ? "Read the guide." : "Learn more."}
-                    href={`${HOME_DOMAIN}/help/${
-                      currentProvider
-                        ? `article/${currentProvider.saml}-scim`
-                        : "category/saml-sso"
-                    }`}
+                    href={`https://docs.affeasy.link/providers/scim`}
                   />
                 }
               />

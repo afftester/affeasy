@@ -45,7 +45,7 @@ export default function RewriteSection({
               <SimpleTooltipContent
                 title="Mask your destination URL so your users only see the short link in the browser address bar."
                 cta="Learn more."
-                href={`${HOME_DOMAIN}/help/article/link-cloaking`}
+                href={`https://docs.affeasy.link/features/link-cloaking`}
               />
             }
           />

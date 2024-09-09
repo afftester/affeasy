@@ -87,7 +87,7 @@ export default function OGSection({
               <SimpleTooltipContent
                 title="Customize how your links look when shared on social media."
                 cta="Learn more."
-                href={`${HOME_DOMAIN}/help/article/custom-social-media-cards`}
+                href={`https://docs.affeasy.link/features/custom-social-media-cards`}
               />
             }
           />

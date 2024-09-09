@@ -93,7 +93,7 @@ const BUSINESS_PLAN_MODIFIER = ({
       footnote: {
         title: "Organize your links with tags.",
         cta: "Learn more.",
-        href: "https://affeasy.link/help/article/how-to-use-tags",
+        href: "https://docs.affeasy.link/features/how-to-use-tags",
       },
     },
     { text: "Elevated support", footnote: "Email and chat support." },
@@ -103,7 +103,7 @@ const BUSINESS_PLAN_MODIFIER = ({
         title:
           "Set custom QR code logos, password-protected links logos, and more.",
         cta: "Learn more.",
-        href: "https://affeasy.link/help/article/custom-qr-codes",
+        href: "https://docs.affeasy.link/features/custom-qr-codes",
       },
     },
   ],

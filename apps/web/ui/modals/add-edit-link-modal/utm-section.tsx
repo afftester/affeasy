@@ -2,7 +2,6 @@ import { LinkProps } from "@/lib/types";
 import { InfoTooltip, SimpleTooltipContent, Switch } from "@dub/ui";
 import {
   FADE_IN_ANIMATION_SETTINGS,
-  HOME_DOMAIN,
   constructURLFromUTMParams,
   getParamsFromURL,
   getUrlWithoutUTMParams,
@@ -65,7 +64,7 @@ export default function UTMSection({
               <SimpleTooltipContent
                 title="Add UTM parameters to your short links for conversion tracking."
                 cta="Learn more."
-                href={`${HOME_DOMAIN}/help/article/utm-builder`}
+                href={`https://docs.affeasy.link/features/utm-builder`}
               />
             }
           />

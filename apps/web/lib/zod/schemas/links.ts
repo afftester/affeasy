@@ -74,13 +74,13 @@ export const getLinkInfoQuerySchema = z.object({
     .string()
     .min(1, "Domain is required.")
     .describe(
-      "The domain of the link to retrieve. E.g. for `d.to/github`, the domain is `d.to`.",
+      "The domain of the link to retrieve. E.g. for `offrs.us/github`, the domain is `offrs.us`.",
     ),
   key: z
     .string()
     .min(1, "Key is required.")
     .describe(
-      "The key of the link to retrieve. E.g. for `d.to/github`, the key is `github`.",
+      "The key of the link to retrieve. E.g. for `offrs.us/github`, the key is `github`.",
     ),
 });
 
@@ -279,7 +279,7 @@ export const LinkSchema = z
       .record(z.string())
       .nullable()
       .describe(
-        "Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`. Learn more: https://d.to/geo",
+        "Geo targeting information for the short link in JSON format `{[COUNTRY]: https://example.com }`. Learn more: https://docs.affeasy.link/features/geo-targeting",
       ),
     publicStats: z
       .boolean()

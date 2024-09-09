@@ -1,6 +1,6 @@
 import { LinkProps } from "@/lib/types";
 import { InfoTooltip, SimpleTooltipContent, Switch } from "@dub/ui";
-import { FADE_IN_ANIMATION_SETTINGS, HOME_DOMAIN } from "@dub/utils";
+import { FADE_IN_ANIMATION_SETTINGS } from "@dub/utils";
 import { motion } from "framer-motion";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import TextareaAutosize from "react-textarea-autosize";
@@ -39,7 +39,7 @@ export default function CommentsSection({
               <SimpleTooltipContent
                 title="Use comments to add context to your short links – for you and your team."
                 cta="Learn more."
-                href={`${HOME_DOMAIN}/help/article/link-comments`}
+                href={`https://docs.affeasy.link/features/link-comments`}
               />
             }
           />

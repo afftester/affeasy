@@ -81,7 +81,15 @@
         "features/how-to-redirect-root-domain",
         "features/custom-qr-codes",
         "features/custom-social-media-cards",
-        "features/how-to-use-tags"
+        "features/how-to-use-tags",
+        "features/geo-targeting",
+        "features/utm-builder",
+        "features/link-comments",
+        "features/device-targeting",
+        "features/expiration-date",
+        "features/link-cloaking",
+        "features/password-protection",
+        "features/search-indexing"
       ]
     },
     {
