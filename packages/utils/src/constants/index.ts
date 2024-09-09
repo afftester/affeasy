@@ -78,71 +78,6 @@ export const DUB_DOMAINS = [
     allowedHostnames: [],
     projectId: DUB_WORKSPACE_ID,
   },
-  ...(process.env.NEXT_PUBLIC_IS_DUB
-    ? [
-        {
-          id: "clce1z7cs00y8rbstk4xtnj0k",
-          slug: "chatg.pt",
-          verified: true,
-          primary: false,
-          archived: false,
-          publicStats: false,
-          target: "https://dub.co/tools/chatgpt-link-shortener",
-          type: "redirect",
-          placeholder: "https://chat.openai.com/g/g-UGjKKONEe-domainsgpt",
-          clicks: 0,
-          allowedHostnames: ["chat.openai.com"],
-          projectId: DUB_WORKSPACE_ID,
-        },
-        {
-          id: "cloxw8y2u0003js08a7mqg1j8",
-          slug: "spti.fi",
-          verified: true,
-          primary: false,
-          archived: false,
-          publicStats: false,
-          target: "https://dub.co/tools/spotify-link-shortener",
-          type: "redirect",
-          placeholder: "https://open.spotify.com/album/1SCyi9a5pOasikidToUY5y",
-          clicks: 0,
-          allowedHostnames: ["open.spotify.com"],
-          projectId: DUB_WORKSPACE_ID,
-        },
-        {
-          id: "cltgtd6s5000341itdszz20u2",
-          slug: "git.new",
-          verified: true,
-          primary: false,
-          archived: false,
-          publicStats: false,
-          target: "https://dub.co/tools/github-link-shortener",
-          type: "redirect",
-          placeholder: "https://github.com/dubinc/dub",
-          clicks: 0,
-          allowedHostnames: ["github.com", "gist.github.com"],
-          projectId: DUB_WORKSPACE_ID,
-        },
-        {
-          id: "cloxw8qtk000bjt08n9b812vs",
-          slug: "amzn.id",
-          verified: true,
-          primary: false,
-          archived: false,
-          publicStats: false,
-          target: "https://dub.co/tools/amazon-link-shortener",
-          type: "redirect",
-          placeholder: "https://www.amazon.com/dp/B0BW4SWNC8",
-          clicks: 0,
-          allowedHostnames: [
-            "amazon.com",
-            "amazon.co.uk",
-            "amazon.ca",
-            "amazon.es",
-          ],
-          projectId: DUB_WORKSPACE_ID,
-        },
-      ]
-    : []),
 ];
 
 export const DUB_DOMAINS_ARRAY = DUB_DOMAINS.map((domain) => domain.slug);
@@ -150,27 +85,7 @@ export const DUB_DOMAINS_ARRAY = DUB_DOMAINS.map((domain) => domain.slug);
 export const DUB_DEMO_LINKS = [
   {
     id: "clqo10sum0006js08vutzfxt3",
-    domain: "dub.sh",
+    domain: "offrs.us",
     key: "try",
-  },
-  {
-    id: "clot0z5rg000djp08ue98hxkn",
-    domain: "chatg.pt",
-    key: "domains",
-  },
-  {
-    id: "clp4jh9av0001l308ormavtlu",
-    domain: "spti.fi",
-    key: "hans",
-  },
-  {
-    id: "cltgtsex40003ck8z444hum5u",
-    domain: "git.new",
-    key: "dub",
-  },
-  {
-    id: "clp3k3yoi0001ju0874nz899q",
-    domain: "amzn.id",
-    key: "tv",
   },
 ];

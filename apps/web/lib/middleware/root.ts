@@ -1,6 +1,6 @@
 import { recordClick } from "@/lib/tinybird";
 import { formatRedisDomain, redis } from "@/lib/upstash";
-import { DUB_HEADERS } from "@dub/utils";
+import { AFFEASY_HEADERS } from "@dub/utils";
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
 import { getDomainViaEdge } from "../planetscale";
 import { RedisDomainProps } from "../types";
@@ -23,7 +23,10 @@ export default async function RootMiddleware(
 
     if (!linkData) {
       // rewrite to placeholder page if domain doesn't exist
-      return NextResponse.rewrite(new URL(`/${domain}`, req.url), DUB_HEADERS);
+      return NextResponse.rewrite(
+        new URL(`/${domain}`, req.url),
+        AFFEASY_HEADERS,
+      );
     }
 
     // format link to fit the RedisLinkProps interface
@@ -43,21 +46,24 @@ export default async function RootMiddleware(
 
   if (!url) {
     // rewrite to placeholder page unless the user defines a site to redirect to
-    return NextResponse.rewrite(new URL(`/${domain}`, req.url), DUB_HEADERS);
+    return NextResponse.rewrite(
+      new URL(`/${domain}`, req.url),
+      AFFEASY_HEADERS,
+    );
   }
 
   if (rewrite) {
     if (iframeable) {
       return NextResponse.rewrite(
         new URL(`/rewrite/${encodeURIComponent(url)}`, req.url),
-        DUB_HEADERS,
+        AFFEASY_HEADERS,
       );
     } else {
       // if link is not iframeable, use Next.js rewrite instead
-      return NextResponse.rewrite(url, DUB_HEADERS);
+      return NextResponse.rewrite(url, AFFEASY_HEADERS);
     }
   } else {
     // For root links that have a destination URL, use 301 status code (for SEO purposes)
-    return NextResponse.redirect(url, { ...DUB_HEADERS, status: 301 });
+    return NextResponse.redirect(url, { ...AFFEASY_HEADERS, status: 301 });
   }
 }

@@ -27,7 +27,7 @@ export default function WorkspaceLinksClient() {
             <h1 className="text-2xl text-gray-600">Links</h1>
             <div className="flex">
               <AddEditLinkButton />
-              <AddLinkOptions />
+              {/* <AddLinkOptions /> */}
             </div>
           </div>
         </MaxWidthWrapper>
