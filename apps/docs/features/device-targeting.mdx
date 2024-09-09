@@ -1,173 +1,116 @@
 ---
 title: "Device Targeting"
-"og:title": "Using Tags to Organize Links on AffEasy"
-description: "Learn more about what a 'Tag' is and how you can use it to better manage your links on AffEasy."
-icon: tag
+"og:title": "Mastering Device Targeting on AffEasy"
+description: "Learn how to use device targeting on AffEasy to personalize the destination URL for your links based on the user's device type."
+icon: mobile
 ---
 
-Tags are a powerful way to organize your links on AffEasy. You can use tags to group links together and make it easier to find them later.
+AffEasy's device targeting feature allows you to customize the destination URL for your links based on the user's device type, providing a more personalized experience for your audience.
+
+<Note>This feature is only available for **Pro plans and above**.</Note>
+
+## Why use device targeting?
+
+Device targeting is a powerful tool that can significantly enhance your marketing efforts and user experience. By tailoring the destination URL to specific device types, you can:
+
+- Direct iOS users to the App Store and Android users to Google Play Store
+- Provide device-specific landing pages or content
+- Optimize user experience based on device capabilities
+
+## How to set up device targeting
+
+To use device targeting for your AffEasy links, follow these steps:
+
+1. Open the **link builder** in your AffEasy dashboard.
+2. Set your main **Destination URL** (this will be used as a fallback for non-targeted devices).
+3. Toggle the "Device Targeting" switch to reveal targeting options.
+4. Enable targeting for specific device types:
+
+   a. **iOS Targeting**: Toggle this switch and enter a custom URL for iOS devices.
+
+   b. **Android Targeting**: Toggle this switch and enter a custom URL for Android devices.
+
+   c. **Desktop Targeting**: Toggle this switch and enter a custom URL for desktop devices.
 
 <Frame>
   <img
     className="rounded-lg border border-gray-100"
-    src="/images/tags/tags-overview.png"
-    alt="Using tags to organize links on AffEasy"
+    src="/images/device-targeting/device-targeting-builder.png"
+    alt="Device targeting options in the AffEasy link builder"
     width="600"
     height="400"
   />
 </Frame>
 
-## What is a Tag?
+## Advanced device targeting with AI
 
-A tag is a label that you can assign to a link. Tags are color-coded and can be created and assigned to a link in just a few clicks.
+AffEasy also offers an AI-powered solution to enhance your device targeting strategy. By clicking the `✨` button in the link builder, you can access **AffEasy AI**, which analyzes your destination URLs and suggests optimal targeting settings based on content and user behavior patterns.
 
-With tags, you can:
+## How device targeting works
 
-1. Organize your links by campaigns, clients, or any other categories you can think of.
-2. Filter your links by tags and get a shareable link to the filtered results.
-3. **Filter your analytics by tags** to see how your campaigns are performing.
+When a user clicks on your AffEasy link, our system detects their device type and redirects them to the appropriate URL:
 
-## How to create a Tag
+- If the user is on an iOS device, they'll be sent to the iOS-specific URL (if set).
+- If the user is on an Android device, they'll be sent to the Android-specific URL (if set).
+- If the user is on a desktop, they'll be sent to the desktop-specific URL (if set).
+- For any other device type, or if a specific targeting rule isn't set, the user will be directed to the main Destination URL.
 
-To create a tag, follow these steps:
-
-1. Navigate to the **Tags settings page** in your AffEasy workspace.
-
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/tags-settings-page.png"
-    alt="Tags settings page"
-    width="600"
-    height="400"
-  />
-</Frame>
-
-2. Click on the "Create Tag" button to open the tag creation modal.
-3. Enter a name for your tag and choose a color.
+Here's a visual representation of how device targeting works:
 
 <Frame>
   <img
     className="rounded-lg border border-gray-100"
-    src="/images/tags/tag-creation-modal.png"
-    alt="Tag creation modal"
-    width="400"
+    src="/images/device-targeting/device-targeting-flow.png"
+    alt="Flow chart of device targeting process"
+    width="500"
     height="300"
   />
 </Frame>
 
-You can also create new tags directly inside the **AffEasy link builder**:
+## Bonus: Combining device targeting with geo-targeting
 
-1. After **creating a link**, click on the tag input field.
-2. Type in the name of the tag you want to create.
-3. If the tag doesn't exist, press `Enter ↩` to create a new tag.
+For even more precise link customization, you can combine device targeting with AffEasy's geo-targeting feature. This allows you to create links that direct users to different URLs based on both their device type and geographical location.
 
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/create-tag-in-builder.png"
-    alt="Input the name of the tag you want to create (e.g. 'New Tag')"
-    width="500"
-    height="100"
-  />
-</Frame>
+To set up combined device and geo-targeting:
 
-4. Click on the "Create Link" button to assign the tag to the link.
+1. Enable device targeting as described above.
+2. In the link builder, also enable the "Geo Targeting" option.
+3. Set up your geo-targeting rules for different countries or regions.
+4. AffEasy will first check the user's device type, then apply any relevant geo-targeting rules.
 
-## How to edit or delete a Tag
+```typescript
+import { AffEasy } from "affeasy";
 
-Tags can be managed via the **Tags settings page** in your AffEasy workspace.
+const affeasy = new AffEasy();
 
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/edit-tags-page.png"
-    alt="Editing tags in the Tags settings page"
-    width="600"
-    height="400"
-  />
-</Frame>
+await affeasy.links.create({
+  url: "https://example.com", // fallback URL
+  deviceTargeting: {
+    ios: "https://apps.apple.com/app/your-app",
+    android: "https://play.google.com/store/apps/details?id=your.app",
+  },
+  geoTargeting: {
+    US: "https://example.com/us",
+    UK: "https://example.com/uk",
+  },
+});
+```
 
-To manage a tag:
+<Note>
+  The order of precedence is: Device Targeting > Geo Targeting > Default URL.
+  Make sure to plan your targeting strategy accordingly.
+</Note>
 
-1. Click on the `⋮` button next to the tag to open the menu popover.
-2. Choose from the following options:
-   - Edit the tag
-   - Copy the tag's unique ID (for **programmatic API use**)
-   - Delete the tag
+## Measuring the impact of device targeting
 
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/tag-menu-popover.png"
-    alt="Edit a tag by clicking on the ⋮ icon"
-    width="300"
-    height="200"
-  />
-</Frame>
+AffEasy provides detailed analytics to help you measure the effectiveness of your device targeting strategy. In your dashboard, you can view:
 
-You can also use the following keyboard shortcuts to manage your tags:
+- Click-through rates for each device type
+- Conversion rates for targeted vs. non-targeted links
+- Geographic distribution of clicks by device type
 
-| Keyboard Shortcut | Action                   |
-| ----------------- | ------------------------ |
-| `E`               | Edit a tag               |
-| `I`               | Copy the tag's unique ID |
-| `X`               | Delete a tag             |
-
-To edit a tag:
-
-1. Click on the "Edit" button in the tag menu popover.
-2. In the tag editing modal, you can:
-   - Rename the tag
-   - Change the color of the tag
-
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/tag-editing-modal.png"
-    alt="Tag editing modal"
-    width="400"
-    height="300"
-  />
-</Frame>
-
-## Can I assign multiple tags to a link?
-
-Yes, you can. In the tags section for a given link, you can select multiple tags to assign to the link.
-
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/assign-multiple-tags.png"
-    alt="Assign multiple tags to a link"
-    width="500"
-    height="100"
-  />
-</Frame>
-
-The tags will show up in the link's details, and you can filter your links by these tags.
-
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/multiple-tags-assigned.png"
-    alt="Multiple tags assigned to a link"
-    width="500"
-    height="100"
-  />
-</Frame>
-
-## How many tags can I create?
-
-The number of tags you can create depends on your plan:
-
-- **Free plan**: Up to 5 tags
-- **Pro plan**: Up to 25 tags
-- **Business plan**: Up to 150 tags
-- **Enterprise plan**: Unlimited tags
-
-Check out our [pricing page](https://affeasy.link/pricing) for more information on our plans.
+Use these insights to continually refine your targeting strategy and optimize your marketing campaigns.
 
 ## Need Help?
 
-If you have any questions about using tags or need assistance with any other features, please don't hesitate to [contact our support team](mailto:support@affeasy.link). We're here to help!
+If you have any questions about setting up device targeting or using any of our advanced features, please don't hesitate to [contact our support team](mailto:support@affeasy.link). We're here to help you make the most of AffEasy's powerful link management tools!

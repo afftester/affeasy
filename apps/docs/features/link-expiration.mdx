@@ -1,173 +1,128 @@
 ---
-title: "Expiration Date"
-"og:title": "Using Tags to Organize Links on AffEasy"
-description: "Learn more about what a 'Tag' is and how you can use it to better manage your links on AffEasy."
-icon: tag
+title: "Link Expiration"
+"og:title": "How to Set an Expiration Date for Your AffEasy Links"
+description: "Learn how to automatically expire your AffEasy links after a certain date & time, and set custom expiration URLs."
+icon: calendar
 ---
 
-Tags are a powerful way to organize your links on AffEasy. You can use tags to group links together and make it easier to find them later.
+AffEasy allows you to set expiration dates for your links, giving you more control over the lifespan of your short URLs.
+
+<Note>This feature is only available for **Pro plans and above**.</Note>
+
+## How to set an expiration date for your links
+
+To set an expiration date for your AffEasy links, follow these steps:
+
+1. Open the **link builder** in your AffEasy dashboard.
+2. Toggle the "Link Expiration" switch to reveal the expiration options.
+3. You can set the expiration date in two ways:
+   a. Use natural language: Type in any time interval, such as "in 2 hours" or "tomorrow at 5PM". AffEasy will automatically convert this to the correct date-time format.
+   b. Use the date-time picker: Manually select the date and time from the provided calendar and time selector.
 
 <Frame>
   <img
     className="rounded-lg border border-gray-100"
-    src="/images/tags/tags-overview.png"
-    alt="Using tags to organize links on AffEasy"
+    src="/images/link-expiration/expiration-setting.png"
+    alt="Setting link expiration in the AffEasy link builder"
     width="600"
     height="400"
   />
 </Frame>
 
-## What is a Tag?
+When a user tries to access an expired link, they will see an "Expired Link" page.
 
-A tag is a label that you can assign to a link. Tags are color-coded and can be created and assigned to a link in just a few clicks.
+<Note>
+  Clicks to the link after the expiration date will ***not*** be tracked in your
+  analytics.
+</Note>
 
-With tags, you can:
+## Setting a custom expiration URL
 
-1. Organize your links by campaigns, clients, or any other categories you can think of.
-2. Filter your links by tags and get a shareable link to the filtered results.
-3. **Filter your analytics by tags** to see how your campaigns are performing.
+You can redirect users to a specific page when a link expires by setting a custom expiration URL:
 
-## How to create a Tag
+1. In the link builder, under the **Link Expiration** section, locate the **Expiration URL** field.
+2. Enter the custom URL you want users to be redirected to when the link expires.
 
-To create a tag, follow these steps:
+## Setting a default expiration URL for all links under a domain
 
-1. Navigate to the **Tags settings page** in your AffEasy workspace.
+For consistency across your links, you can set a default expiration URL for all links under a specific domain:
 
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/tags-settings-page.png"
-    alt="Tags settings page"
-    width="600"
-    height="400"
-  />
-</Frame>
-
-2. Click on the "Create Tag" button to open the tag creation modal.
-3. Enter a name for your tag and choose a color.
+1. Go to the **AffEasy dashboard**.
+2. Click on the **Domains** tab in the top navigation bar.
+3. Find the domain you want to set the default expiration URL for and click the `⋮` button to open the dropdown menu.
 
 <Frame>
   <img
     className="rounded-lg border border-gray-100"
-    src="/images/tags/tag-creation-modal.png"
-    alt="Tag creation modal"
+    src="/images/link-expiration/domain-options.png"
+    alt="More options popover for domain settings"
     width="400"
     height="300"
   />
 </Frame>
 
-You can also create new tags directly inside the **AffEasy link builder**:
-
-1. After **creating a link**, click on the tag input field.
-2. Type in the name of the tag you want to create.
-3. If the tag doesn't exist, press `Enter ↩` to create a new tag.
+4. Click on the **Edit** button in the dropdown menu to open the **Edit domain** modal.
+5. Toggle the **Advanced options** section.
+6. In the **Default Expiration URL** field, enter the URL you want to redirect users to when any link under this domain expires.
 
 <Frame>
   <img
     className="rounded-lg border border-gray-100"
-    src="/images/tags/create-tag-in-builder.png"
-    alt="Input the name of the tag you want to create (e.g. 'New Tag')"
-    width="500"
-    height="100"
-  />
-</Frame>
-
-4. Click on the "Create Link" button to assign the tag to the link.
-
-## How to edit or delete a Tag
-
-Tags can be managed via the **Tags settings page** in your AffEasy workspace.
-
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/edit-tags-page.png"
-    alt="Editing tags in the Tags settings page"
+    src="/images/link-expiration/default-expiration-url.png"
+    alt="Setting a default expiration URL for a domain"
     width="600"
     height="400"
   />
 </Frame>
 
-To manage a tag:
+7. Click on the **Save changes** button to apply the settings.
 
-1. Click on the `⋮` button next to the tag to open the menu popover.
-2. Choose from the following options:
-   - Edit the tag
-   - Copy the tag's unique ID (for **programmatic API use**)
-   - Delete the tag
+## Advanced expiration features
 
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/tag-menu-popover.png"
-    alt="Edit a tag by clicking on the ⋮ icon"
-    width="300"
-    height="200"
-  />
-</Frame>
+AffEasy offers several advanced features to enhance your link expiration strategy:
 
-You can also use the following keyboard shortcuts to manage your tags:
+### Gradual expiration
 
-| Keyboard Shortcut | Action                   |
-| ----------------- | ------------------------ |
-| `E`               | Edit a tag               |
-| `I`               | Copy the tag's unique ID |
-| `X`               | Delete a tag             |
+Instead of a hard cutoff, you can set up a gradual expiration process:
 
-To edit a tag:
+1. In the link builder, enable "Gradual Expiration" under the Link Expiration section.
+2. Set multiple expiration stages, each with its own redirect URL and expiration time.
 
-1. Click on the "Edit" button in the tag menu popover.
-2. In the tag editing modal, you can:
-   - Rename the tag
-   - Change the color of the tag
+This allows you to create a staged expiration process, useful for phasing out campaigns or managing time-sensitive content.
 
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/tag-editing-modal.png"
-    alt="Tag editing modal"
-    width="400"
-    height="300"
-  />
-</Frame>
+### Expiration notifications
 
-## Can I assign multiple tags to a link?
+Set up notifications to alert you before your links expire:
 
-Yes, you can. In the tags section for a given link, you can select multiple tags to assign to the link.
+1. In your AffEasy dashboard, go to **Settings** > **Notifications**.
+2. Enable "Link Expiration Alerts" and set your preferred notification time (e.g., 24 hours before expiration).
 
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/assign-multiple-tags.png"
-    alt="Assign multiple tags to a link"
-    width="500"
-    height="100"
-  />
-</Frame>
+### API support for link expiration
 
-The tags will show up in the link's details, and you can filter your links by these tags.
+For developers and advanced users, AffEasy provides API access to set link expiration programmatically. Here's an example of how to create a link with an expiration date using the AffEasy API:
 
-<Frame>
-  <img
-    className="rounded-lg border border-gray-100"
-    src="/images/tags/multiple-tags-assigned.png"
-    alt="Multiple tags assigned to a link"
-    width="500"
-    height="100"
-  />
-</Frame>
+```typescript
+import { AffEasy } from "affeasy";
 
-## How many tags can I create?
+const affeasy = new AffEasy();
 
-The number of tags you can create depends on your plan:
+await affeasy.links.create({
+  url: "https://example.com/limited-offer",
+  expiresAt: "2024-12-31T23:59:59Z",
+  expirationUrl: "https://example.com/offer-ended",
+});
+```
 
-- **Free plan**: Up to 5 tags
-- **Pro plan**: Up to 25 tags
-- **Business plan**: Up to 150 tags
-- **Enterprise plan**: Unlimited tags
+## Best practices for using link expiration
 
-Check out our [pricing page](https://affeasy.link/pricing) for more information on our plans.
+To make the most of the link expiration feature, consider these best practices:
+
+1. Use expiration dates for time-sensitive campaigns or limited-time offers.
+2. Set meaningful expiration URLs that provide value to users who click expired links.
+3. Regularly review and update your expired links to maintain a clean link inventory.
+4. Combine link expiration with other features like geo-targeting or device targeting for more sophisticated campaigns.
+5. Use the gradual expiration feature for important links to create a smooth transition.
 
 ## Need Help?
 
-If you have any questions about using tags or need assistance with any other features, please don't hesitate to [contact our support team](mailto:support@affeasy.link). We're here to help!
+If you have any questions about setting expiration dates for your links or using any of our advanced features, please don't hesitate to [contact our support team](mailto:support@affeasy.link). We're here to help you make the most of AffEasy's powerful link management tools!
