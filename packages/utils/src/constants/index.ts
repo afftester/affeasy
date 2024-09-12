@@ -78,6 +78,24 @@ export const DUB_DOMAINS = [
     allowedHostnames: [],
     projectId: DUB_WORKSPACE_ID,
   },
+  ...(process.env.NEXT_PUBLIC_IS_DUB
+    ? [
+        {
+          id: "clce1z7cs00y8rbstk4xtnj0k",
+          slug: "chatg.pt",
+          verified: true,
+          primary: false,
+          archived: false,
+          publicStats: false,
+          target: "https://${process.env.NEXT_PUBLIC_APP_DOMAIN}",
+          type: "redirect",
+          placeholder: "https://chat.openai.com/g/g-UGjKKONEe-domainsgpt",
+          clicks: 0,
+          allowedHostnames: ["beautiful.openai.com"],
+          projectId: DUB_WORKSPACE_ID,
+        },
+      ]
+    : []),
 ];
 
 export const DUB_DOMAINS_ARRAY = DUB_DOMAINS.map((domain) => domain.slug);
