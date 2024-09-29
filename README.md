@@ -2,7 +2,6 @@
   <img alt="AffEasy is the #1 affliate marketing platform for modern marketing teams." src="https://private-user-images.githubusercontent.com/122701660/365404532-076dc28c-995a-4f4e-9105-35c45d688abb.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MjU3NTA3NzMsIm5iZiI6MTcyNTc1MDQ3MywicGF0aCI6Ii8xMjI3MDE2NjAvMzY1NDA0NTMyLTA3NmRjMjhjLTk5NWEtNGY0ZS05MTA1LTM1YzQ1ZDY4OGFiYi5qcGc_WC1BbXotQWxnb3JpdGhtPUFXUzQtSE1BQy1TSEEyNTYmWC1BbXotQ3JlZGVudGlhbD1BS0lBVkNPRFlMU0E1M1BRSzRaQSUyRjIwMjQwOTA3JTJGdXMtZWFzdC0xJTJGczMlMkZhd3M0X3JlcXVlc3QmWC1BbXotRGF0ZT0yMDI0MDkwN1QyMzA3NTNaJlgtQW16LUV4cGlyZXM9MzAwJlgtQW16LVNpZ25hdHVyZT00NWE3YWI4NmIyNTcxYWE3NTRiZWNkZGQyNWZmY2ZjYjM5NjJmZDY4ODcxNjYxYjQ3MTQwMTFhNDY2Njg4ZmQ4JlgtQW16LVNpZ25lZEhlYWRlcnM9aG9zdCZhY3Rvcl9pZD0wJmtleV9pZD0wJnJlcG9faWQ9MCJ9.rec-MwZVf3aGsicO28HzIMTK_myvXFsxwaFOge3vkOk">
 </a>
 
-
 <h3 align="center">AffEasy</h3>
 
 <p align="center">
@@ -32,7 +31,7 @@
 
 ## Introduction
 
-Dub.co is the open-source link management infrastructure for modern marketing teams.
+AffEasy is the open-source affiliate marketing platform for modern affiliate marketers.
 
 ## Features
 
@@ -59,14 +58,14 @@ Dub.co is the open-source link management infrastructure for modern marketing te
 
 ## Self-Hosting
 
-You can self-host Dub.co for greater control over your data and design. [Read this guide](https://dub.co/docs/self-hosting/guide) to learn more.
+You can self-host AffEasy for greater control over your data and design. [Read this guide](https://docs.affeasy.link/self-hosting/guide) to learn more.
 
 ## Contributing
 
 We love our contributors! Here's how you can contribute:
 
 - [Open an issue](https://github.com/afftester/afftester/issues) if you believe you've encountered a bug.
-- Follow the [local development guide](https://dub.co/docs/local-development) to get your local dev environment set up.
+- Follow the [local development guide](https://docs.affeasy.link/local-development) to get your local dev environment set up.
 - Make a [pull request](https://github.com/afftester/afftester/pull) to add new features/make quality-of-life improvements/fix bugs.
 
 ## License
