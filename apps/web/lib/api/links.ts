@@ -544,6 +544,11 @@ export async function processLink({
                 break;
               }
             }
+          } else if (linkElements) {
+            const allowDeepLinkingElement = linkElements["allow-deep-linking"];
+            if (allowDeepLinkingElement) {
+              desiredClickUrl = linkElements.clickUrl;
+            }
           }
 
           if (desiredClickUrl) {
