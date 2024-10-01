@@ -2,8 +2,7 @@ import { nanoid } from "@dub/utils";
 import { connect } from "@planetscale/database";
 import { DomainProps, WorkspaceProps } from "./types";
 
-export const DATABASE_URL =
-  process.env.PLANETSCALE_DATABASE_URL || process.env.DATABASE_URL;
+export const DATABASE_URL = process.env.DATABASE_URL;
 
 export const pscale_config = {
   url: DATABASE_URL,
