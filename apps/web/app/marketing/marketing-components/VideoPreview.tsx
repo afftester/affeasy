@@ -11,7 +11,7 @@ export default function VideoPreview() {
               muted
               loop
               playsInline
-              poster={`/assets/preview/demo.webp`}
+              poster={`/_static/preview.webp`}
               className="h-auto w-full"
             >
               <source
