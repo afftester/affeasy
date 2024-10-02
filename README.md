@@ -18,8 +18,8 @@
 </p>
 
 <p align="center">
-  <a href="https://twitter.com/dubdotco">
-    <img src="https://img.shields.io/twitter/follow/ritanshu675?style=flat&label=%ritanshu675&logo=twitter&color=0bf&logoColor=fff" alt="Twitter" />
+  <a href="https://twitter.com/ritanshu675">
+    <img src="https://img.shields.io/twitter/follow/ritanshu675?style=flat&label=%40ritanshu675&logo=twitter&color=0bf&logoColor=fff" alt="Twitter" />
   </a>
   <a href="https://github.com/afftester/afftester/blob/main/LICENSE.md">
     <img src="https://img.shields.io/github/license/afftester/afftester?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
