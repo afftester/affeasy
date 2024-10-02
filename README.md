@@ -45,11 +45,11 @@ AffEasy is revolutionizing affiliate marketing with a modern, open-source platfo
 
 ## 🚀 Key Features
 
-- ✨ **Advanced Analytics** - Make data-driven decisions with comprehensive tracking and reporting
-- 🔗 **Branded Links** - Create custom, branded short links that reinforce your identity
-- 📱 **QR Codes** - Generate dynamic QR codes for seamless offline-to-online experiences
-- 🎯 **Personalization** - Tailor your affiliate campaigns for maximum impact
-- 👥 **Team Collaboration** - Work seamlessly with your team members
+- ✨ [**Advanced Analytics**](https://docs.affeasy.link/features/analytics)
+- 🔗 [**Branded Links**](https://docs.affeasy.link/features/branded-links)
+- 📱 [**QR Codes**](https://docs.affeasy.link/features/qr-codes)
+- 🎯 [**GEO Targeting**](https://docs.affeasy.link/features/geo-targeting)
+- 👻 [**Link Cloaking**](https://docs.affeasy.link/features/link-cloaking)
 
 [Explore all features →](https://docs.affeasy.link/features)
 
@@ -86,9 +86,7 @@ We welcome contributions from the community! Here's how you can help:
 
 ## 📄 License
 
-AffEasy is open-source software licensed under the GNU Affero General Public License Version 3 (AGPLv3) or any later version. 
-
-[View license →](https://github.com/afftester/afftester/blob/main/LICENSE.md)
+Inspired by [Dub](https://dub.co/), AffEasy is open-source under the GNU Affero General Public License Version 3 (AGPLv3) or any later version. You can [find it here](https://[https://github.com/afftester/afftester/blob/main/LICENSE.md).
 
 ---
 
