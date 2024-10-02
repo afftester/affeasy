@@ -1,21 +1,10 @@
-<a href="https://affeasy.link">
-  <img alt="AffEasy is the #1 affliate marketing platform for modern affiliate marketers." src="https://affeasy.link/_static/thumbnail.jpg">
-</a>
+<h1 align="center">
+  <a href="https://affeasy.link">
+    <img alt="AffEasy Logo" src="https://affeasy.link/_static/thumbnail.jpg" width="800">
+  </a>
+</h1>
 
-<h3 align="center">AffEasy</h3>
-
-<p align="center">
-    The #1 affliate marketing platform for modern marketing teams.
-    <br />
-    <a href="https://affeasy.link"><strong>Learn more »</strong></a>
-    <br />
-    <br />
-    <a href="#introduction"><strong>Introduction</strong></a> ·
-    <a href="#features"><strong>Features</strong></a> ·
-    <a href="#tech-stack"><strong>Tech Stack</strong></a> ·
-    <a href="#self-hosting"><strong>Self-hosting</strong></a> ·
-    <a href="#contributing"><strong>Contributing</strong></a>
-</p>
+<h2 align="center">The #1 Affiliate Marketing Platform for Modern Marketing Teams</h2>
 
 <p align="center">
   <a href="https://twitter.com/ritanshu675">
@@ -24,49 +13,85 @@
   <a href="https://github.com/afftester/afftester/blob/main/LICENSE.md">
     <img src="https://img.shields.io/github/license/afftester/afftester?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
   </a>
+  <!-- Add more relevant badges here -->
 </p>
 
-<br/>
+<p align="center">
+  <a href="#introduction"><strong>Introduction</strong></a> ·
+  <a href="#key-features"><strong>Key Features</strong></a> ·
+  <a href="#quick-start"><strong>Quick Start</strong></a> ·
+  <a href="#tech-stack"><strong>Tech Stack</strong></a> ·
+  <a href="#self-hosting"><strong>Self-hosting</strong></a> ·
+  <a href="#contributing"><strong>Contributing</strong></a>
+</p>
 
-## Introduction
+## ⚡️ Quick Start
 
-AffEasy is the open-source affiliate marketing platform for modern affiliate marketers.
+```bash
+# Clone the repository
+git clone https://github.com/afftester/afftester.git
 
-## Features
+# Install dependencies
+cd afftester
+npm install
 
-- [Advanced Analytics](https://docs.affeasy.link/features/analytics)
-- [Branded Links](https://docs.affeasy.link/features/branded-links)
-- [QR Codes](https://docs.affeasy.link/features/qr-codes)
-- [Personalization](https://docs.affeasy.link/features/personalization)
-- [Team Collaboration](https://docs.affeasy.link/features/collaboration)
+# Start the development server
+npm run dev
+```
 
-## Tech Stack
+## 🎯 Introduction
 
-- [Next.js](https://nextjs.org/) – framework
-- [TypeScript](https://www.typescriptlang.org/) – language
-- [Tailwind](https://tailwindcss.com/) – CSS
-- [Upstash](https://upstash.com/) – redis
-- [Tinybird](https://tinybird.com/) – analytics
-- [PlanetScale](https://planetscale.com/) – database
-- [NextAuth.js](https://next-auth.js.org/) – auth
-- [BoxyHQ](https://boxyhq.com/enterprise-sso) – SSO/SAML
-- [Turborepo](https://turbo.build/repo) – monorepo
-- [Stripe](https://stripe.com/) – payments
-- [Postmark](https://postmarkapp.com/) – emails
-- [Vercel](https://vercel.com/) – deployments
+AffEasy is revolutionizing affiliate marketing with a modern, open-source platform designed for today's marketing teams. Whether you're a solo entrepreneur or part of a large organization, AffEasy provides the tools you need to succeed in affiliate marketing.
 
-## Self-Hosting
+## 🚀 Key Features
 
-You can self-host AffEasy for greater control over your data and design. [Read this guide](https://docs.affeasy.link/self-hosting/guide) to learn more.
+- ✨ **Advanced Analytics** - Make data-driven decisions with comprehensive tracking and reporting
+- 🔗 **Branded Links** - Create custom, branded short links that reinforce your identity
+- 📱 **QR Codes** - Generate dynamic QR codes for seamless offline-to-online experiences
+- 🎯 **Personalization** - Tailor your affiliate campaigns for maximum impact
+- 👥 **Team Collaboration** - Work seamlessly with your team members
 
-## Contributing
+[Explore all features →](https://docs.affeasy.link/features)
 
-We love our contributors! Here's how you can contribute:
+## 🛠 Tech Stack
 
-- [Open an issue](https://github.com/afftester/afftester/issues) if you believe you've encountered a bug.
-- Follow the [local development guide](https://docs.affeasy.link/local-development) to get your local dev environment set up.
-- Make a [pull request](https://github.com/afftester/afftester/pull) to add new features/make quality-of-life improvements/fix bugs.
+AffEasy is built with the following cutting-edge technologies:
 
-## License
+- 🔥 **Next.js** - React framework for production
+- 📘 **TypeScript** - For type-safe code
+- 🎨 **Tailwind CSS** - Utility-first CSS framework
+- ⚡️ **Upstash** - Serverless Redis database
+- 📊 **Tinybird** - Real-time analytics
+- 🗄️ **PlanetScale** - Serverless MySQL platform
+- 🔒 **NextAuth.js** - Authentication for Next.js
+- 🔑 **BoxyHQ** - Enterprise SSO/SAML
+- ⚙️ **Turborepo** - High-performance build system
+- 💳 **Stripe** - Payment processing
+- ✉️ **Postmark** - Transactional email service
+- 🚀 **Vercel** - Platform for deployment
 
-Inspired by [Dub](https://dub.co/), AffEasy is open-source under the GNU Affero General Public License Version 3 (AGPLv3) or any later version. You can [find it here](https://[https://github.com/afftester/afftester/blob/main/LICENSE.md).
+## 🏠 Self-Hosting
+
+Take control of your data and customization by self-hosting AffEasy. Our comprehensive guide will help you get started:
+
+[Self-Hosting Guide →](https://docs.affeasy.link/self-hosting/guide)
+
+## 👥 Contributing
+
+We welcome contributions from the community! Here's how you can help:
+
+1. [Open an issue](https://github.com/afftester/afftester/issues) to report bugs or suggest features
+2. Follow our [local development guide](https://docs.affeasy.link/local-development) to set up your environment
+3. Submit a [pull request](https://github.com/afftester/afftester/pull) with your improvements
+
+## 📄 License
+
+AffEasy is open-source software licensed under the GNU Affero General Public License Version 3 (AGPLv3) or any later version. 
+
+[View license →](https://github.com/afftester/afftester/blob/main/LICENSE.md)
+
+---
+
+<p align="center">
+  Built with ❤️ by the AffEasy team
+</p>
