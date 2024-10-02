@@ -20,7 +20,7 @@
     <br />
     <br />
     <a href="#-introduction"><strong>Introduction</strong></a> ·
-    <a href="#-features"><strong>Features</strong></a> ·
+    <a href="#-key-features"><strong>Features</strong></a> ·
     <a href="#-tech-stack"><strong>Tech Stack</strong></a> ·
     <a href="#-self-hosting"><strong>Self-hosting</strong></a> ·
     <a href="#-contributing"><strong>Contributing</strong></a>
