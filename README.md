@@ -4,7 +4,7 @@
   </a>
 </h1>
 
-<h2 align="center">The #1 Affiliate Marketing Platform for Modern Marketing Teams</h2>
+<h2 align="center">The #1 Affiliate Marketing Platform for Modern Affiliate Marketing Teams</h2>
 
 <p align="center">
   <a href="https://twitter.com/ritanshu675">
@@ -13,7 +13,6 @@
   <a href="https://github.com/afftester/afftester/blob/main/LICENSE.md">
     <img src="https://img.shields.io/github/license/afftester/afftester?label=license&logo=github&color=f80&logoColor=fff" alt="License" />
   </a>
-  <!-- Add more relevant badges here -->
 </p>
 
 <p align="center">
@@ -41,10 +40,11 @@ npm run dev
 
 ## 🎯 Introduction
 
-AffEasy is revolutionizing affiliate marketing with a modern, open-source platform designed for today's marketing teams. Whether you're a solo entrepreneur or part of a large organization, AffEasy provides the tools you need to succeed in affiliate marketing.
+AffEasy is #1 Affiliate Marketing Platform that allows you to create affiliate links from every major affiliate network. Whether you're a solo entrepreneur or part of a large organization, AffEasy provides the tools you need to succeed in affiliate marketing.
 
 ## 🚀 Key Features
 
+- 🕶️ [**Unified Network Access**](https://docs.affeasy.link/how-it-works)
 - ✨ [**Advanced Analytics**](https://docs.affeasy.link/features/analytics)
 - 🔗 [**Branded Links**](https://docs.affeasy.link/features/branded-links)
 - 📱 [**QR Codes**](https://docs.affeasy.link/features/qr-codes)
