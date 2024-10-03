@@ -8,28 +8,18 @@ export type Social = {
 
 export const socialsConfig: Social[] = [
   {
-    title: "Discord",
-    href: "/discord",
-    icon: "discord",
-  },
-  {
     title: "GitHub",
-    href: "/github",
+    href: "https://github.com/afftester/affeasy",
     icon: "github",
   },
   {
     title: "Twitter",
-    href: "/twitter",
+    href: "https://x.com/ritanshu675",
     icon: "twitter",
   },
   {
     title: "LinkedIn",
-    href: "/linkedin",
+    href: "https://www.linkedin.com/in/ritanshudokania/",
     icon: "linkedin",
   },
-  // {
-  //   title: "YouTube",
-  //   href: "/youtube",
-  //   icon: "youtube",
-  // },
 ];

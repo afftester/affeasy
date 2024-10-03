@@ -6,7 +6,6 @@ import { Shell } from "../_components/shell";
 import { socialsConfig } from "../config/socials";
 import { BrandName } from "./brand-name";
 import { SocialIconButton } from "./social-icon-button";
-// import { StatusWidgetContainer } from "./status-widget-suspense";
 
 interface Props {
   className?: string;
