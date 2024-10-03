@@ -1,10 +1,14 @@
-<h1 align="center">
+<div align="center">
+
   <a href="https://affeasy.link">
     <img alt="AffEasy Logo" src="https://affeasy.link/_static/thumbnail.jpg" width="800">
   </a>
-</h1>
+  </div>
 
-<h2 align="center">The #1 Affiliate Marketing Platform for Modern Affiliate Marketing Teams</h2>
+
+<p align="center">
+AffEasy - Affiliate Link Creation Made Easy 🤙
+</p>
 
 <p align="center">
   <a href="https://twitter.com/ritanshu675">
@@ -26,6 +30,9 @@
     <a href="#-contributing"><strong>Contributing</strong></a>
 </p>
 
+## 🎯 Introduction
+
+AffEasy is the #1 Affiliate Marketing Platform that allows you to create affiliate links from every major affiliate network. Whether you're a solo entrepreneur or part of a large organization, AffEasy provides the tools you need to succeed in affiliate marketing.
 ## ⚡️ Quick Start
 
 ```bash
@@ -40,9 +47,7 @@ npm install
 npm run dev
 ```
 
-## 🎯 Introduction
 
-AffEasy is the #1 Affiliate Marketing Platform that allows you to create affiliate links from every major affiliate network. Whether you're a solo entrepreneur or part of a large organization, AffEasy provides the tools you need to succeed in affiliate marketing.
 
 ## 🚀 Key Features
 
