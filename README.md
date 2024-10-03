@@ -32,7 +32,10 @@ AffEasy - Affiliate Link Creation Made Easy 🤙
 
 ## 🎯 Introduction
 
-AffEasy is the #1 Affiliate Marketing Platform that allows you to create affiliate links from every major affiliate network. Whether you're a solo entrepreneur or part of a large organization, AffEasy provides the tools you need to succeed in affiliate marketing.
+AffEasy is the only open source Affiliate Marketing Platform that allows you to create affiliate links from every major affiliate network. Whether you're a solo entrepreneur or part of a large organization, AffEasy provides the tools you need to succeed in affiliate marketing.
+
+https://github.com/user-attachments/assets/8ce8d7dd-9c52-43bf-877f-c521caa38c72
+
 ## ⚡️ Quick Start
 
 ```bash
