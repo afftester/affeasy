@@ -42,7 +42,7 @@ npm run dev
 
 ## 🎯 Introduction
 
-AffEasy is #1 Affiliate Marketing Platform that allows you to create affiliate links from every major affiliate network. Whether you're a solo entrepreneur or part of a large organization, AffEasy provides the tools you need to succeed in affiliate marketing.
+AffEasy is the #1 Affiliate Marketing Platform that allows you to create affiliate links from every major affiliate network. Whether you're a solo entrepreneur or part of a large organization, AffEasy provides the tools you need to succeed in affiliate marketing.
 
 ## 🚀 Key Features
 
