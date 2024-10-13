@@ -25,7 +25,7 @@ export const GET = withSession(async ({}) => {
 
 // POST /api/domains - add a domain
 export const POST = withAuth(async ({ req, workspace }) => {
-  const { slug: domain, primary, archived, target, type } = await req.json();
+  const { slug: domain, primary, archived, target, type, advertiserId } = await req.json();
 
   if (workspace.domains.length >= workspace.domainsLimit) {
     return new Response(
@@ -67,7 +67,7 @@ export const POST = withAuth(async ({ req, workspace }) => {
       },
     }),
     // Handle PlanetHowl specific logic
-    req.body.advertiserId === "4" && prisma.advertiser.update({
+    advertiserId === "4" && prisma.advertiser.update({
       where: { id: "4" },
       data: {
         lastIntegrated: new Date(),

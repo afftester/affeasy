@@ -260,11 +260,12 @@ function AddEditNetworkModal({
                     clientId: data.clientId,
                     clientSecret:
                       changedFields.clientSecret || data.partialClientSecret,
-                    // Add any PlanetHowl specific fields
-                    clientId: data.clientId,
-                    clientSecret: data.clientSecret,
-                    accountId: data.accountId,
                   };
+
+              // If editing a PlanetHowl network, include lastIntegrated
+              if (data.advertiserId === "4") {
+                bodyData.lastIntegrated = new Date();
+              }
 
               fetch(endpoint.url, {
                 method: endpoint.method,
