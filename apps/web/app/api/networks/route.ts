@@ -7,6 +7,7 @@ import { exceededLimitError } from "@/lib/api/errors";
 import { withAuth, withSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { generatePlanetHowlToken } from "@/lib/advertisers";
 
 export const GET = withSession(async ({}) => {
   const networks = await prisma.advertiser.findMany({
@@ -14,6 +15,8 @@ export const GET = withSession(async ({}) => {
       id: true, // Select the id field
       name: true, // Select the name field
       // Add any other fields you need to retrieve here
+      logoUrl: true, // Add logo URL for frontend display
+      type: true, // Specify type if needed for different advertisers
     },
   });
 
@@ -61,6 +64,13 @@ export const POST = withAuth(async ({ req, workspace }) => {
         projectId: workspace.id,
         primary: primary || workspace.domains.length === 0,
         archived,
+      },
+    }),
+    // Handle PlanetHowl specific logic
+    req.body.advertiserId === "4" && prisma.advertiser.update({
+      where: { id: "4" },
+      data: {
+        lastIntegrated: new Date(),
       },
     }),
     primary &&

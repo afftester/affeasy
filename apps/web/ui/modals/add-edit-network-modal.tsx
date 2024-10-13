@@ -260,6 +260,10 @@ function AddEditNetworkModal({
                     clientId: data.clientId,
                     clientSecret:
                       changedFields.clientSecret || data.partialClientSecret,
+                    // Add any PlanetHowl specific fields
+                    clientId: data.clientId,
+                    clientSecret: data.clientSecret,
+                    accountId: data.accountId,
                   };
 
               fetch(endpoint.url, {
@@ -332,7 +336,7 @@ function AddEditNetworkModal({
                 >
                   {networks?.map(({ id, name }) => (
                     <option key={id} value={id}>
-                      {name || ""}
+                      {name === "PlanetHowl" ? "PlanetHowl" : name || ""}
                     </option>
                   ))}
                 </select>
@@ -590,6 +594,110 @@ function AddEditNetworkModal({
                           handleInputChange("websiteId", e.target.value)
                         }
                         className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : advertiserId === "4" ? (
+                <>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`clientId-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Client ID
+                      </label>
+                      <a
+                        href="https://docs.planethowl.com/quickstart/affiliate-networks/planet-howl#1-obtain-your-client-id"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="clientId"
+                        id={`clientId-${randomIdx}`}
+                        placeholder="Enter your PlanetHowl Client ID"
+                        value={clientId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("clientId", e.target.value)
+                        }
+                        className="border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500 block w-full rounded-md focus:outline-none sm:text-sm"
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`clientSecret-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Client Secret
+                      </label>
+                      <a
+                        href="https://docs.planethowl.com/quickstart/affiliate-networks/planet-howl#2-obtain-your-client-secret"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="clientSecret"
+                        id={`clientSecret-${randomIdx}`}
+                        placeholder="Enter your PlanetHowl Client Secret"
+                        value={partialClientSecret ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("partialClientSecret", e.target.value)
+                        }
+                        className="border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500 block w-full rounded-md focus:outline-none sm:text-sm"
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`accountId-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Account ID
+                      </label>
+                      <a
+                        href="https://docs.planethowl.com/quickstart/affiliate-networks/planet-howl#3-obtain-your-account-id"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="accountId"
+                        id={`accountId-${randomIdx}`}
+                        placeholder="Enter your PlanetHowl Account ID"
+                        value={accountId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("accountId", e.target.value)
+                        }
+                        className="border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500 block w-full rounded-md focus:outline-none sm:text-sm"
                         aria-invalid="true"
                       />
                     </div>

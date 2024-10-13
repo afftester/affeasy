@@ -29,3 +29,32 @@ export async function generateRakutenToken(
   }
   return data.access_token;
 }
+
+export async function generatePlanetHowlToken(
+  clientId: string,
+  clientSecret: string,
+  accountId: string,
+): Promise<string> {
+  if (!clientId || !clientSecret || !accountId) {
+    throw new Error("Missing required parameters for generating PlanetHowl token");
+  }
+
+  const url = "https://api.planethowl.com/token";
+  const headers = {
+    "Content-Type": "application/json",
+    Authorization: `Bearer ${clientSecret}`,
+  };
+  const payload = { clientId, accountId };
+
+  const response = await fetch(url, {
+    method: "POST",
+    headers: headers,
+    body: JSON.stringify(payload),
+  });
+
+  const data = await response.json();
+  if (!data.access_token) {
+    throw new Error("Failed to generate PlanetHowl token");
+  }
+  return data.access_token;
+}

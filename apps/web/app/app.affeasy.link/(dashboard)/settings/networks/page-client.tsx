@@ -111,7 +111,7 @@ const NetworkRow = (relationship: UserAdvertiserWithNameProps) => {
           <TokenAvatar id={relationship.advertiserId} />
           <div className="flex flex-col space-y-px">
             <p className="font-semibold text-gray-700">
-              {relationship.advertiser.name}
+              {relationship.name}
             </p>
           </div>
         </div>
@@ -121,6 +121,11 @@ const NetworkRow = (relationship: UserAdvertiserWithNameProps) => {
           suppressHydrationWarning
         >
           {/* {timeAgo(token.lastUsed)} */}
+          {relationship.lastIntegrated && (
+            <span className="text-xs text-gray-400">
+              Last Integrated: {new Date(relationship.lastIntegrated).toLocaleDateString()}
+            </span>
+          )}
         </div>
 
         <Popover

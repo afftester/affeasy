@@ -3,6 +3,10 @@ import { DirectorySyncProviders } from "@boxyhq/saml-jackson";
 import { Link, UserAdvertiserRelationship } from "@prisma/client";
 import { createLinkBodySchema } from "./zod/schemas/links";
 
+export interface AdvertiserWithDetails extends Advertiser {
+  logoUrl: string;
+  type: string;
+}
 export type LinkProps = Link;
 export type UserAdvertiserProps = UserAdvertiserRelationship;
 
