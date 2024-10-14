@@ -635,6 +635,61 @@ export async function processLink({
         }
 
         clickUrl = `${processedUrl}?&tag=${websiteId}`;
+      } else if (advertiserId === "4") {
+        const userAdvertiserRelation =
+          userBrandRelationship.userAdvertiserRelation;
+
+        const apiKey = decrypt(userAdvertiserRelation.encryptedApiKey || "");
+        const accountId = userAdvertiserRelation.accountId || "";
+        const websiteId = userAdvertiserRelation.websiteId || "";
+
+        if (!apiKey || !websiteId || !accountId) {
+          return {
+            link: payload,
+            error: "Missing credentials for PlaetHowl",
+            code: "unprocessable_entity",
+          };
+        }
+
+        const url = "https://api.narrativ.com/api/v1/smart_links/";
+        const headers = {
+          Authorization: `NRTV-API-KEY ${apiKey}`,
+          "Content-Type": "application/json",
+        };
+
+        const data = {
+          url: processedUrl,
+          article_name: accountId,
+          article_url: websiteId,
+          exclusive_match_requested: true,
+        };
+
+        try {
+          const response = await fetch(url, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(data),
+          });
+
+          if (response.status === 201) {
+            const responseJson = await response.json();
+
+            // Type guard to check if responseJson is an object
+            if (typeof responseJson === "object" && responseJson !== null) {
+              // Type assertion for the expected structure
+              const typedResponse = responseJson as {
+                data: Array<{ howl_link_url?: string }>;
+              };
+
+              const affiliateUrl = typedResponse.data[0]?.howl_link_url || "";
+              clickUrl = affiliateUrl;
+            } else {
+              console.error("Unexpected response format");
+            }
+          }
+        } catch (error) {
+          console.error("Error generating affiliate link:", error);
+        }
       }
     }
   }
