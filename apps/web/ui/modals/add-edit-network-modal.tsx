@@ -595,6 +595,44 @@ function AddEditNetworkModal({
                     </div>
                   </div>
                 </>
+              ) : advertiserId === "4" ? (
+                <>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`url-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        API Key
+                      </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/planethowl"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="apiKey"
+                        id={`apiKey-${randomIdx}`}
+                        placeholder={
+                          "https://docs.affeasy.link/quickstart/affiliate-networks/planethowl"
+                        }
+                        value={partialApiKey ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("partialApiKey", e.target.value)
+                        }
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                </>
               ) : null}
             </div>
 

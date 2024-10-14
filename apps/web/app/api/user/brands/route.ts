@@ -14,7 +14,7 @@ function extractBaseUrlUpdated(url) {
   const baseUrl = url.split("/")[0].split("?")[0];
   return baseUrl;
 }
-// GET /api/user/brands
+// POST /api/user/brands
 export const POST = withSession(async ({ req, session }) => {
   const data = await req.json();
   const relationship = data.userAdvertiserRelationship;
@@ -307,6 +307,54 @@ export const POST = withSession(async ({ req, session }) => {
       }
     } catch (error) {
       console.error("Error processing Amazon advertiser:", error);
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 },
+      );
+    }
+  } else if (advertiserId === "4") {
+    try {
+      const brands = await prisma.brand.findMany({
+        where: {
+          advertisers: {
+            some: {
+              advertiserId: advertiserId,
+            },
+          },
+        },
+        include: {
+          advertisers: {
+            where: { advertiserId: advertiserId },
+          },
+          userBrandRelationships: {
+            where: { userId: session.user.id, advertiserId },
+          },
+        },
+      });
+
+      const userBrandRelationships = await Promise.all(
+        brands.map(async (brand) => {
+          let userBrandRelationship = brand.userBrandRelationships[0];
+
+          if (!userBrandRelationship) {
+            userBrandRelationship = await prisma.userBrandRelationship.create({
+              data: {
+                userId: session.user.id,
+                brandId: brand.id,
+                advertiserId,
+                userAdvertiserRelationId: relationship.id,
+                brandAdvertiserRelationId: brand.advertisers[0].id,
+              },
+            });
+          }
+
+          return { brand, userBrandRelationship };
+        })
+      );
+
+      return NextResponse.json(userBrandRelationships);
+    } catch (error) {
+      console.error("Error processing advertiser ID 4:", error);
       return NextResponse.json(
         { error: "Internal server error" },
         { status: 500 },

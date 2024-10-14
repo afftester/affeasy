@@ -30,16 +30,16 @@ model UserAdvertiserRelationship {
   id                     String                  @id @default(cuid())
   userId                 String
   advertiserId           String
-  partialApiKey           String?
-  encryptedApiKey        String?  
-  username               String?
-  partialPassword         String?
-  encryptedPassword      String?
-  clientId               String?
-  partialClientSecret     String?
-  encryptedClientSecret  String?
-  accountId              String?
-  websiteId              String?
+  partialApiKey          String?                 @db.VarChar(1000)
+  encryptedApiKey        String?                 @db.VarChar(1000)
+  username               String?                
+  partialPassword        String?                
+  encryptedPassword      String?                
+  clientId               String?                 @db.VarChar(1000)
+  partialClientSecret    String?                 @db.VarChar(1000)
+  encryptedClientSecret  String?                 @db.VarChar(1000)
+  accountId              String?                 
+  websiteId              String?               
   user                   User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
   advertiser             Advertiser              @relation(fields: [advertiserId], references: [id], onDelete: Cascade)
   userBrandRelationships UserBrandRelationship[]

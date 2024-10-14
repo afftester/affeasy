@@ -2,25 +2,6 @@ import { encrypt, withSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
 
-// // GET /api/user/networks – get all networks for a specific user
-// export const GET = withSession(async ({ session }) => {
-//   const networks = await prisma.advertiser.findMany({
-//     where: {
-//       userAdvertiserRelationships: {
-//         some: {
-//           userId: session.user.id,
-//         },
-//       },
-//     },
-//     select: {
-//       id: true,
-//       name: true,
-//     },
-//   });
-//   // console.log(networks);
-//   return NextResponse.json(networks);
-// });
-
 // GET /api/user/userAdvertiserRelationships – get all user-advertiser relationships for a specific user
 export const GET = withSession(async ({ session }) => {
   const userAdvertiserRelationships =
