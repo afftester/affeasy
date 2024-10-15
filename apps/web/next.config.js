@@ -89,7 +89,7 @@ const nextConfig = {
           },
           {
             key: "Access-Control-Allow-Origin",
-            value: "*",
+            value: "https://api.dealshq.xyz",
           },
           {
             key: "Access-Control-Allow-Methods",
