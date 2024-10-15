@@ -690,6 +690,69 @@ export async function processLink({
         } catch (error) {
           console.error("Error generating affiliate link:", error);
         }
+      } else if (advertiserId === "5") { // Impact.com
+        const userAdvertiserRelation = userBrandRelationship.userAdvertiserRelation;
+        const impactAccountId = userAdvertiserRelation.impactAccountId || "";
+        const impactApiKey = decrypt(userAdvertiserRelation.encryptedImpactApiKey || "");
+
+        if (!impactApiKey || !impactAccountId) {
+          return {
+            link: payload,
+            error: "Missing credentials for Impact.com affiliate program.",
+            code: "unprocessable_entity",
+          };
+        }
+
+        const impactUrl = "https://api.impact.com/affiliate/links";
+        const headers = {
+          Authorization: `Bearer ${impactApiKey}`,
+          "Content-Type": "application/json",
+        };
+
+        const data = {
+          websiteId: impactAccountId,
+          originalUrl: processedUrl,
+          // Add other necessary fields as per Impact.com's API documentation
+        };
+
+        try {
+          const response = await fetch(impactUrl, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(data),
+          });
+
+          if (response.ok) {
+            const responseData = await response.json();
+            const affiliateLink = responseData.affiliateLink; // Adjust based on actual response
+
+            return {
+              link: {
+                ...payload,
+                aff_url: affiliateLink || null,
+                projectId: workspace?.id || null,
+                ...(userId && {
+                  userId,
+                }),
+              },
+              error: null,
+            };
+          } else {
+            const errorData = await response.json();
+            return {
+              link: payload,
+              error: errorData.message || "Failed to generate Impact.com affiliate link.",
+              code: "unprocessable_entity",
+            };
+          }
+        } catch (error) {
+          console.error("Error generating Impact.com affiliate link:", error);
+          return {
+            link: payload,
+            error: "Internal server error while generating affiliate link.",
+            code: "internal_error",
+          };
+        }
       }
     }
   }

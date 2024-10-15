@@ -360,6 +360,46 @@ export const POST = withSession(async ({ req, session }) => {
         { status: 500 },
       );
     }
+  } else if (advertiserId === "5") { // Assuming "5" is Impact.com's advertiserId
+    try {
+      const { impactApiKey, impactAccountId } = relationship;
+
+      if (!impactApiKey || !impactAccountId) {
+        return NextResponse.json(
+          { error: "Missing Impact.com credentials." },
+          { status: 400 }
+        );
+      }
+
+      // Example Impact.com API integration
+      const impactUrl = "https://api.impact.com/affiliate/links";
+      const headers = {
+        Authorization: `Bearer ${impactApiKey}`,
+        "Content-Type": "application/json",
+      };
+
+      const response = await fetch(impactUrl, {
+        method: "GET",
+        headers,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data from Impact.com");
+      }
+
+      const data = await response.json();
+
+      // Process Impact.com data as needed
+      // For example, create or update brands based on Impact.com data
+
+      return NextResponse.json({ message: "Impact.com integration successful." });
+    } catch (error) {
+      console.error("Error processing Impact.com advertiser:", error);
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 },
+      );
+    }
   } else {
     return NextResponse.json(
       { error: "Invalid advertiser ID" },
