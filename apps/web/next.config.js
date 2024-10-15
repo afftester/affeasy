@@ -89,7 +89,7 @@ const nextConfig = {
           },
           {
             key: "Access-Control-Allow-Origin",
-            value: "https://api.dealshq.xyz",
+            value: "https://affeasy-access.vercel.app",
           },
           {
             key: "Access-Control-Allow-Methods",
