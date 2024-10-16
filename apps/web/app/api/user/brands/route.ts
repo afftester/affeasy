@@ -349,12 +349,156 @@ export const POST = withSession(async ({ req, session }) => {
           }
 
           return { brand, userBrandRelationship };
-        })
+        }),
       );
 
       return NextResponse.json(userBrandRelationships);
     } catch (error) {
       console.error("Error processing advertiser ID 4:", error);
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 },
+      );
+    }
+  } else if (advertiserId === "5") {
+    interface Campaign {
+      AdvertiserId: string;
+      AdvertiserName: string;
+      CampaignUrl: string;
+    }
+
+    interface ApiResponse {
+      "@total": string;
+      "@numpages": string;
+      "@page": string;
+      "@nextpageuri": string;
+      Campaigns: Campaign[];
+    }
+
+    try {
+      if (!accountId || !encryptedApiKey) {
+        return NextResponse.json(
+          { error: "Missing Impact.com credentials." },
+          { status: 400 },
+        );
+      }
+
+      const apiKey = decrypt(encryptedApiKey);
+      const baseUrl = `https://api.impact.com/Mediapartners/${accountId}/Campaigns`;
+      const headers = {
+        Accept: "application/json",
+        Authorization: `Basic ${Buffer.from(`${accountId}:${apiKey}`).toString("base64")}`,
+      };
+      const params = new URLSearchParams({
+        InsertionOrderStatus: "Active",
+        PageSize: "100", // Maximum allowed page size
+      });
+
+      let allCampaigns: Campaign[] = [];
+      let nextPageUri = `${baseUrl}?${params}`;
+
+      while (nextPageUri) {
+        const response = await fetch(nextPageUri, { headers });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = (await response.json()) as ApiResponse;
+        allCampaigns = allCampaigns.concat(data.Campaigns);
+
+        nextPageUri = data["@nextpageuri"]
+          ? `https://api.impact.com${data["@nextpageuri"]}`
+          : "";
+      }
+
+      // Process campaigns and update database
+      const processedBrands = await Promise.all(
+        allCampaigns.map(async (campaign) => {
+          const brandName = campaign.AdvertiserName;
+          const brandId = campaign.AdvertiserId;
+          const advertiserUrl = campaign.CampaignUrl;
+          const modifiedUrl = extractBaseUrlUpdated(advertiserUrl);
+
+          if (modifiedUrl) {
+            const brand = await prisma.brand.findFirst({
+              where: {
+                url: modifiedUrl,
+                advertisers: {
+                  some: {
+                    brandIdAtAdvertiser: brandId,
+                    advertiserId,
+                  },
+                },
+              },
+              include: {
+                advertisers: {
+                  where: { advertiserId: advertiserId },
+                },
+                userBrandRelationships: {
+                  where: { userId: session.user.id, advertiserId },
+                },
+              },
+            });
+
+            if (!brand) {
+              const newBrand = await prisma.brand.create({
+                data: {
+                  name: brandName,
+                  url: modifiedUrl,
+                  advertisers: {
+                    create: {
+                      brandIdAtAdvertiser: brandId,
+                      advertiserId,
+                    },
+                  },
+                },
+                include: {
+                  advertisers: {
+                    where: { advertiserId: advertiserId },
+                  },
+                },
+              });
+
+              const userBrandRelationship =
+                await prisma.userBrandRelationship.create({
+                  data: {
+                    userId: session.user.id,
+                    brandId: newBrand.id,
+                    advertiserId,
+                    userAdvertiserRelationId: relationship.id,
+                    brandAdvertiserRelationId: newBrand.advertisers[0].id,
+                  },
+                });
+
+              return { brand: newBrand, userBrandRelationship };
+            }
+
+            if (brand) {
+              let userBrandRelationship = brand.userBrandRelationships[0];
+              if (!userBrandRelationship) {
+                userBrandRelationship =
+                  await prisma.userBrandRelationship.create({
+                    data: {
+                      userId: session.user.id,
+                      brandId: brand.id,
+                      advertiserId,
+                      userAdvertiserRelationId: relationship.id,
+                      brandAdvertiserRelationId: brand.advertisers[0].id,
+                    },
+                  });
+              }
+
+              return { brand, userBrandRelationship };
+            }
+          }
+          return null;
+        }),
+      );
+
+      const validBrands = processedBrands.filter(Boolean);
+      return NextResponse.json(validBrands);
+    } catch (error) {
+      console.error("Error processing Impact.com advertiser:", error);
       return NextResponse.json(
         { error: "Internal server error" },
         { status: 500 },
