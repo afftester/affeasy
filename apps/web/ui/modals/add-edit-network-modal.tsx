@@ -338,7 +338,7 @@ function AddEditNetworkModal({
                 </select>
               </div>
 
-              {advertiserId === "1" ? (
+              {advertiserId === "1" ? ( // CJ
                 <>
                   <div>
                     <div className="flex items-center justify-between">
@@ -361,9 +361,7 @@ function AddEditNetworkModal({
                       <input
                         name="websiteID"
                         id={`websiteID-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
-                        }
+                        placeholder="Enter your CJ Website ID"
                         value={websiteId ?? ""}
                         required
                         autoComplete="off"
@@ -396,9 +394,7 @@ function AddEditNetworkModal({
                       <input
                         name="apiKey"
                         id={`apiKey-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
-                        }
+                        placeholder="Enter your CJ API Key"
                         value={partialApiKey ?? ""}
                         required
                         autoComplete="off"
@@ -431,9 +427,7 @@ function AddEditNetworkModal({
                       <input
                         name="accountId"
                         id={`accountId-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
-                        }
+                        placeholder="Enter your CJ Account ID"
                         value={accountId ?? ""}
                         required
                         autoComplete="off"
@@ -446,7 +440,7 @@ function AddEditNetworkModal({
                     </div>
                   </div>
                 </>
-              ) : advertiserId === "2" ? (
+              ) : advertiserId === "2" ? ( // Rakuten
                 <>
                   <div>
                     <div className="flex items-center justify-between">
@@ -469,9 +463,7 @@ function AddEditNetworkModal({
                       <input
                         name="clientId"
                         id={`clientId-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
-                        }
+                        placeholder="Enter your Rakuten Client ID"
                         value={clientId ?? ""}
                         required
                         autoComplete="off"
@@ -504,9 +496,7 @@ function AddEditNetworkModal({
                       <input
                         name="clientSecret"
                         id={`clientSecret-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/rakuten#5-connect-rakuten-to-affeasy"
-                        }
+                        placeholder="Enter your Rakuten Client Secret"
                         value={partialClientSecret ?? ""}
                         required
                         autoComplete="off"
@@ -542,9 +532,7 @@ function AddEditNetworkModal({
                       <input
                         name="accountId"
                         id={`accountId-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/rakuten"
-                        }
+                        placeholder="Enter your Rakuten Account ID"
                         value={accountId ?? ""}
                         required
                         autoComplete="off"
@@ -557,7 +545,7 @@ function AddEditNetworkModal({
                     </div>
                   </div>
                 </>
-              ) : advertiserId === "3" ? (
+              ) : advertiserId === "3" ? ( // Amazon
                 <>
                   <div>
                     <div className="flex items-center justify-between">
@@ -580,9 +568,7 @@ function AddEditNetworkModal({
                       <input
                         name="websiteID"
                         id={`websiteID-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/amazon"
-                        }
+                        placeholder="Enter your Amazon Website ID"
                         value={websiteId ?? ""}
                         required
                         autoComplete="off"
@@ -595,7 +581,7 @@ function AddEditNetworkModal({
                     </div>
                   </div>
                 </>
-              ) : advertiserId === "4" ? (
+              ) : advertiserId === "4" ? ( // PlanetHowl
                 <>
                   <div>
                     <div className="flex items-center justify-between">
@@ -618,9 +604,7 @@ function AddEditNetworkModal({
                       <input
                         name="websiteID"
                         id={`websiteID-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/commision-junction"
-                        }
+                        placeholder="Enter your HOWL Website URL"
                         value={websiteId ?? ""}
                         required
                         autoComplete="off"
@@ -653,9 +637,7 @@ function AddEditNetworkModal({
                       <input
                         name="apiKey"
                         id={`apiKey-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/planethowl"
-                        }
+                        placeholder="Enter your HOWL API Key"
                         value={partialApiKey ?? ""}
                         required
                         autoComplete="off"
@@ -688,14 +670,81 @@ function AddEditNetworkModal({
                       <input
                         name="accountId"
                         id={`accountId-${randomIdx}`}
-                        placeholder={
-                          "https://docs.affeasy.link/quickstart/affiliate-networks/planethowl"
-                        }
+                        placeholder="Enter your HOWL Website Name"
                         value={accountId ?? ""}
                         required
                         autoComplete="off"
                         onChange={(e) =>
                           handleInputChange("accountId", e.target.value)
+                        }
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : advertiserId === "5" ? ( // Impact.com
+                <>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`impactAccountId-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Account ID
+                      </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/impact#setup"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="accountId"
+                        id={`accountId-${randomIdx}`}
+                        placeholder="Enter your Impact Account ID"
+                        value={accountId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("accountId", e.target.value)
+                        }
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`impactApiKey-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        API Key
+                      </label>
+                      <a
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/impact#api-key"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="apiKey"
+                        id={`apiKey-${randomIdx}`}
+                        placeholder="Enter your Impact API Key"
+                        value={partialApiKey ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("partialApiKey", e.target.value)
                         }
                         className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
                         aria-invalid="true"
