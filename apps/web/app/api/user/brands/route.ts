@@ -360,38 +360,38 @@ export const POST = withSession(async ({ req, session }) => {
         { status: 500 },
       );
     }
-  } else if (advertiserId === "5") {
-    // Partnerize-specific processing
-    try {
-      const apiKey = decrypt(encryptedApiKey);
-      const partnerizeUrl = "https://api.partnerize.com/v1/affiliate/link";
+  // } else if (advertiserId === "5") {
+  //   // Partnerize-specific processing
+  //   try {
+  //     const apiKey = decrypt(encryptedApiKey);
+  //     const partnerizeUrl = "https://api.partnerize.com/v1/affiliate/link";
 
-      const response = await fetch(partnerizeUrl, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          url: processedUrl,
-          campaign_id: accountId,
-        }),
-      });
+  //     const response = await fetch(partnerizeUrl, {
+  //       method: "POST",
+  //       headers: {
+  //         Authorization: `Bearer ${apiKey}`,
+  //         "Content-Type": "application/json",
+  //       },
+  //       body: JSON.stringify({
+  //         url: processedUrl,
+  //         campaign_id: accountId,
+  //       }),
+  //     });
 
-      if (response.ok) {
-        const data = await response.json();
-        return NextResponse.json({ affiliateUrl: data.affiliate_link_url });
-      } else {
-        const errorData = await response.json();
-        return NextResponse.json(
-          { error: `Partnerize API error: ${errorData.message}` },
-          { status: response.status },
-        );
-      }
-    } catch (error) {
-      console.error("Error processing Partnerize advertiser:", error);
-      return NextResponse.json(
-        { error: "Internal server error" },
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       return NextResponse.json({ affiliateUrl: data.affiliate_link_url });
+  //     } else {
+  //       const errorData = await response.json();
+  //       return NextResponse.json(
+  //         { error: `Partnerize API error: ${errorData.message}` },
+  //         { status: response.status },
+  //       );
+  //     }
+  //   } catch (error) {
+  //     console.error("Error processing Partnerize advertiser:", error);
+  //     return NextResponse.json(
+  //       { error: "Internal server error" },
         { status: 500 },
       );
     }
