@@ -138,6 +138,46 @@ export const POST = withSession(async ({ req, session }) => {
         { status: 500 },
       );
     }
+  } else if (advertiserId === "6") {  // eBay
+    try {
+      const { ebayClientId, ebayClientSecret } = relationship;
+
+      if (!ebayClientId || !ebayClientSecret) {
+        return NextResponse.json(
+          { error: "Missing eBay credentials." },
+          { status: 400 }
+        );
+      }
+
+      // Example eBay API integration
+      const ebayUrl = "https://api.ebay.com/affiliate/links";
+      const headers = {
+        Authorization: `Bearer ${ebayClientSecret}`,
+        "Content-Type": "application/json",
+      };
+
+      const response = await fetch(ebayUrl, {
+        method: "GET",
+        headers,
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch data from eBay");
+      }
+
+      const data = await response.json();
+
+      // Process eBay data as needed
+      // For example, create or update brands based on eBay data
+
+      return NextResponse.json({ message: "eBay integration successful." });
+    } catch (error) {
+      console.error("Error processing eBay advertiser:", error);
+      return NextResponse.json(
+        { error: "Internal server error" },
+        { status: 500 },
+      );
+    }
   } else if (advertiserId === "2") {
     const clientId = relationship.clientId;
     const encryptedClientSecret = relationship.encryptedClientSecret;

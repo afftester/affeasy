@@ -1,6 +1,7 @@
 import { encrypt, withSession } from "@/lib/auth";
 import prisma from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { NextApiRequest, NextApiResponse } from 'next';
 
 // GET /api/user/userAdvertiserRelationships – get all user-advertiser relationships for a specific user
 export const GET = withSession(async ({ session }) => {
@@ -32,7 +33,7 @@ export const GET = withSession(async ({ session }) => {
 });
 
 // POST /api/user/networks – create a new UserAdvertiserRelationship
-export const POST = withSession(async ({ req, session }) => {
+export const POST = withSession(async (req: NextApiRequest, res: NextApiResponse) => {
   const {
     advertiserId,
     username,
@@ -122,4 +123,6 @@ export const PUT = withSession(async ({ req }) => {
     });
 
   return NextResponse.json({ userAdvertiserRelationship });
+} else if (advertiserId === "6") {  // eBay
+  // Existing eBay integration code
 });

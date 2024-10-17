@@ -311,6 +311,70 @@ export async function processLink({
     geo,
   } = payload;
 
+  // Add eBay integration logic
+  const advertiserId = userBrandRelationship.advertiserId;
+  if (advertiserId === "6") { // eBay
+    const userAdvertiserRelation = userBrandRelationship.userAdvertiserRelation;
+    const ebayClientId = userAdvertiserRelation.ebayClientId || "";
+    const ebayClientSecret = decrypt(userAdvertiserRelation.encryptedEbayClientSecret || "");
+
+    if (!ebayClientId || !ebayClientSecret) {
+      return {
+        link: payload,
+        error: "Missing credentials for eBay affiliate program.",
+        code: "unprocessable_entity",
+      };
+    }
+
+    const ebayUrl = "https://api.ebay.com/affiliate/links";
+    const headers = {
+      Authorization: `Bearer ${ebayClientSecret}`,
+      "Content-Type": "application/json",
+    };
+
+    const data = {
+      websiteId: ebayClientId,
+      originalUrl: processedUrl,
+      // Add other necessary fields as per eBay's API documentation
+    };
+
+    try {
+      const response = await fetch(ebayUrl, {
+        method: "POST",
+        headers,
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        const affiliateLink = responseData.affiliateLink || null;
+
+        return {
+          link: {
+            ...payload,
+            aff_url: affiliateLink,
+            projectId: workspace?.id || null,
+            ...(userId && { userId }),
+          },
+          error: null,
+        };
+      } else {
+        const errorData = await response.json();
+        return {
+          link: payload,
+          error: errorData.message || "Failed to generate eBay affiliate link.",
+          code: "unprocessable_entity",
+        };
+      }
+    } catch (error) {
+      console.error("Error generating eBay affiliate link:", error);
+      return {
+        link: payload,
+        error: "Internal server error while generating affiliate link.",
+        code: "internal_error",
+      };
+    }
+  }
   const tagIds = combineTagIds(payload);
 
   // url checks
@@ -562,7 +626,69 @@ export async function processLink({
           userBrandRelationship.brandAdvertiserRelation.brandIdAtAdvertiser;
         const userAdvertiserRelation =
           userBrandRelationship.userAdvertiserRelation;
+      } else if (advertiserId === "6") { // eBay
+        const userAdvertiserRelation = userBrandRelationship.userAdvertiserRelation;
+        const ebayClientId = userAdvertiserRelation.ebayClientId || "";
+        const ebayClientSecret = decrypt(userAdvertiserRelation.encryptedEbayClientSecret || "");
 
+        if (!ebayClientId || !ebayClientSecret) {
+          return {
+            link: payload,
+            error: "Missing credentials for eBay affiliate program.",
+            code: "unprocessable_entity",
+          };
+        }
+
+        const ebayUrl = "https://api.ebay.com/affiliate/links";
+        const headers = {
+          Authorization: `Bearer ${ebayClientSecret}`,
+          "Content-Type": "application/json",
+        };
+
+        const data = {
+          websiteId: ebayClientId,
+          originalUrl: processedUrl,
+          // Add other necessary fields as per eBay's API documentation
+        };
+
+        try {
+          const response = await fetch(ebayUrl, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(data),
+          });
+
+          if (response.ok) {
+            const responseData = await response.json();
+            const affiliateLink = responseData.affiliateLink; // Adjust based on actual response
+
+            return {
+              link: {
+                ...payload,
+                aff_url: affiliateLink || null,
+                projectId: workspace?.id || null,
+                ...(userId && {
+                  userId,
+                }),
+              },
+              error: null,
+            };
+          } else {
+            const errorData = await response.json();
+            return {
+              link: payload,
+              error: errorData.message || "Failed to generate eBay affiliate link.",
+              code: "unprocessable_entity",
+            };
+          }
+        } catch (error) {
+          console.error("Error generating eBay affiliate link:", error);
+          return {
+            link: payload,
+            error: "Internal server error while generating affiliate link.",
+            code: "internal_error",
+          };
+        }
         const clientId = userAdvertiserRelation.clientId || "";
         const encryptedClientSecret =
           userAdvertiserRelation.encryptedClientSecret || "";

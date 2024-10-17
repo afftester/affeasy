@@ -619,13 +619,13 @@ function AddEditNetworkModal({
                   <div>
                     <div className="flex items-center justify-between">
                       <label
-                        htmlFor={`url-${randomIdx}`}
+                        htmlFor={`ebayClientId-${randomIdx}`}
                         className="block text-sm font-medium text-gray-700"
                       >
-                        API Key
+                        Client ID
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/planethowl"
+                        href="https://developer.ebay.com/api-docs/static/oauth-client-credentials-grant.html"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
@@ -635,14 +635,47 @@ function AddEditNetworkModal({
                     </div>
                     <div className="relative mt-1 flex rounded-md shadow-sm">
                       <input
-                        name="apiKey"
-                        id={`apiKey-${randomIdx}`}
-                        placeholder="Enter your HOWL API Key"
-                        value={partialApiKey ?? ""}
+                        name="ebayClientId"
+                        id={`ebayClientId-${randomIdx}`}
+                        placeholder="Enter your eBay Client ID"
+                        value={clientId ?? ""}
                         required
                         autoComplete="off"
                         onChange={(e) =>
-                          handleInputChange("partialApiKey", e.target.value)
+                          handleInputChange("ebayClientId", e.target.value)
+                        }
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`ebayClientSecret-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Client Secret
+                      </label>
+                      <a
+                        href="https://developer.ebay.com/api-docs/static/oauth-client-credentials-grant.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="clientSecret"
+                        id={`clientSecret-${randomIdx}`}
+                        placeholder="Enter your eBay Client Secret"
+                        value={partialClientSecret ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("partialClientSecret", e.target.value)
                         }
                         className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
                         aria-invalid="true"
@@ -671,6 +704,108 @@ function AddEditNetworkModal({
                         name="accountId"
                         id={`accountId-${randomIdx}`}
                         placeholder="Enter your HOWL Website Name"
+                        value={accountId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("accountId", e.target.value)
+                        }
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                </>
+              ) : advertiserId === "5" ? ( // Impact.com
+                <>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`ebayClientId-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Client ID
+                      </label>
+                      <a
+                        href="https://developer.ebay.com/api-docs/static/oauth-client-credentials-grant.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="ebayClientId"
+                        id={`ebayClientId-${randomIdx}`}
+                        placeholder="Enter your eBay Client ID"
+                        value={clientId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("ebayClientId", e.target.value)
+                        }
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`ebayClientSecret-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Client Secret
+                      </label>
+                      <a
+                        href="https://developer.ebay.com/api-docs/static/oauth-client-credentials-grant.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="clientSecret"
+                        id={`clientSecret-${randomIdx}`}
+                        placeholder="Enter your eBay Client Secret"
+                        value={partialClientSecret ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) =>
+                          handleInputChange("partialClientSecret", e.target.value)
+                        }
+                        className={`${"border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500"} block w-full rounded-md focus:outline-none sm:text-sm`}
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label
+                        htmlFor={`accountId-${randomIdx}`}
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Account ID
+                      </label>
+                      <a
+                        href="https://developer.ebay.com/api-docs/static/oauth-client-credentials-grant.html"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="accountId"
+                        id={`accountId-${randomIdx}`}
+                        placeholder="Enter your eBay Account ID"
                         value={accountId ?? ""}
                         required
                         autoComplete="off"

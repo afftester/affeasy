@@ -40,6 +40,8 @@ model UserAdvertiserRelationship {
   encryptedClientSecret  String?                 @db.VarChar(1000)
   accountId              String?                 
   websiteId              String?               
+  ebayClientId           String?                 @db.VarChar(1000)
+  encryptedEbayClientSecret String?             @db.VarChar(1000)
   user                   User                    @relation(fields: [userId], references: [id], onDelete: Cascade)
   advertiser             Advertiser              @relation(fields: [advertiserId], references: [id], onDelete: Cascade)
   userBrandRelationships UserBrandRelationship[]
