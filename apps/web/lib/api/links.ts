@@ -636,6 +636,7 @@ export async function processLink({
 
         clickUrl = `${processedUrl}?&tag=${websiteId}`;
       } else if (advertiserId === "4") {
+        // Howl
         const userAdvertiserRelation =
           userBrandRelationship.userAdvertiserRelation;
 
@@ -689,6 +690,67 @@ export async function processLink({
           }
         } catch (error) {
           console.error("Error generating affiliate link:", error);
+        }
+      } else if (advertiserId === "5") {
+        // Impact.com
+
+        interface ImpactApiResponse {
+          TrackingURL: string;
+          // Add other fields that might be in the response
+          Status?: string;
+          Message?: string;
+        }
+
+        const userAdvertiserRelation =
+          userBrandRelationship.userAdvertiserRelation;
+        const impactAccountId = userAdvertiserRelation.accountId || "";
+        const brandId =
+          userBrandRelationship.brandAdvertiserRelation.brandIdAtAdvertiser;
+        const impactApiKey = decrypt(
+          userAdvertiserRelation.encryptedApiKey || "",
+        );
+
+        if (!impactApiKey || !impactAccountId) {
+          return {
+            link: payload,
+            error: "Missing credentials for Impact.com affiliate program.",
+            code: "unprocessable_entity",
+          };
+        }
+
+        const impactUrl = `https://api.impact.com/Mediapartners/${impactAccountId}/Programs/${brandId}/TrackingLinks`;
+        const encodedUrl = encodeURIComponent(processedUrl);
+
+        // Add the deep link as a query parameter
+        const urlWithParams = `${impactUrl}?DeepLink=${encodedUrl}`;
+
+        const headers = {
+          Accept: "application/json",
+          // Using Basic Auth instead of Bearer token
+          Authorization: `Basic ${Buffer.from(`${impactAccountId}:${impactApiKey}`).toString("base64")}`,
+        };
+
+        try {
+          const response = await fetch(urlWithParams, {
+            method: "POST", // Changed from POST to GET
+            headers,
+            // Removed body since we're using GET
+          });
+
+          if (response.ok) {
+            const responseData = (await response.json()) as ImpactApiResponse;
+
+            if (!responseData.TrackingURL) {
+              throw new Error("No tracking URL found in response");
+            }
+
+            clickUrl = responseData.TrackingURL;
+          } else {
+            const errorData = await response.json();
+            console.error(`Error: ${errorData}`);
+          }
+        } catch (error) {
+          console.error("Error generating Impact.com affiliate link:", error);
         }
       }
     }

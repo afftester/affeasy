@@ -362,7 +362,7 @@ export const POST = withSession(async ({ req, session }) => {
     }
   } else if (advertiserId === "5") {
     interface Campaign {
-      AdvertiserId: string;
+      CampaignId: string;
       AdvertiserName: string;
       CampaignUrl: string;
     }
@@ -415,7 +415,7 @@ export const POST = withSession(async ({ req, session }) => {
       const processedBrands = await Promise.all(
         allCampaigns.map(async (campaign) => {
           const brandName = campaign.AdvertiserName;
-          const brandId = campaign.AdvertiserId;
+          const brandId = campaign.CampaignId;
           const advertiserUrl = campaign.CampaignUrl;
           const modifiedUrl = extractBaseUrlUpdated(advertiserUrl);
 
