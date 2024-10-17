@@ -692,6 +692,56 @@ export async function processLink({
           console.error("Error generating affiliate link:", error);
         }
       } else if (advertiserId === "5") {
+        const userAdvertiserRelation =
+          userBrandRelationship.userAdvertiserRelation;
+
+        const apiKey = decrypt(userAdvertiserRelation.encryptedApiKey || "");
+        const accountId = userAdvertiserRelation.accountId || "";
+
+        if (!apiKey || !accountId) {
+          return {
+            link: payload,
+            error: "Missing credentials for Partnerize affiliate program.",
+            code: "unprocessable_entity",
+          };
+        }
+
+        const partnerizeUrl = "https://api.partnerize.com/v1/affiliate/link";
+
+        const headers = {
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        };
+
+        const data = {
+          url: processedUrl,
+          campaign_id: accountId,
+        };
+
+        try {
+          const response = await fetch(partnerizeUrl, {
+            method: "POST",
+            headers,
+            body: JSON.stringify(data),
+          });
+
+          if (response.ok) {
+            const responseJson = await response.json();
+            const affiliateUrl = responseJson.affiliate_link_url || "";
+            clickUrl = affiliateUrl;
+          } else {
+            const errorData = await response.json();
+            console.error(`Partnerize API error: ${errorData.message}`);
+          }
+        } catch (error) {
+          console.error("Error generating Partnerize affiliate link:", error);
+        }
+            }
+          }
+        } catch (error) {
+          console.error("Error generating affiliate link:", error);
+        }
+      } else if (advertiserId === "5") {
         // Impact.com
 
         interface ImpactApiResponse {

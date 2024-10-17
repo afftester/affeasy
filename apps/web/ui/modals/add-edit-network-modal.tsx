@@ -752,6 +752,65 @@ function AddEditNetworkModal({
                     </div>
                   </div>
                 </>
+              ) : advertiserId === "5" ? ( // Partnerize
+                <>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label htmlFor={`partnerizeApiKey-${randomIdx}`} className="block text-sm font-medium text-gray-700">
+                        API Key
+                      </label>
+                      <a
+                        href="https://docs.partnerize.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="apiKey"
+                        id={`partnerizeApiKey-${randomIdx}`}
+                        placeholder="Enter your Partnerize API Key"
+                        value={partialApiKey ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) => handleInputChange("partialApiKey", e.target.value)}
+                        className="border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500 block w-full rounded-md focus:outline-none sm:text-sm"
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex items-center justify-between">
+                      <label htmlFor={`partnerizeAccountId-${randomIdx}`} className="block text-sm font-medium text-gray-700">
+                        Account ID
+                      </label>
+                      <a
+                        href="https://docs.partnerize.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-gray-400 hover:text-gray-500"
+                      >
+                        <HelpCircle className="h-4 w-4" />
+                      </a>
+                    </div>
+                    <div className="relative mt-1 flex rounded-md shadow-sm">
+                      <input
+                        name="accountId"
+                        id={`partnerizeAccountId-${randomIdx}`}
+                        placeholder="Enter your Partnerize Account ID"
+                        value={accountId ?? ""}
+                        required
+                        autoComplete="off"
+                        onChange={(e) => handleInputChange("accountId", e.target.value)}
+                        className="border-gray-300 text-gray-900 placeholder-gray-300 focus:border-gray-500 focus:ring-gray-500 block w-full rounded-md focus:outline-none sm:text-sm"
+                        aria-invalid="true"
+                      />
+                    </div>
+                  </div>
+                </>
               ) : null}
             </div>
 
