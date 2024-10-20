@@ -592,7 +592,7 @@ function AddEditNetworkModal({
                         Website URL
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/planethowl  "
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/howl#4-connect-howl-link-to-affeasy"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
@@ -625,7 +625,7 @@ function AddEditNetworkModal({
                         API Key
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/planethowl"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/howl#3-retrieve-your-api-key"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
@@ -658,7 +658,7 @@ function AddEditNetworkModal({
                         Website Name
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/planethowl"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/howl#4-connect-howl-link-to-affeasy"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
