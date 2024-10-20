@@ -647,7 +647,7 @@ export async function processLink({
         if (!apiKey || !websiteId || !accountId) {
           return {
             link: payload,
-            error: "Missing credentials for PlaetHowl",
+            error: "Missing credentials for PlanetHowl",
             code: "unprocessable_entity",
           };
         }
