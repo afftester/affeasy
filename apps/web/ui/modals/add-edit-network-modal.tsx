@@ -691,7 +691,7 @@ function AddEditNetworkModal({
                         htmlFor={`impactAccountId-${randomIdx}`}
                         className="block text-sm font-medium text-gray-700"
                       >
-                        Account ID
+                        Account SID
                       </label>
                       <a
                         href="https://docs.affeasy.link/quickstart/affiliate-networks/impact#setup"
@@ -724,7 +724,7 @@ function AddEditNetworkModal({
                         htmlFor={`impactApiKey-${randomIdx}`}
                         className="block text-sm font-medium text-gray-700"
                       >
-                        API Key
+                        Auth Token
                       </label>
                       <a
                         href="https://docs.affeasy.link/quickstart/affiliate-networks/impact#api-key"
