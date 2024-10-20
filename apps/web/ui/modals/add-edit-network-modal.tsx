@@ -694,7 +694,7 @@ function AddEditNetworkModal({
                         Account SID
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/impact#setup"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/impact#3-retrieve-your-account-sid-and-auth-token"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
@@ -727,7 +727,7 @@ function AddEditNetworkModal({
                         Auth Token
                       </label>
                       <a
-                        href="https://docs.affeasy.link/quickstart/affiliate-networks/impact#api-key"
+                        href="https://docs.affeasy.link/quickstart/affiliate-networks/impact#3-retrieve-your-account-sid-and-auth-token"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-gray-400 hover:text-gray-500"
