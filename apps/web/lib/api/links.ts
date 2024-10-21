@@ -290,6 +290,14 @@ export async function processLink({
   userId,
   bulk = false,
   skipKeyChecks = false, // only skip when key doesn't change (e.g. when editing a link)
+  advertiserId, // Include advertiserId
+}: {
+  payload: LinkWithTagIdsProps;
+  workspace?: WorkspaceProps;
+  userId?: string;
+  bulk?: boolean;
+  skipKeyChecks?: boolean;
+  advertiserId?: string; // Add advertiserId to the function signature
 }: {
   payload: LinkWithTagIdsProps;
   workspace?: WorkspaceProps;
@@ -500,6 +508,8 @@ export async function processLink({
         },
         brand: {
           url: modifiedUrl,
+        },
+        advertiserId: payload.advertiserId, // Use selected advertiserId
         },
       },
       include: {

@@ -80,6 +80,9 @@ function AddEditLinkModal({
   const [generatingKey, setGeneratingKey] = useState(false);
   const [saving, setSaving] = useState(false);
 
+  const [advertisers, setAdvertisers] = useState<Advertiser[]>([]);
+  const [selectedAdvertiser, setSelectedAdvertiser] = useState<string | null>(null);
+
   const {
     allActiveDomains: domains,
     primaryDomain,
@@ -116,6 +119,20 @@ function AddEditLinkModal({
   useEffect(() => {
     // when someone pastes a URL
     if (showAddEditLinkModal && url.length > 0) {
+      // Fetch advertisers based on selected brand
+      const fetchAdvertisers = async () => {
+        if (data.domain) {
+          const res = await fetch(`/api/affiliate-networks/brands/${data.domain}/advertisers`);
+          if (res.ok) {
+            const result = await res.json();
+            setAdvertisers(result.advertisers);
+          } else {
+            setAdvertisers([]);
+          }
+        }
+      };
+      fetchAdvertisers();
+
       // if it's a new link and there are matching default domains, set it as the domain
       if (!props && activeDefaultDomains) {
         const urlDomain = getDomainWithoutWWW(url) || "";
@@ -329,6 +346,7 @@ function AddEditLinkModal({
               const { user, tags, tagId, ...rest } = data;
               const bodyData = {
                 ...rest,
+                advertiserId: data.advertiserId, // Include advertiserId
                 // Map tags to tagIds
                 tagIds: tags.map(({ id }) => id),
               };
