@@ -29,8 +29,6 @@ export function MarketingHeader({ className }: Props) {
       </div>
       <div className="border-border mx-auto hidden items-center justify-center rounded-full border px-2 backdrop-blur-[2px] md:col-span-3 md:flex md:gap-1">
         {marketingPagesConfig.map(({ href, title, segment }) => {
-          const isExternal = href.startsWith("http");
-          const externalProps = isExternal ? { target: "_blank" } : {};
           const isActive = pathname.startsWith(href);
           return (
             <MarketingButton
@@ -39,9 +37,7 @@ export function MarketingHeader({ className }: Props) {
               className={isActive ? "font-semibold" : undefined}
               asChild
             >
-              <Link href={href} {...externalProps}>
-                {title}
-              </Link>
+              <Link href={href}>{title}</Link>
             </MarketingButton>
           );
         })}
