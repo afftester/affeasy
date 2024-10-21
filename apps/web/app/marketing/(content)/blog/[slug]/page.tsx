@@ -36,16 +36,14 @@ export async function generateMetadata({
       url: `https://www.affeasy.link/blog/${slug}`,
       images: [
         {
-          url: `https://www.affeasy.link/api/og/post?title=${title}&description=${description}&image=${image}`,
+          url: `https://www.affeasy.link/_static/posts/${slug}.webp`,
         },
       ],
     },
     twitter: {
       title,
       description,
-      images: [
-        `https://www.affeasy.link/api/og/post?title=${title}&description=${description}&image=${image}`,
-      ],
+      images: [`https://www.affeasy.link/_static/posts/${slug}.webp`],
     },
   };
 }
