@@ -346,7 +346,7 @@ function AddEditLinkModal({
               const { user, tags, tagId, ...rest } = data;
               const bodyData = {
                 ...rest,
-                advertiserId: data.advertiserId, // Include advertiserId
+                advertiserId: selectedAdvertiser, // Use the state bound to the dropdown
                 // Map tags to tagIds
                 tagIds: tags.map(({ id }) => id),
               };
@@ -501,6 +501,19 @@ function AddEditLinkModal({
                     {domains?.map(({ slug }) => (
                       <option key={slug} value={slug}>
                         {punycode.toUnicode(slug || "")}
+                      </option>
+                    ))}
+                  </select>
+                  <select
+                    value={selectedAdvertiser}
+                    onChange={(e) => setSelectedAdvertiser(e.target.value)}
+                    className="ml-4 max-w-[16rem] rounded-md border border-gray-300 bg-white pl-4 pr-8 text-sm text-gray-500 focus:border-gray-500 focus:outline-none focus:ring-0"
+                    required
+                  >
+                    <option value="" disabled>Select Advertiser</option>
+                    {advertisers.map((advertiser) => (
+                      <option key={advertiser.id} value={advertiser.id}>
+                        {advertiser.name}
                       </option>
                     ))}
                   </select>
