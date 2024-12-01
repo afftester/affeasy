@@ -501,6 +501,8 @@ export async function processLink({
         brand: {
           url: modifiedUrl,
         },
+        advertiserId: payload.advertiserId, // Use selected advertiserId
+        },
       },
       include: {
         brand: true,
