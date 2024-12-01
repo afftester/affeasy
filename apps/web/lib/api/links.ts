@@ -692,65 +692,49 @@ export async function processLink({
           console.error("Error generating affiliate link:", error);
         }
       } else if (advertiserId === "5") {
-        // Impact.com
-
-        interface ImpactApiResponse {
-          TrackingURL: string;
-          // Add other fields that might be in the response
-          Status?: string;
-          Message?: string;
-        }
-
         const userAdvertiserRelation =
           userBrandRelationship.userAdvertiserRelation;
-        const impactAccountId = userAdvertiserRelation.accountId || "";
-        const brandId =
-          userBrandRelationship.brandAdvertiserRelation.brandIdAtAdvertiser;
-        const impactApiKey = decrypt(
-          userAdvertiserRelation.encryptedApiKey || "",
-        );
 
-        if (!impactApiKey || !impactAccountId) {
+        const apiKey = decrypt(userAdvertiserRelation.encryptedApiKey || "");
+        const accountId = userAdvertiserRelation.accountId || "";
+
+        if (!apiKey || !accountId) {
           return {
             link: payload,
-            error: "Missing credentials for Impact.com affiliate program.",
+            error: "Missing credentials for Partnerize affiliate program.",
             code: "unprocessable_entity",
           };
         }
 
-        const impactUrl = `https://api.impact.com/Mediapartners/${impactAccountId}/Programs/${brandId}/TrackingLinks`;
-        const encodedUrl = encodeURIComponent(processedUrl);
-
-        // Add the deep link as a query parameter
-        const urlWithParams = `${impactUrl}?DeepLink=${encodedUrl}`;
+        const partnerizeUrl = "https://api.partnerize.com/v1/affiliate/link";
 
         const headers = {
-          Accept: "application/json",
-          // Using Basic Auth instead of Bearer token
-          Authorization: `Basic ${Buffer.from(`${impactAccountId}:${impactApiKey}`).toString("base64")}`,
+          Authorization: `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        };
+
+        const data = {
+          url: processedUrl,
+          campaign_id: accountId,
         };
 
         try {
-          const response = await fetch(urlWithParams, {
-            method: "POST", // Changed from POST to GET
+          const response = await fetch(partnerizeUrl, {
+            method: "POST",
             headers,
-            // Removed body since we're using GET
+            body: JSON.stringify(data),
           });
 
           if (response.ok) {
-            const responseData = (await response.json()) as ImpactApiResponse;
-
-            if (!responseData.TrackingURL) {
-              throw new Error("No tracking URL found in response");
-            }
-
-            clickUrl = responseData.TrackingURL;
+            const responseJson = await response.json();
+            const affiliateUrl = responseJson.affiliate_link_url || "";
+            clickUrl = affiliateUrl;
           } else {
             const errorData = await response.json();
-            console.error(`Error: ${errorData}`);
+            console.error(`Partnerize API error: ${errorData.message}`);
           }
         } catch (error) {
-          console.error("Error generating Impact.com affiliate link:", error);
+          console.error("Error generating Partnerize affiliate link:", error);
         }
       }
     }
